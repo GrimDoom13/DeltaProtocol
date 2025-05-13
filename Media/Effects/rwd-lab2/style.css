@@ -1,0 +1,110 @@
+/* Elements */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color: #646464;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-size: 18px;
+}
+
+body {
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 54px;
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 18px;
+}
+
+a {
+  color: #1098c8;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Layout */
+
+.wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 720px;
+}
+
+/* Content Area */
+
+.content {
+  color: #646464;
+  display: flex;
+  padding: 0 10px;
+  margin-top: 36px;
+  width: 100%;
+}
+
+.content h1 a {
+  color: #646464;
+  text-decoration: none;
+}
+
+.banner-text {
+  flex: 0 1 370px;
+  font-size: 24px;
+  margin-right: 80px;
+  order: 1;
+  padding-top: 150px;
+  text-align: right;
+}
+
+.banner-image {
+  flex: 0 1 250px;
+  order: 2;
+}
+
+.actions li {
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.cta {
+  background-color: #f4f4f4;
+  border: 3px solid #646464;
+  border-radius: 10px;
+  color: #646464;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 9px 27px;
+  text-decoration: none;
+}
+
+.cta.special {
+  background-color: #1098c8;
+  border-color: #1098c8;
+  color: #fff;
+}
+
+.cta i {
+  margin-right: 9px;
+}
+
+.credit {
+  margin-top: 18px;
+  text-align: center;
+}
+
+/* Mobile layout */
+
+/* Add your breakpoints here (Using media queries)... */
+

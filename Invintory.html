@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+	<!-- asdf -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+
+	<!-- page stile -->
+	<link rel="stylesheet" href="styleD.css">
+
+	<!--Java script for counting points-->
+	<script>
+        // Function to update the total points
+        function updateTotalPoints() {
+            // Get all inventory inputs
+            const inventoryInputs = document.querySelectorAll('.inventory');
+            
+            // Sum all input values
+            let total = 0;
+            inventoryInputs.forEach(input => {
+                total += parseInt(input.value) || 0;
+            });
+            
+            // Update the Points field
+            document.getElementById("Points").value = total;
+        }
+
+        // Run the update function every time an input changes
+        window.onload = () => {
+            document.querySelectorAll('.inventory').forEach(input => {
+                input.addEventListener('input', updateTotalPoints);
+            });
+
+            // Run once on load
+            updateTotalPoints();
+        }
+    </script>
+</head>
+
+<!--Body-->
+
+<body>
+<!--Inventory Variables-->
+<input class="inventory" id="Vest" value="3" >
+<input class="inventory" id="Granade1" value="0">
+<input class="inventory" id="Granade2" value="0">
+<input class="inventory" id="Granade3" value="0">
+<input class="inventory" id="Equipment1" value="0">
+<input class="inventory" id="Equipment2" value="0">
+<input class="inventory" id="Equipment3" value="0">
+<input class="inventory" id="Primary" value="0">
+<input class="inventory" id="Secondary" value="0">
+<input class="inventory" id="Mele" value="0">
+
+<!--Hero-->
+<div class="HeroInv">
+
+ <button1 id="Invintory">Invintory </button1>
+ <button2 id="MainWeapon">Main Weapon </button2>
+ <button3 id="Secondary">Secondary </button3>
+ <button4 id="Melle">Melle </button4>
+
+</div>
+
+
+<!--Hero-->
+
+
+<!--PointCounts-->
+<div class="PointCount">
+    <h2 class="h2">Total points 
+        <input type="text" Class="TotalPoints" readonly> /14
+    </h2>
+</div>
+
+<!--Return Home-->
+<a href="DeltaProtocol.html">
+<button class="Menu">Return Home</button>
+</a>
+
+
+
+</body>
+
