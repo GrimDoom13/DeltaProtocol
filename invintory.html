@@ -9,33 +9,6 @@
 	<!-- page stile -->
 	<link type="text/css" rel="stylesheet" href="styles.css">
 
-	<!--Java script for counting points-->
-	<script>
-        // Function to update the total points
-        function updateTotalPoints() {
-            // Get all inventory inputs
-            const inventoryInputs = document.querySelectorAll('.inventory');
-            
-            // Sum all input values
-            let total = 0;
-            inventoryInputs.forEach(input => {
-                total += parseInt(input.value) || 0;
-            });
-            
-            // Update the Points field
-            document.getElementById("Points").value = total;
-        }
-
-        // Run the update function every time an input changes
-        window.onload = () => {
-            document.querySelectorAll('.inventory').forEach(input => {
-                input.addEventListener('input', updateTotalPoints);
-            });
-
-            // Run once on load
-            updateTotalPoints();
-        }
-    </script>
 </head>
 
 <!--Body-->
@@ -53,13 +26,31 @@
 <input class="inventory" id="Secondary" value="0">
 <input class="inventory" id="Mele" value="0">
 
+
+<!-- Side_Menu -->
+<div class="Menu_Main">
+    
+    <a  class="MenueButton" href="index.html"></a>
+
+	
+	<a class = "Invintory"  >	
+		<buttonhref="invintory.html" class="MenueButton InvintoryBtn"></button>
+	</a>
+
+	<a class = "Skils" href="skils.html" >	
+		<button class="MenueButton SkilsBtn"></button>
+	</a>
+
+</div>
+ 
+
 <!--Hero-->
 <div class="HeroInv">
 
- <button1 id="Invintory">Invintory </button1>
- <button2 id="MainWeapon">Main Weapon </button2>
- <button3 id="Secondary">Secondary </button3>
- <button4 id="Melle">Melle </button4>
+ <a id="Invintory">Invintory </a>
+ <a id="MainWeapon">Main Weapon </a>
+ <a id="Secondary">Secondary</a>
+ <a id="Melle">Melle </a>
 
 </div>
 
@@ -74,12 +65,41 @@
     </h2>
 </div>
 
-<!--Return Home-->
-<a href="/index.html">
-<button class="Menu">Return Home</button>
-</a>
 
+<!--DropDown Sections-->
 
+    <div class="dropdown">
+        <button id="main-button">
+            <img src="Media/UiElements/Nothing.jpg" alt="Main Button" id="main-image">
+        </button>
+        <ul id="dropdown-list">
+            <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" ><img src="Media/UiElements/Nothing.jpg" ></li>
+            <li class="dropdown-item" data-image="Media/UiElements/Vests/LightArmor.jpg" ><img src="Media/UiElements/Vests/LightArmor.jpg" ></li>            
+            <li class="dropdown-item" data-image="Media/UiElements/Vests/MediumArmor.jpg" ><img src="Media/UiElements/Vests/MediumArmor.jpg" ></li>
+            <li class="dropdown-item" data-image="Media/UiElements/Vests/HeavyArmor.jpg" ><img src="Media/UiElements/Vests/HeavyArmor.jpg" ></li>
+        </ul>
+    </div>
+
+<div class="Equipmants">
+    <div class="Equipment dropdown">
+        <button id="main-button">
+            <img src="Media/UiElements/Nothing.jpg" alt="Main Button" id="main-image">
+        </button>
+        <ul id="dropdown-list">
+            <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" ><img src="Media/UiElements/Nothing.jpg" ></li>
+            <li class="dropdown-item" data-image="Media/UiElements/Vests/LightArmor.jpg" ><img src="Media/UiElements/Vests/LightArmor.jpg" ></li>            
+            <li class="dropdown-item" data-image="Media/UiElements/Vests/MediumArmor.jpg" ><img src="Media/UiElements/Vests/MediumArmor.jpg" ></li>
+            <li class="dropdown-item" data-image="Media/UiElements/Vests/HeavyArmor.jpg" ><img src="Media/UiElements/Vests/HeavyArmor.jpg" ></li>
+        </ul>
+    </div>
+
+    </div>
+
+</div>
 
 </body>
 
+<!--Java Script-->
+<script src="script.js"></script>
+
+</html>

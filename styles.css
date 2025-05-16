@@ -59,55 +59,85 @@ src: url("https://fontawesome.com/icons/house?f=classic&s=solid");
 
 
 /*Menue Button*/
+/* Main button styling */
+.Menu_Main{
+position:absolute;
+transform: translateY(-50%) translateX(-80%);
+top: 50%;
+left: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+width: 30%;
 
 
+
+
+}
 .MenueButton {
-	/*Image*/
-		position: left;
-	 	box-sizing: border-box;
-		border: none;
-		width: 100px;
-		background-image: url('Media/UiElements/SideButton.png');
-		background-color: transparent !important;
-		background-size: cover;
-		background-position: center;
-		object-fit: contain;
-		margin-bottom: 3rem;
-    	cursor: pointer;
-		transition: width 0.2s ease-in ;
+	/*position*/
+
+	box-sizing: border-box;
+	border: none;
+	background-image: url('Media/UiElements/DeltaMenupng_Base.png');
+	background-color: transparent !important;
+	background-size: cover;
+	object-fit: contain;
+    cursor: pointer;
 
 	/*size*/
-
-		width: 647px;
-		height: 95px;
-		display: flex;
-    	align-items: center;
-    	justify-content: center;
-
-	/*text*/	
-		padding-left: 60px;
-		font-weight: bold;
-		font-size: 48px;
-
-/* Hover */
+	width: 100%;
+	aspect-ratio: 16 / 7;
+    transition: transform 0.3s ease;
+    z-index: 10;
 }
- 	.MenueButton:hover {
-        /*--background-image: url('Media/UiElements/SideButton.png'); in case of change image --*/
+.InvintoryBtn {
+ position: absolute;
+    top: 100%; /* Directly under the main button */
+	left: 15%;
+    width: 80%;
+    aspect-ratio: 16 / 7;
+    background-image: url('Media/UiElements/DeltaMenupng_Inventory.png');
+    background-color: transparent !important;
+    background-size: cover;
+    object-fit: contain;
+    cursor: pointer;
+    visibility: hidden;
+    transition: visibility 0s, opacity 0.3s ease;
+}
 
+.SkilsBtn {
+ position: absolute;
+    top: -80%; /* Directly under the main button */
+	left: 15%;
+    width: 80%;
+    aspect-ratio: 16 / 7;
+    background-image: url('Media/UiElements/DeltaMenupng_Skills.png');
+    background-color: transparent !important;
+    background-size: cover;
+    object-fit: contain;
+    cursor: pointer;
+    visibility: hidden;
 
-	/*Resize*/
-	width: 787px;
-	height: 100%;
-
+}
+/* Hover */
+.Menu_Main:hover{
+	.MenueButton{
+	transform: translateX(80%);
+	}
+	/*InvintoryBtn*/
+	.InvintoryBtn {
+		visibility: visible;
+	}
+		.SkilsBtn {
+		visibility: visible;
+	}
 
 
 	/*Shdow*/
         filter: drop-shadow(5px 5px 5px #222); 
-
-	/*text*/	
-		font-size: 48px;
-		padding-left: 50px;
-    }
+}
 
 /*Invintory */ 
 
@@ -133,16 +163,14 @@ width: fit-content;
 		background-position-x:0;
 		background-image: url('Media/UiElements/InvNav.png');
 		background-repeat: no-repeat;
-		background-size: 50%;
+		background-size: 100vw;
 		background-position:center;
 		color: white;
- border: none;
-	/*text*/
-
+ 		border: none;
 
 }
 
-
+/*HeroContent*/
 .HeroInv #Invintory,
 .HeroInv #MainWeapon,
 .HeroInv #Secondary,
@@ -151,31 +179,67 @@ width: fit-content;
 	border: none;
 	padding: 15px 32px ;
 	text-align: center;
-	font-size:32px;
+	font-size:3.5vw;
 
 }
-.Menu {
-position: absolute; 
-top: 0px; 
-left: 0px;
-width: 100px;
-height: 100px;
-border: none;
-background-color: transparent;
-padding: 3rem;
+/*EquipmentsCont*/
+.Equipmants{
+position: absolute;
+top:50%;
+left:50%;
 
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: row;
 
-
-
-} 
-
-.clock {
-	background-color: transparent;
-	border:none;
-}
-
-.clock:focus {
-transform: rotate(90deg) rotate(0deg);
 
 
 }
+
+/*Drop down selections*/
+
+	/* Main dropdown container */
+	.dropdown {
+    position: relative;
+    display: inline-block;
+	}
+
+	/* Main button (image) */
+	#main-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+	}
+
+	#main-image {
+    width: 120px;
+    height: auto;
+    border-radius: 10px;
+	}
+
+	/* Dropdown menu styling */
+	#dropdown-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 5px 0;
+    padding: 0;
+    list-style: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1000;
+	}
+
+	#dropdown-list li {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+	}
+
+	#dropdown-list li:hover {
+    background-color: #f0f0f0;
+	}
