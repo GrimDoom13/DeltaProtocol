@@ -1,105 +1,202 @@
 <!DOCTYPE html>
 <html>
-
-	<!-- asdf -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <title>Inventory</title>
 
-	<!-- page stile -->
-	<link type="text/css" rel="stylesheet" href="styles.css">
+  <style>
+    .dropdown-list {
+      display: none;
+      list-style: none;
+      padding: 0;
+      background: #222;
+      position: absolute;
+      z-index: 1000;
+    }
 
+    .dropdown-item img {
+      width: 80px;
+      height: auto;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .selector-button img {
+      width: 100px;
+      border: 3px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .selector-button.selected img {
+      border-color: cyan;
+    }
+
+    .Equipmants {
+      display: flex;
+      gap: 30px;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+  </style>
 </head>
 
-<!--Body-->
-
 <body>
-<!--Inventory Variables-->
-<input class="inventory" id="Vest" value="3" >
-<input class="inventory" id="Granade1" value="0">
-<input class="inventory" id="Granade2" value="0">
-<input class="inventory" id="Granade3" value="0">
-<input class="inventory" id="Equipment1" value="0">
-<input class="inventory" id="Equipment2" value="0">
-<input class="inventory" id="Equipment3" value="0">
-<input class="inventory" id="Primary" value="0">
-<input class="inventory" id="Secondary" value="0">
-<input class="inventory" id="Mele" value="0">
 
+  <!-- Inventory Variables -->
 
-<!-- Side_Menu -->
-<div class="Menu_Main">
-    
-    <a  class="MenueButton" href="index.html"></a>
+  <!-- Navigation -->
+  <div class="Menu_Main">
+    <a class="MenueButton" href="index.html"></a>
+    <a class="Invintory"><button class="MenueButton InvintoryBtn"></button></a>
+    <a class="Skils" href="skils.html"><button class="MenueButton SkilsBtn"></button></a>
+  </div>
 
-	
-	<a class = "Invintory"  >	
-		<buttonhref="invintory.html" class="MenueButton InvintoryBtn"></button>
-	</a>
+  <!-- Page Sections -->
+  <div class="HeroInv">
+    <a id="Invintory">Invintory</a>
+    <a id="MainWeapon">Main Weapon</a>
+    <a id="Secondary">Secondary</a>
+    <a id="Melle">Melle</a>
+  </div>
 
-	<a class = "Skils" href="skils.html" >	
-		<button class="MenueButton SkilsBtn"></button>
-	</a>
-
-</div>
- 
-
-<!--Hero-->
-<div class="HeroInv">
-
- <a id="Invintory">Invintory </a>
- <a id="MainWeapon">Main Weapon </a>
- <a id="Secondary">Secondary</a>
- <a id="Melle">Melle </a>
-
-</div>
-
-
-<!--Hero-->
-
-
-<!--PointCounts-->
-<div class="PointCount">
+  <!-- Total Points -->
+  <div class="PointCount">
     <h2 class="h2">Total points 
-        <input type="text" Class="TotalPoints" readonly> /14
+        <input type="text" class="TotalPoints" value="0" readonly> /14
     </h2>
-</div>
+  </div>
 
-
-<!--DropDown Sections-->
-
+  <!-- Equipment Selectors -->
+  <div class="Equipmants">
+    
+    <!-- Vest -->
     <div class="dropdown">
-        <button id="main-button">
-            <img src="Media/UiElements/Nothing.jpg" alt="Main Button" id="main-image">
-        </button>
-        <ul id="dropdown-list">
-            <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" ><img src="Media/UiElements/Nothing.jpg" ></li>
-            <li class="dropdown-item" data-image="Media/UiElements/Vests/LightArmor.jpg" ><img src="Media/UiElements/Vests/LightArmor.jpg" ></li>            
-            <li class="dropdown-item" data-image="Media/UiElements/Vests/MediumArmor.jpg" ><img src="Media/UiElements/Vests/MediumArmor.jpg" ></li>
-            <li class="dropdown-item" data-image="Media/UiElements/Vests/HeavyArmor.jpg" ><img src="Media/UiElements/Vests/HeavyArmor.jpg" ></li>
-        </ul>
+      <button class="selector-button" onclick="selectSlot('vest')">
+        <img src="Media/UiElements/Nothing.jpg" alt="vest" id="vest"> <!--Where to put-->
+      </button>
+ 
+      <ul class="dropdown-list" id="dropdown_vest">      <!--What to put-->
+        <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0"><img src="Media/UiElements/Nothing.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Vests/LightArmor.jpg" data-cost="3"><img src="Media/UiElements/Vests/LightArmor.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Vests/MediumArmor.jpg" data-cost="2"><img src="Media/UiElements/Vests/MediumArmor.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Vests/HeavyArmor.jpg" data-cost="3"><img src="Media/UiElements/Vests/HeavyArmor.jpg"></li>
+      </ul>
     </div>
 
-<div class="Equipmants">
-    <div class="Equipment dropdown">
-        <button id="main-button">
-            <img src="Media/UiElements/Nothing.jpg" alt="Main Button" id="main-image">
-        </button>
-        <ul id="dropdown-list">
-            <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" ><img src="Media/UiElements/Nothing.jpg" ></li>
-            <li class="dropdown-item" data-image="Media/UiElements/Vests/LightArmor.jpg" ><img src="Media/UiElements/Vests/LightArmor.jpg" ></li>            
-            <li class="dropdown-item" data-image="Media/UiElements/Vests/MediumArmor.jpg" ><img src="Media/UiElements/Vests/MediumArmor.jpg" ></li>
-            <li class="dropdown-item" data-image="Media/UiElements/Vests/HeavyArmor.jpg" ><img src="Media/UiElements/Vests/HeavyArmor.jpg" ></li>
-        </ul>
+    <!-- Equipment1 -->
+    <div class="dropdown">
+      <button class="selector-button" onclick="selectSlot('equipment1')">
+        <img src="Media/UiElements/Nothing.jpg" alt="equipment1" id="equipment1">
+      </button>
+      <ul class="dropdown-list" id="dropdown_equipment1">
+        <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0"><img src="Media/UiElements/Nothing.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/BattelBoost.jpg" data-cost="1"><img src="Media/UiElements/Equipments/BattelBoost.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Comunication.jpg" data-cost="1"><img src="Media/UiElements/Equipments/Comunication.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Dron.jpg" data-cost="3"><img src="Media/UiElements/Equipments/Dron.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Fulton.jpg" data-cost="1"><img src="Media/UiElements/Equipments/Fulton.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/InstaHeal.jpg" data-cost="2"><img src="Media/UiElements/Equipments/InstaHeal.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/MedKit.jpg" data-cost="2"><img src="Media/UiElements/Equipments/MedKit.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/NightVision.jpg" data-cost="2"><img src="Media/UiElements/Equipments/NightVision.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/ShokWave.jpg" data-cost="3"><img src="Media/UiElements/Equipments/ShokWave.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Svarka.jpg" data-cost="1"><img src="Media/UiElements/Equipments/Svarka.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/ToolKit.jpg" data-cost="2"><img src="Media/UiElements/Equipments/ToolKit.jpg"></li>
+
+      </ul>
     </div>
 
+    <!-- Equipment2 -->
+    <div class="dropdown">
+      <button class="selector-button" onclick="selectSlot('equipment2')">
+        <img src="Media/UiElements/Nothing.jpg" alt="equipment2" id="equipment2">
+      </button>
+      <ul class="dropdown-list" id="dropdown_equipment2">
+        <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0"><img src="Media/UiElements/Nothing.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/BattelBoost.jpg" data-cost="1"><img src="Media/UiElements/Equipments/BattelBoost.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Comunication.jpg" data-cost="1"><img src="Media/UiElements/Equipments/Comunication.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Dron.jpg" data-cost="3"><img src="Media/UiElements/Equipments/Dron.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Fulton.jpg" data-cost="1"><img src="Media/UiElements/Equipments/Fulton.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/InstaHeal.jpg" data-cost="2"><img src="Media/UiElements/Equipments/InstaHeal.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/MedKit.jpg" data-cost="2"><img src="Media/UiElements/Equipments/MedKit.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/NightVision.jpg" data-cost="2"><img src="Media/UiElements/Equipments/NightVision.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/ShokWave.jpg" data-cost="3"><img src="Media/UiElements/Equipments/ShokWave.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Svarka.jpg" data-cost="1"><img src="Media/UiElements/Equipments/Svarka.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/ToolKit.jpg" data-cost="2"><img src="Media/UiElements/Equipments/ToolKit.jpg"></li>
+      </ul>
+    </div>
+       <!-- Equipment3 -->
+    <div class="dropdown">
+      <button class="selector-button" onclick="selectSlot('equipment3')">
+        <img src="Media/UiElements/Nothing.jpg" alt="Equipment3" id="equipment3">
+      </button>
+      <ul class="dropdown-list" id="dropdown_equipment3">
+        <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0"><img src="Media/UiElements/Nothing.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/BattelBoost.jpg" data-cost="1"><img src="Media/UiElements/Equipments/BattelBoost.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Comunication.jpg" data-cost="1"><img src="Media/UiElements/Equipments/Comunication.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Dron.jpg" data-cost="3"><img src="Media/UiElements/Equipments/Dron.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Fulton.jpg" data-cost="1"><img src="Media/UiElements/Equipments/Fulton.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/InstaHeal.jpg" data-cost="2"><img src="Media/UiElements/Equipments/InstaHeal.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/MedKit.jpg" data-cost="2"><img src="Media/UiElements/Equipments/MedKit.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/NightVision.jpg" data-cost="2"><img src="Media/UiElements/Equipments/NightVision.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/ShokWave.jpg" data-cost="3"><img src="Media/UiElements/Equipments/ShokWave.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/Svarka.jpg" data-cost="1"><img src="Media/UiElements/Equipments/Svarka.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Equipments/ToolKit.jpg" data-cost="2"><img src="Media/UiElements/Equipments/ToolKit.jpg"></li>
+      </ul>
+    </div>
+        <!-- granade1 -->
+    <div class="dropdown">
+      <button class="selector-button" onclick="selectSlot('granade1')">
+        <img src="Media/UiElements/Nothing.jpg" alt="granade1" id="granade1">
+      </button>
+      <ul class="dropdown-list" id="dropdown_granade1">
+        <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="1"><img src="Media/UiElements/Nothing.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1"><img src="Media/UiElements/Granades/Clamor.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1"><img src="Media/UiElements/Granades/FlameGranade.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1"><img src="Media/UiElements/Granades/FlashBang.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1"><img src="Media/UiElements/Granades/Granate.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1"><img src="Media/UiElements/Granades/SmokkeGranade.jpg"></li>
+
+      </ul>
     </div>
 
-</div>
+    <!-- granade2 -->
+    <div class="dropdown">
+      <button class="selector-button" onclick="selectSlot('granade2')">
+        <img src="Media/UiElements/Nothing.jpg" alt="granade2" id="granade2">
+      </button>
+      <ul class="dropdown-list" id="dropdown_granade2">
+        <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="1"><img src="Media/UiElements/Nothing.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1"><img src="Media/UiElements/Granades/Clamor.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1"><img src="Media/UiElements/Granades/FlameGranade.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1"><img src="Media/UiElements/Granades/FlashBang.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1"><img src="Media/UiElements/Granades/Granate.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1"><img src="Media/UiElements/Granades/SmokkeGranade.jpg"></li>
+      </ul>
+    </div>
+       <!-- granade3 -->
+    <div class="dropdown">
+      <button class="selector-button" onclick="selectSlot('granade3')">
+        <img src="Media/UiElements/Nothing.jpg" alt="granade3" id="granade3">
+      </button>
+      <ul class="dropdown-list" id="dropdown_granade3">
+        <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="1"><img src="Media/UiElements/Nothing.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1"><img src="Media/UiElements/Granades/Clamor.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1"><img src="Media/UiElements/Granades/FlameGranade.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1"><img src="Media/UiElements/Granades/FlashBang.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1"><img src="Media/UiElements/Granades/Granate.jpg"></li>
+        <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1"><img src="Media/UiElements/Granades/SmokkeGranade.jpg"></li>
+      </ul>
+
+  </div>
+
 
 </body>
 
+
 <!--Java Script-->
 <script src="script.js"></script>
-
 </html>

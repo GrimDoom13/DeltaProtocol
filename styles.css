@@ -1,245 +1,213 @@
-
 body {
-
-
-
-/*background collor*/
-	background-color:rgb(220,220,220);
-/*background*/
-	 width: 100%;
-	background-image: url('Media/Background/MenuAgr1_1.jpg'); /*Walpaper image */
-
-/*text style*/    
-	text-align: center
+  background-color: rgb(220, 220, 220);
+  background-image: url('Media/Background/MenuAgr1_1.jpg');
+  width: 100%;
+  text-align: center;
 }
 
-/* link style */
-style{
-    a:link {
-      color: #000;
-    }
-    a:visited {
-      color: #000;
-    }
-    a:hover {
-      color: #000;
-    }
-    a:active {
-      color: #000;
-    }
-
+/* Link styles */
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: #000;
 }
+
 /* H1 */
-	h1{
-		background-color: #2A295C ;
-		color: white ;
-		line-height: 120px;
-		font-size: 62px;
-
-
-
-		/*font style link*/
+h1 {
+  background-color: #2A295C;
+  color: white;
+  line-height: 120px;
+  font-size: 62px;
   font-family: "Bebas Neue", sans-serif;
   font-weight: 700;
   font-style: normal;
-
-	 }
-
+}
 
 /* H2 */
-h2{
-	color: #fff;
-}
-src {
-
-
-src: url("https://fontawesome.com/icons/house?f=classic&s=solid");
-
+h2 {
+  color: #fff;
 }
 
-
-/*Menue Button*/
-/* Main button styling */
-.Menu_Main{
-position:absolute;
-transform: translateY(-50%) translateX(-80%);
-top: 50%;
-left: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-width: 30%;
-
-
-
-
+/* Menu */
+.Menu_Main {
+  position: absolute;
+  transform: translateY(-50%) translateX(-80%);
+  top: 50%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 30%;
 }
+
 .MenueButton {
-	/*position*/
-
-	box-sizing: border-box;
-	border: none;
-	background-image: url('Media/UiElements/DeltaMenupng_Base.png');
-	background-color: transparent !important;
-	background-size: cover;
-	object-fit: contain;
-    cursor: pointer;
-
-	/*size*/
-	width: 100%;
-	aspect-ratio: 16 / 7;
-    transition: transform 0.3s ease;
-    z-index: 10;
+  box-sizing: border-box;
+  border: none;
+  background-image: url('Media/UiElements/DeltaMenupng_Base.png');
+  background-color: transparent !important;
+  background-size: cover;
+  object-fit: contain;
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  transition: transform 0.3s ease;
+  z-index: 10;
 }
+
 .InvintoryBtn {
- position: absolute;
-    top: 100%; /* Directly under the main button */
-	left: 15%;
-    width: 80%;
-    aspect-ratio: 16 / 7;
-    background-image: url('Media/UiElements/DeltaMenupng_Inventory.png');
-    background-color: transparent !important;
-    background-size: cover;
-    object-fit: contain;
-    cursor: pointer;
-    visibility: hidden;
-    transition: visibility 0s, opacity 0.3s ease;
+  position: absolute;
+  top: 100%;
+  left: 15%;
+  width: 80%;
+  aspect-ratio: 16 / 7;
+  background-image: url('Media/UiElements/DeltaMenupng_Inventory.png');
+  background-color: transparent !important;
+  background-size: cover;
+  object-fit: contain;
+  cursor: pointer;
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.3s ease;
 }
 
 .SkilsBtn {
- position: absolute;
-    top: -80%; /* Directly under the main button */
-	left: 15%;
-    width: 80%;
-    aspect-ratio: 16 / 7;
-    background-image: url('Media/UiElements/DeltaMenupng_Skills.png');
-    background-color: transparent !important;
-    background-size: cover;
-    object-fit: contain;
-    cursor: pointer;
-    visibility: hidden;
-
-}
-/* Hover */
-.Menu_Main:hover{
-	.MenueButton{
-	transform: translateX(80%);
-	}
-	/*InvintoryBtn*/
-	.InvintoryBtn {
-		visibility: visible;
-	}
-		.SkilsBtn {
-		visibility: visible;
-	}
-
-
-	/*Shdow*/
-        filter: drop-shadow(5px 5px 5px #222); 
+  position: absolute;
+  top: -80%;
+  left: 15%;
+  width: 80%;
+  aspect-ratio: 16 / 7;
+  background-image: url('Media/UiElements/DeltaMenupng_Skills.png');
+  background-color: transparent !important;
+  background-size: cover;
+  object-fit: contain;
+  cursor: pointer;
+  visibility: hidden;
 }
 
-/*Invintory */ 
+.Menu_Main:hover {
+  filter: drop-shadow(5px 5px 5px #222);
+}
 
-.inventory{
+.Menu_Main:hover .MenueButton {
+  transform: translateX(80%);
+}
 
-	visibility: hidden;
+.Menu_Main:hover .InvintoryBtn,
+.Menu_Main:hover .SkilsBtn {
+  visibility: visible;
+}
+
+/* Inventory fields (hidden) */
+.inventory {
+  visibility: hidden;
 }
 
 .TotalPoints {
-	border:none;
-
-	background-color: transparent;
-width: fit-content;
-
+  border: none;
+  background-color: transparent;
+  width: fit-content;
 }
 
-/*HeroInv*/
-
-
+/* Hero navigation */
 .HeroInv {
-	/*background*/
-		background-position: absolute ;
-		background-position-x:0;
-		background-image: url('Media/UiElements/InvNav.png');
-		background-repeat: no-repeat;
-		background-size: 100vw;
-		background-position:center;
-		color: white;
- 		border: none;
-
+  background-position: center;
+  background-image: url('Media/UiElements/InvNav.png');
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  color: white;
+  border: none;
 }
 
-/*HeroContent*/
 .HeroInv #Invintory,
 .HeroInv #MainWeapon,
 .HeroInv #Secondary,
 .HeroInv #Melle {
-
-	border: none;
-	padding: 15px 32px ;
-	text-align: center;
-	font-size:3.5vw;
-
-}
-/*EquipmentsCont*/
-.Equipmants{
-position: absolute;
-top:50%;
-left:50%;
-
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: row;
-
-
-
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 3.5vw;
 }
 
-/*Drop down selections*/
+/* Equipment slots container */
+.Equipmants {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 30px;
+}
 
-	/* Main dropdown container */
-	.dropdown {
-    position: relative;
-    display: inline-block;
-	}
+/* Dropdown component */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-	/* Main button (image) */
-	#main-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-	}
+.selector-button img {
+  width: 100px;
+  border: 3px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+}
 
-	#main-image {
-    width: 120px;
-    height: auto;
-    border-radius: 10px;
-	}
+.selector-button {
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline-block;
+}
 
-	/* Dropdown menu styling */
-	#dropdown-list {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin: 5px 0;
-    padding: 0;
-    list-style: none;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    z-index: 1000;
-	}
+.selector-button img {
+  width: 100px;
+  height: auto;
+  border: none;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  background: none;
+  display: block;
+}
 
-	#dropdown-list li {
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-	}
+.selector-button.selected img {
+  border-color: cyan;
+}
 
-	#dropdown-list li:hover {
-    background-color: #f0f0f0;
-	}
+.dropdown-list {
+  display: none;
+  list-style: none;
+  padding: 0;
+  background: white;
+  border: 1px solid #ccc;
+  position: absolute;
+  z-index: 1000;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.dropdown-item img {
+  width: 80px;
+  height: auto;
+  margin: 5px;
+  cursor: pointer;
+}
+
+/* For selected loadout preview if needed */
+.selected-items-container {
+  margin-top: 20px;
+  padding: 10px;
+  border: 2px solid #aaa;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.selected-item {
+  width: 60px;
+  border: 1px solid #666;
+  border-radius: 5px;
+}
+
