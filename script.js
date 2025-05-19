@@ -1,5 +1,4 @@
-
-            let activeSlot = null;
+ let activeSlot = null;
         let totalPoints = 0;
         const totalPointsInput = document.querySelector('.TotalPoints');
 
@@ -9,84 +8,60 @@
         }
 
         function selectSlot(slotId) {
-            // Remove all dropdowns
             document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
-
-            // Remove selection highlights
-            document.querySelectorAll('.selector-button').forEach(btn => {
-                btn.classList.remove('selected');
-                const pointsDisplay = btn.querySelector('.item-points');
-                if (pointsDisplay) {
-                    pointsDisplay.remove(); // Remove previous points display
-                }
-            });
-
-            // Set active slot
+            document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
             activeSlot = slotId;
-
-            // Show related dropdown
-            let dropdownId;
-  if (slotId === 'vest') {
-    dropdownId = 'dropdown_vest';
-  } else if (slotId === 'equipment1') {
-    dropdownId = 'dropdown_equipment1';
-  } else if (slotId === 'equipment2') {
-    dropdownId = 'dropdown_equipment2';
-  } else if (slotId === 'equipment3') {
-    dropdownId = 'dropdown_equipment3';
-  } else if (slotId === 'granade1') {
-    dropdownId = 'dropdown_granade1';
-  } else if (slotId === 'granade2') {
-    dropdownId = 'dropdown_granade2';
-  } else if (slotId === 'granade3') {
-    dropdownId = 'dropdown_granade3';
-  }
-    
-  if (dropdownId) {
-    document.getElementById(dropdownId).style.display = 'block';
-  }
-
-            // Highlight clicked button
+            const dropdown = document.getElementById(`dropdown_${slotId}`);
+            if (dropdown) {
+                dropdown.style.display = 'block';
+            }
             const currentButton = event.currentTarget;
             currentButton.classList.add('selected');
         }
 
-        // Handle dropdown image click
-        document.querySelectorAll('.dropdown-item').forEach(item => {
-            item.addEventListener('click', () => {
-                if (!activeSlot) return;
+        document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
+            const dropdownList = dropdownContainer.querySelector('.dropdown-list');
+            if (dropdownList) {
+                dropdownList.addEventListener('click', (event) => {
+                    const listItem = event.target.closest('.dropdown-item');
+                    if (listItem && activeSlot) {
+                        const targetImage = document.getElementById(activeSlot);
+                        const selectorButton = targetImage.parentNode;
+                        const selectedItemCon = selectorButton.querySelector('.selected-item-con');
 
-                const newSrc = item.getAttribute('data-image');
-                const newCost = parseInt(item.getAttribute('data-cost'));
-                const targetImage = document.getElementById(activeSlot);
-                const previousCost = parseInt(targetImage.dataset.cost || 0); // Get previous cost
+                        if (targetImage && selectorButton && selectedItemCon) {
+                            const newSrc = listItem.getAttribute('data-image');
+                            const newCost = parseInt(listItem.getAttribute('data-cost'));
+                            const previousCost = parseInt(targetImage.dataset.cost || 0);
 
-                // Update total points
-                updatePoints(previousCost, false); // Subtract previous cost
-                updatePoints(newCost, true);    // Add new cost
+                            updatePoints(previousCost, false);
+                            updatePoints(newCost, true);
 
-                // Update image source and data-cost
-                targetImage.src = newSrc;
-                targetImage.dataset.cost = newCost;
+                            targetImage.src = newSrc;
+                            targetImage.dataset.cost = newCost;
 
-                // Display points on the selector button
-                const selectorButton = targetImage.parentNode;
-                let pointsDisplay = selectorButton.querySelector('.item-points');
-                if (!pointsDisplay) {
-                    pointsDisplay = document.createElement('div');
-                    pointsDisplay.classList.add('item-points');
-                    selectorButton.appendChild(pointsDisplay);
-                }
-                pointsDisplay.textContent = newCost;
+                            const itemCon = listItem.querySelector('.item_con');
+                            let itemConContent = '';
 
-                // Hide dropdown and reset
-                document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
-                document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
-                activeSlot = null;
-            });
+                            if (itemCon) {
+                                itemCon.childNodes.forEach(node => {
+                                    if (node.nodeType === Node.ELEMENT_NODE && !node.classList.contains('img_con')) {
+                                        itemConContent += node.outerHTML;
+                                    }
+                                });
+                            }
+
+                            selectedItemCon.innerHTML = itemConContent;
+
+                            document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
+                            document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
+                            activeSlot = null;
+                        }
+                    }
+                });
+            }
         });
 
-        // Click outside to close dropdown
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.dropdown')) {
                 document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');

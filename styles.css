@@ -1,8 +1,19 @@
 body {
   background-color: rgb(220, 220, 220);
-  background-image: url('Media/Background/MenuAgr1_1.jpg');
+  background-image: url('Media/Background/MenuAgr1_1.jpg' );
+  background-size: 100%;
   width: 100%;
   text-align: center;
+}
+
+
+body.Inv_Body{
+
+background-size: 25%;
+  background-image: url('Media/Background/Inv/Inv_Background2.jpg' );
+
+
+
 }
 
 /* Link styles */
@@ -27,7 +38,10 @@ h1 {
 /* H2 */
 h2 {
   color: #fff;
+   font-family: "Bebas Neue", sans-serif;
+   font-size: 1.5vw;
 }
+
 
 /* Menu */
 .Menu_Main {
@@ -68,7 +82,6 @@ h2 {
   object-fit: contain;
   cursor: pointer;
   visibility: hidden;
-  transition: visibility 0s, opacity 0.3s ease;
 }
 
 .SkilsBtn {
@@ -106,7 +119,15 @@ h2 {
 .TotalPoints {
   border: none;
   background-color: transparent;
-  width: fit-content;
+  width: 2rem;
+  color: #fff;
+  font-size: 1.5vw;
+    font-family: "Bebas Neue", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+
+
+  
 }
 
 /* Hero navigation */
@@ -129,85 +150,170 @@ h2 {
   font-size: 3.5vw;
 }
 
+
+.PointCount{
+border-radius: 1rem;
+border: solid 2px #aaa ;
+padding: 1rem;
+padding-top : 0px;
+padding-bottom : 0px;
+background-image: linear-gradient(#252525, #424141);
+width:fit-content;
+
+
+}
+
+
+/*main item_con*/
+.item_con {
+position: relative;
+width: 100%;
+height: fit-content;
+color: whitesmoke;
+
+}
+
+
+  /*img item_con*/
+  .img_con {
+    z-index: -1;
+  }
+
+/*points item_con*/
+  .points_con {
+    position: absolute;
+    background-color: #8a8a8a;
+    width: 20%;
+    aspect-ratio: 1 / 1;
+    top: 0px;
+    left: 0;
+    content: unset;
+    font-weight: bold;
+    font-size: 1.5vw;
+    color: black;
+    z-index: 1;
+
+
+}
+
+
+  /*info item_con*/
+  .info_con {
+    position: absolute;
+    background-color: #c5850f ;
+    width: 20%;
+    aspect-ratio: 1 / 1;
+    top: 0;
+    right: 0;
+
+    content: unset;
+    font-weight: bold;
+    font-size: 1.5vw;
+    color: black;
+    z-index: 1;
+  }
+
+
 /* Equipment slots container */
 .Equipmants {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 30px;
+
+    gap: 2vw;
+    width: 90%;
 }
 
 /* Dropdown component */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
 
-.selector-button img {
-  width: 100px;
-  border: 3px solid transparent;
-  border-radius: 6px;
-  cursor: pointer;
-}
 
 .selector-button {
   background: none;
   border: none;
   padding: 0;
   display: inline-block;
+width: 100%;
 }
 
 .selector-button img {
-  width: 100px;
-  height: auto;
-  border: none;
-  border: 3px solid transparent;
-  border-radius: 10px;
-  background: none;
-  display: block;
+    background: none;
+    border: none;
+    padding: 0;
+    display: block; /* Change to block */
+
 }
 
 .selector-button.selected img {
   border-color: cyan;
 }
 
+
 .dropdown-list {
   display: none;
   list-style: none;
-  padding: 0;
-  background: white;
-  border: 1px solid #ccc;
+  padding: 5px;
+  background: #222;
   position: absolute;
   z-index: 1000;
-  margin-top: 5px;
+  width: fit-content;
+  border: 1px solid #ccc;
   border-radius: 5px;
+
 }
 
 .dropdown-item img {
-  width: 80px;
-  height: auto;
-  margin: 5px;
-  cursor: pointer;
+      width: 100%;
+
+      margin-bottom: 5px;
+      cursor: pointer;
 }
+
+
+
 
 /* For selected loadout preview if needed */
 .selected-items-container {
-  margin-top: 20px;
+
   padding: 10px;
   border: 2px solid #aaa;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: #000;
 }
 
 .selected-item {
-  width: 60px;
+  width: 100%;
   border: 1px solid #666;
   border-radius: 5px;
 }
+/*Dropdown Size*/
+.dropdown #vest,
+#equipment1,
+#equipment2,
+#equipment3,
+#granade1,
+#granade2,
+#granade3{
+width: 8vw;
 
+}
+
+/*Dropdown Positions*/
+.E-G_Group{
+position: absolute;
+top: 20%;
+right: 50%;
+
+
+}
+.E_Group {
+  width: fit-content;
+  display: flex;
+    flex-direction: row;
+
+
+}
+
+.G_Group {
+   width: fit-content;
+  display: flex;
+    flex-direction: row;
+
+}
