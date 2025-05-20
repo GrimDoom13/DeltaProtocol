@@ -142,13 +142,20 @@ right: 0;
 /* Hero navigation */
 .HeroInv {
   position: absolute;
+  top: 0;
+ 
+  left: 0;
+  width: 100%;
+  height: auto;
   background-position: center;
   background-image: url('Media/UiElements/InvNav.png');
   background-repeat: no-repeat;
-  background-size: 100vw;
+  background-size: cover;
   color: white;
   border: none;
+  display: flex;
   align-items: center;
+  justify-content: center;
 
 }
 
@@ -156,11 +163,13 @@ right: 0;
 .HeroInv #MainWeapon,
 .HeroInv #Secondary,
 .HeroInv #Melle {
+align-self: center;
   border: none;
-  padding: 15px 4vw;
+  padding: 1vw 4vw;
   text-align: center;
   font-size: 2vw;
   top: 50%;
+  bottom: 50%;
 }
 
 
