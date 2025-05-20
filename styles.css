@@ -53,63 +53,72 @@ h2 {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 30%;
-}
+ width: 30%;
+  }
 
-.MenueButton {
-  box-sizing: border-box;
-  border: none;
-  background-image: url('Media/UiElements/DeltaMenupng_Base.png');
-  background-color: transparent !important;
-  background-size: cover;
-  object-fit: contain;
-  cursor: pointer;
-  width: 100%;
-  aspect-ratio: 16 / 7;
-  transition: transform 0.3s ease;
-  z-index: 10;
-}
+  .MenueButton {
+    box-sizing: border-box;
+    border: none;
+    background-image: url('Media/UiElements/DeltaMenupng_Base.png');
+    background-color: transparent !important;
+    background-size: cover;
+    object-fit: contain;
+    cursor: pointer;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    transition: transform 0.3s ease;
+    z-index: 10;
+  }
 
-.InvintoryBtn {
-  position: absolute;
-  top: 100%;
-  left: 15%;
-  width: 80%;
-  aspect-ratio: 16 / 7;
-  background-image: url('Media/UiElements/DeltaMenupng_Inventory.png');
-  background-color: transparent !important;
-  background-size: cover;
-  object-fit: contain;
-  cursor: pointer;
-  visibility: hidden;
-}
+  .InvintoryBtn {
+    position: absolute;
+    top: 100%;
+    left: 15%;
+    width: 80%;
+    aspect-ratio: 16 / 7;
+    background-image: url('Media/UiElements/DeltaMenupng_Inventory.png');
+    background-color: transparent !important;
+    background-size: cover;
+    object-fit: contain;
+    cursor: pointer;
+    visibility: hidden;
+  }
 
-.SkilsBtn {
-  position: absolute;
-  top: -80%;
-  left: 15%;
-  width: 80%;
-  aspect-ratio: 16 / 7;
-  background-image: url('Media/UiElements/DeltaMenupng_Skills.png');
-  background-color: transparent !important;
-  background-size: cover;
-  object-fit: contain;
-  cursor: pointer;
-  visibility: hidden;
-}
+  .SkilsBtn {
+    position: absolute;
+    top: -80%;
+    left: 15%;
+    width: 80%;
+    aspect-ratio: 16 / 7;
+    background-image: url('Media/UiElements/DeltaMenupng_Skills.png');
+    background-color: transparent !important;
+    background-size: cover;
+    object-fit: contain;
+    cursor: pointer;
+    visibility: hidden;
+  }
 
 .Menu_Main:hover {
   filter: drop-shadow(5px 5px 5px #222);
 }
 
-.Menu_Main:hover .MenueButton {
-  transform: translateX(80%);
+  .Menu_Main:hover .MenueButton {
+    transform: translateX(80%);
+  }
+
+  .Menu_Main:hover .InvintoryBtn,
+  .Menu_Main:hover .SkilsBtn {
+    visibility: visible;
+  }
+
+/*NPC*/
+.NPC{
+  position: absolute;
+height: 60%;
+bottom: 0;
+right: 0;
 }
 
-.Menu_Main:hover .InvintoryBtn,
-.Menu_Main:hover .SkilsBtn {
-  visibility: visible;
-}
 
 /* Inventory fields (hidden) */
 .inventory {
@@ -223,7 +232,6 @@ color: whitesmoke;
 
 /* Dropdown component */
 
-
 .selector-button {
   background: none;
   border: none;
@@ -234,9 +242,12 @@ width: 100%;
 
 .selector-button img {
     background: none;
-    border: none;
     padding: 0;
     display: block; /* Change to block */
+    width: 100px;
+    border: 3px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
 
 }
 
@@ -244,17 +255,22 @@ width: 100%;
   border-color: cyan;
 }
 
+.dropdown {
+  position: relative;
+}
+
 
 .dropdown-list {
   display: none;
   list-style: none;
+  top: 100%;
   padding: 5px;
+  margin: 0;
   background: #222;
   position: absolute;
   z-index: 1000;
-  width: fit-content;
+  width: fit-content; 
   border: 1px solid #ccc;
-  border-radius: 5px;
 
 }
 

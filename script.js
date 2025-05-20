@@ -69,3 +69,30 @@
                 activeSlot = null;
             }
         });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownLists = document.querySelectorAll('.dropdown-list');
+
+    dropdownLists.forEach(dropdownList => {
+        // Find the first .item_con inside this dropdown-list
+        const itemCon = dropdownList.querySelector('.item_con');
+
+        if (itemCon) {
+            // Temporarily show dropdown to get correct height
+            dropdownList.style.display = 'block';
+            dropdownList.style.visibility = 'hidden';
+
+            // Use scrollHeight to get full height even if content overflows
+            const itemHeight = itemCon.scrollHeight;
+            const listMaxHeight = itemHeight * 2.5;
+
+            dropdownList.style.maxHeight = `${listMaxHeight}px`;
+            dropdownList.style.overflowY = 'auto';
+
+            // Hide again
+            dropdownList.style.display = 'none';
+            dropdownList.style.visibility = 'visible';
+        }
+    });
+});
