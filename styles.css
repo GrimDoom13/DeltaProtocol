@@ -141,12 +141,15 @@ right: 0;
 
 /* Hero navigation */
 .HeroInv {
+  position: absolute;
   background-position: center;
   background-image: url('Media/UiElements/InvNav.png');
   background-repeat: no-repeat;
   background-size: 100vw;
   color: white;
   border: none;
+  align-items: center;
+
 }
 
 .HeroInv #Invintory,
@@ -154,9 +157,10 @@ right: 0;
 .HeroInv #Secondary,
 .HeroInv #Melle {
   border: none;
-  padding: 15px 32px;
+  padding: 15px 4vw;
   text-align: center;
-  font-size: 3.5vw;
+  font-size: 2vw;
+  top: 50%;
 }
 
 
@@ -237,13 +241,13 @@ color: whitesmoke;
   border: none;
   padding: 0;
   display: inline-block;
-width: 100%;
+  width: 100%;
 }
 
 .selector-button img {
     background: none;
     padding: 0;
-    display: block; /* Change to block */
+    display: block;
     width: 100px;
     border: 3px solid transparent;
     border-radius: 3px;
@@ -299,6 +303,8 @@ width: 100%;
   border: 1px solid #666;
   border-radius: 5px;
 }
+
+
 /*Dropdown Size*/
 .dropdown #vest,
 #equipment1,
@@ -307,23 +313,31 @@ width: 100%;
 #granade1,
 #granade2,
 #granade3{
-width: 8vw;
+width: 15vw; /*change dropdown size*/
+max-width: 175px;
 
 }
 
 /*Dropdown Positions*/
+.Vest_Grp{
+width: fit-content;
+
+
+}
+
 .E-G_Group{
 position: absolute;
 top: 20%;
 right: 50%;
-
+transform: translateX(50%);
 
 }
+
+
 .E_Group {
   width: fit-content;
   display: flex;
-    flex-direction: row;
-
+  flex-direction: row;
 
 }
 
