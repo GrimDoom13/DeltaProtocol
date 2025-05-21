@@ -10,8 +10,6 @@
 
 
 
- 
-
 
   </style>
 </head>
@@ -20,16 +18,13 @@
 
 
 
-  <!-- Navigation -->
   <div class="Menu_Main">
     <a class="MenueButton" href="index.html"></a>
     <a class="Invintory"><button class="MenueButton InvintoryBtn"></button></a>
     <a class="Skils" href="skils.html"><button class="MenueButton SkilsBtn"></button></a>
   </div>
 
-  <!--Header-->
-    <div class="InvHeader">
-      <!-- Top Menu -->
+  <div class="InvHeader">
       <div class="HeroInv">
         <a id="Invintory">Invintory</a>
         <a id="MainWeapon">Main Weapon</a>
@@ -37,72 +32,66 @@
         <a id="Melle">Melle</a>
       </div>
 
-      <!-- Total Points -->
       <div class="PointCount">
-        <h2 class="h2">Total points 
+        <h2 class="h2">Total points
             <input type="number" class="TotalPoints" value="0" readonly> /14
         </h2>
       </div> <br>
 
-      <!-- Equipment Selectors -->
       <div class="Equipmants">
 
-      <!-- VWC_Group -->
-        <div class="VWC_Group">
-          <!-- Char (no-Funct) -->
+      <div class="VWC_Group">
           <div class="Char_Group">
-              <!--Img-->
-                <img src="Media/UiElements/The Squad/Nomad.png" alt="DeltaChar" class="DeltaChar">
-              <!--CharSelector-->
-                <div class="CharSelector">
-                  <button class="SwipeLeft_btn"><</button> <p class="CharName"> Nomad</p> <button class="SwipeRight_btn">></button>  
+              <img src="Media/UiElements/The Squad/Nomad.png" alt="DeltaChar" class="DeltaChar">
+              <div class="CharSelector">
+                  <button class="SwipeLeft_btn"><</button> <p class="CharName"> Nomad</p> <button class="SwipeRight_btn">></button>
                 </div>
           </div>
 
-          <!-- VM+W1W2 =VW -->
           <div class="VW_Group">
-            <!-- Vest+Melley -->
             <div class="VM_Group">
-                <!-- Vest -->
-                  <div class="Vest_Grp">
+                <div class="Vest_Grp">
                       <div class="dropdown V1">
                           <button class="selector-button" onclick="selectSlot('vest')">
                                 <img src="Media/UiElements/Nothing.jpg" alt="vest" id="vest">
                                 <div class="selected-item-con"></div>
                           </button>
 
-                        <ul class="dropdown-list" id="dropdown_vest">      <!--What to put-->
-                          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0">
-                            <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div></li>
-                          <li class="dropdown-item" data-image="Media/UiElements/Vests/LightArmor.jpg" data-cost="3">
-                            <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Vests/LightArmor.jpg" class="img_con"></li>
-                          <li class="dropdown-item" data-image="Media/UiElements/Vests/MediumArmor.jpg" data-cost="2">
-                            <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Vests/MediumArmor.jpg" class="img_con"></li>
-                          <li class="dropdown-item" data-image="Media/UiElements/Vests/HeavyArmor.jpg" data-cost="3">
-                            <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Vests/HeavyArmor.jpg" class="img_con"></li>
+                        <ul class="dropdown-list" id="dropdown_vest">      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
+                            <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Vests/LightArmor.jpg" data-cost="3" data-info-title="Light Vest" 
+                          data-info-content="Allows carrying 4 magazines for assault weapons (or 1 magazine for heavy assault weapons) and 3 magazines for pistols, 2 grenades, and 1 special equipment. Grants a chance to evade attacks (30%).">
+                            <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Vests/LightArmor.jpg" class="img_con">
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Vests/MediumArmor.jpg" data-cost="2" data-info-title="Medium Vest"
+                           data-info-content="Allows carrying 6 magazines for assault weapons (or 2 magazines for heavy assault weapons) and 4 magazines for pistols, 3 grenades, and 3 special equipment.">
+                            <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Vests/MediumArmor.jpg" class="img_con">
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Vests/HeavyArmor.jpg" data-cost="3" data-info-title="Heavy Vest" 
+                          data-info-content="Allows carrying 3 magazines for heavy assault weapons (or 10 magazines for regular assault weapons) and 5 magazines for pistols, 2 grenades, and 2 special equipment. A ceramic plate in the armor reduces incoming damage by 1. The plate may break in an explosion.">
+                            <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Vests/HeavyArmor.jpg" class="img_con">
+                          </li>
                         </ul>
                       </div>
                   </div>
-                <!-- Melee -->
-                  <div class="Melee_Grp">
+                <div class="Melee_Grp">
                     <div class="dropdown Melee">
                         <button class="selector-button" onclick="selectSlot('melee')">
                               <img src="Media/UiElements/Nothing.jpg" alt="melee" id="melee">
                               <div class="selected-item-con"></div>
                         </button>
 
-                      <ul class="dropdown-list" id="dropdown_Melee">      <!--What to put-->
-                        <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0">
+                      <ul class="dropdown-list" id="dropdown_Melee">      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
                           <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div></li>
-                        <li class="dropdown-item" data-image="Media/UiElements/Weapons/Knife.jpg" data-cost="1">
+                        <li class="dropdown-item" data-image="Media/UiElements/Weapons/Knife.jpg" data-cost="1" data-info-title="Knife" data-info-content="A sharp close-combat weapon.">
                           <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Weapons/Knife.jpg" class="img_con"></li>
-                        <li class="dropdown-item" data-image="Media/UiElements/Weapons/Dildo.jpg" data-cost="1">
+                        <li class="dropdown-item" data-image="Media/UiElements/Weapons/Dildo.jpg" data-cost="1" data-info-title="Dildo" data-info-content="A surprisingly effective melee weapon.">
                           <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Weapons/Dildo.jpg" class="img_con"></li>
                       </ul>
                     </div>
                   </div>
-            </div>
-            <!-- Weapon2 -->
+                </div>
             <div class="Weapon1_Grp">
                       <div class="dropdown W1">
                           <button class="selector-button" onclick="selectSlot('weapon1')">
@@ -113,7 +102,6 @@
             </div>
 
 
-            <!-- Weapon2 -->
             <div class="Weapon2_Grp">
                       <div class="dropdown W2">
                           <button class="selector-button" onclick="selectSlot('weapon2')">
@@ -125,12 +113,8 @@
             </div>
           </div>
         </div>
-          <!-- Equipment+Granade -->
           <div class="E-G_Group">
-            <!--Equipment_Grp-->
-              <div class="E_Group">
-                  <!-- Equipment1 -->
-                
+            <div class="E_Group">
                   <div class="dropdown E1">
                   <button class="selector-button" onclick="selectSlot('equipment1')">
                       <img src="Media/UiElements/Nothing.jpg" alt="equipment1"  id="equipment1">
@@ -138,187 +122,193 @@
                   </button>
 
                     <ul class="dropdown-list" id="dropdown_equipment1" >
-                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0">
+                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
                         <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/BattelBoost.jpg" data-cost="1">
-                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/BattelBoost.jpg" class="img_con" ></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Comunication.jpg" data-cost="1">
-                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Comunication.jpg" class="img_con"></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Dron.jpg" data-cost="3">
-                        <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Dron.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Fulton.jpg" data-cost="1">
-                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Fulton.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/InstaHeal.jpg" data-cost="2">
-                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/InstaHeal.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/MedKit.jpg" data-cost="2">
-                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/MedKit.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/NightVision.jpg" data-cost="2">
-                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/NightVision.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ShokWave.jpg" data-cost="3">
-                        <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/ShokWave.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Svarka.jpg" data-cost="1">
-                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Svarka.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ToolKit.jpg" data-cost="2">
-                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/ToolKit.jpg" class="img_con"></div></li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/BattelBoost.jpg" data-cost="1" data-info-title="Battle Boost" data-info-content="Temporarily increases combat effectiveness.">
+                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/BattelBoost.jpg" class="img_con" ></div>
+
+                      </li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Comunication.jpg" data-cost="1" data-info-title="Communication Device" data-info-content="Allows for long-range communication.">
+                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Comunication.jpg" class="img_con">
+                      </li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Dron.jpg" data-cost="3" data-info-title="Drone" data-info-content="A reconnaissance drone for scouting.">
+                        <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Dron.jpg" class="img_con"></div>
+                      </li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Fulton.jpg" data-cost="1" data-info-title="Fulton Device" data-info-content="Extracts personnel or objects via balloon.">
+                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Fulton.jpg" class="img_con"></div>
+                      </li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/InstaHeal.jpg" data-cost="2" data-info-title="Insta-Heal" data-info-content="Rapidly restores health.">
+                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/InstaHeal.jpg" class="img_con"></div>
+                      </li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/MedKit.jpg" data-cost="2" data-info-title="MedKit" data-info-content="Standard medical supplies for healing injuries.">
+                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/MedKit.jpg" class="img_con"></div>
+                      </li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/NightVision.jpg" data-cost="2" data-info-title="Night Vision Goggles" data-info-content="Enhances visibility in low-light conditions.">
+                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/NightVision.jpg" class="img_con"></div>
+                      </li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ShokWave.jpg" data-cost="3" data-info-title="Shockwave Device" data-info-content="Emits a powerful shockwave.">
+                        <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/ShokWave.jpg" class="img_con"></div>
+                      </li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Svarka.jpg" data-cost="1" data-info-title="Welding Tool" data-info-content="Used for repairs or sealing passages.">
+                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Svarka.jpg" class="img_con"></div>
+                      </li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ToolKit.jpg" data-cost="2" data-info-title="Tool Kit" data-info-content="Contains various tools for field repairs and modifications.">
+                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/ToolKit.jpg" class="img_con"></div>
+                      </li>
 
                     </ul>
                   </div>
-                
-                  <!-- Equipment2 -->
+
                   <div class="dropdown E2">
                     <button class="selector-button" onclick="selectSlot('equipment2')">
                       <img src="Media/UiElements/Nothing.jpg" alt="equipment2" id="equipment2">
                     <div class="selected-item-con"></div></button>
                     <ul class="dropdown-list" id="dropdown_equipment2">
-                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0">
+                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
                         <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/BattelBoost.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/BattelBoost.jpg" data-cost="1" data-info-title="Battle Boost" data-info-content="Temporarily increases combat effectiveness.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/BattelBoost.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Comunication.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Comunication.jpg" data-cost="1" data-info-title="Communication Device" data-info-content="Allows for long-range communication.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Comunication.jpg" class="img_con"></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Dron.jpg" data-cost="3">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Dron.jpg" data-cost="3" data-info-title="Drone" data-info-content="A reconnaissance drone for scouting.">
                         <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Dron.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Fulton.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Fulton.jpg" data-cost="1" data-info-title="Fulton Device" data-info-content="Extracts personnel or objects via balloon.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Fulton.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/InstaHeal.jpg" data-cost="2">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/InstaHeal.jpg" data-cost="2" data-info-title="Insta-Heal" data-info-content="Rapidly restores health.">
                         <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/InstaHeal.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/MedKit.jpg" data-cost="2">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/MedKit.jpg" data-cost="2" data-info-title="MedKit" data-info-content="Standard medical supplies for healing injuries.">
                         <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/MedKit.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/NightVision.jpg" data-cost="2">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/NightVision.jpg" data-cost="2" data-info-title="Night Vision Goggles" data-info-content="Enhances visibility in low-light conditions.">
                         <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/NightVision.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ShokWave.jpg" data-cost="3">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ShokWave.jpg" data-cost="3" data-info-title="Shockwave Device" data-info-content="Emits a powerful shockwave.">
                         <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/ShokWave.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Svarka.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Svarka.jpg" data-cost="1" data-info-title="Welding Tool" data-info-content="Used for repairs or sealing passages.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Svarka.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ToolKit.jpg" data-cost="2">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ToolKit.jpg" data-cost="2" data-info-title="Tool Kit" data-info-content="Contains various tools for field repairs and modifications.">
                         <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/ToolKit.jpg" class="img_con"></div></li>
                     </ul>
                   </div>
-                    <!-- Equipment3 -->
-                  <div class="dropdown E3">
+                    <div class="dropdown E3">
                     <button class="selector-button" onclick="selectSlot('equipment3')">
                       <img src="Media/UiElements/Nothing.jpg" alt="Equipment3" id="equipment3">
                     <div class="selected-item-con"></div></button>
                       <ul class="dropdown-list" id="dropdown_equipment3">
-                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0">
+                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
                         <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/BattelBoost.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/BattelBoost.jpg" data-cost="1" data-info-title="Battle Boost" data-info-content="Temporarily increases combat effectiveness.">
                       <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/BattelBoost.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Comunication.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Comunication.jpg" data-cost="1" data-info-title="Communication Device" data-info-content="Allows for long-range communication.">
                       <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Comunication.jpg" class="img_con"></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Dron.jpg" data-cost="3">
-                        <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Dron.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Fulton.jpg" data-cost="1">
-                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Fulton.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/InstaHeal.jpg" data-cost="2">
-                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/InstaHeal.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/MedKit.jpg" data-cost="2">
-                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/MedKit.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/NightVision.jpg" data-cost="2">
-                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/NightVision.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ShokWave.jpg" data-cost="3">
-                        <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/ShokWave.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Svarka.jpg" data-cost="1">
-                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/Svarka.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ToolKit.jpg" data-cost="2">
-                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Equipments/ToolKit.jpg" class="img_con"></div></li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Dron.jpg" data-cost="3" data-info-title="Drone" data-info-content="A reconnaissance drone for scouting.">
+                        <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Dron.jpg" class="img_con"></div></li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Fulton.jpg" data-cost="1" data-info-title="Fulton Device" data-info-content="Extracts personnel or objects via balloon.">
+                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Fulton.jpg" class="img_con"></div></li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/InstaHeal.jpg" data-cost="2" data-info-title="Insta-Heal" data-info-content="Rapidly restores health.">
+                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/InstaHeal.jpg" class="img_con"></div></li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/MedKit.jpg" data-cost="2" data-info-title="MedKit" data-info-content="Standard medical supplies for healing injuries.">
+                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/MedKit.jpg" class="img_con"></div></li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/NightVision.jpg" data-cost="2" data-info-title="Night Vision Goggles" data-info-content="Enhances visibility in low-light conditions.">
+                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/NightVision.jpg" class="img_con"></div></li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ShokWave.jpg" data-cost="3" data-info-title="Shockwave Device" data-info-content="Emits a powerful shockwave.">
+                        <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/ShokWave.jpg" class="img_con"></div></li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/Svarka.jpg" data-cost="1" data-info-title="Welding Tool" data-info-content="Used for repairs or sealing passages.">
+                        <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Svarka.jpg" class="img_con"></div></li>
+                      <li class="dropdown-item" data-image="Media/UiElements/Equipments/ToolKit.jpg" data-cost="2" data-info-title="Tool Kit" data-info-content="Contains various tools for field repairs and modifications.">
+                        <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/ToolKit.jpg" class="img_con"></div></li>
                       </ul>
                     </div>
               </div>
 
-            <!--Granade_Grp-->
-              <div class="G_Group">
-                      <!-- granade1 -->
-                  <div class="dropdown G1">
+            <div class="G_Group">
+                      <div class="dropdown G1">
                     <button class="selector-button" onclick="selectSlot('granade1')">
                       <img src="Media/UiElements/Nothing.jpg" alt="granade1" id="granade1">
                       <div class="selected-item-con"></div>
                   </button>
                     <ul class="dropdown-list" id="dropdown_granade1">
-                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0">
+                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
                         <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1" data-info-title="Clamor Mine" data-info-content="A proximity-activated explosive mine.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Clamor.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1" data-info-title="Flame Grenade" data-info-content="Incendiary grenade, creates a burning area.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/FlameGranade.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1" data-info-title="Flashbang" data-info-content="Blinds and disorients enemies.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/FlashBang.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1" data-info-title="Frag Grenade" data-info-content="Standard explosive grenade.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Granate.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1" data-info-title="Smoke Grenade" data-info-content="Creates a smoke screen for concealment.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/SmokkeGranade.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Magnetic Grenade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Magnetic Grenade.png" data-cost="1" data-info-title="Magnetic Grenade" data-info-content="Attaches to metallic surfaces before detonating.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Magnetic Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Decoy Grenade.png" data-cost="2">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Decoy Grenade.png" data-cost="2" data-info-title="Decoy Grenade" data-info-content="Emits sounds to distract enemies.">
                         <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Decoy Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Door Breacher.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Door Breacher.png" data-cost="1" data-info-title="Door Breacher" data-info-content="Used to quickly open locked doors.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Door Breacher.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/EMP Grenade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/EMP Grenade.png" data-cost="1" data-info-title="EMP Grenade" data-info-content="Disables electronic devices.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/EMP Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Panic Gas Grenade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Panic Gas Grenade.png" data-cost="1" data-info-title="Panic Gas Grenade" data-info-content="Releases a gas that causes panic and disorientation.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Panic Gas Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Mine.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Mine.png" data-cost="1" data-info-title="Proximity Mine" data-info-content="Explodes when an enemy approaches.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Mine.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SafetyGranade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SafetyGranade.png" data-cost="1" data-info-title="Safety Grenade" data-info-content="A non-lethal grenade for training or incapacitation.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/SafetyGranade.png" class="img_con"></div>
                       </li>
-                        
+
                     </ul>
                   </div>
 
-                  <!-- granade2 -->
                   <div class="dropdown G2">
                     <button class="selector-button" onclick="selectSlot('granade2')">
                       <img src="Media/UiElements/Nothing.jpg" alt="granade2" id="granade2">
                     <div class="selected-item-con"></div></button>
                     <ul class="dropdown-list" id="dropdown_granade2">
-                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0">
+                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
                         <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1" data-info-title="Clamor Mine" data-info-content="A proximity-activated explosive mine.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Clamor.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1" data-info-title="Flame Grenade" data-info-content="Incendiary grenade, creates a burning area.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/FlameGranade.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1" data-info-title="Flashbang" data-info-content="Blinds and disorients enemies.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/FlashBang.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1" data-info-title="Frag Grenade" data-info-content="Standard explosive grenade.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Granate.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1" data-info-title="Smoke Grenade" data-info-content="Creates a smoke screen for concealment.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/SmokkeGranade.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Magnetic Grenade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Magnetic Grenade.png" data-cost="1" data-info-title="Magnetic Grenade" data-info-content="Attaches to metallic surfaces before detonating.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Magnetic Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Decoy Grenade.png" data-cost="2">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Decoy Grenade.png" data-cost="2" data-info-title="Decoy Grenade" data-info-content="Emits sounds to distract enemies.">
                         <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Decoy Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Door Breacher.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Door Breacher.png" data-cost="1" data-info-title="Door Breacher" data-info-content="Used to quickly open locked doors.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Door Breacher.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/EMP Grenade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/EMP Grenade.png" data-cost="1" data-info-title="EMP Grenade" data-info-content="Disables electronic devices.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/EMP Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Panic Gas Grenade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Panic Gas Grenade.png" data-cost="1" data-info-title="Panic Gas Grenade" data-info-content="Releases a gas that causes panic and disorientation.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Panic Gas Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Mine.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Mine.png" data-cost="1" data-info-title="Proximity Mine" data-info-content="Explodes when an enemy approaches.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Mine.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SafetyGranade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SafetyGranade.png" data-cost="1" data-info-title="Safety Grenade" data-info-content="A non-lethal grenade for training or incapacitation.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/SafetyGranade.png" class="img_con"></div>
                       </li>
 
@@ -327,48 +317,47 @@
                 </div>
 
 
-                  <!-- granade3 -->
                   <div class="dropdown G3">
                   <button class="selector-button" onclick="selectSlot('granade3')">
                       <img src="Media/UiElements/Nothing.jpg" alt="granade3" id="granade3">
                     <div class="selected-item-con"></div></button>
                     <ul class="dropdown-list" id="dropdown_granade3">
-                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0">
+                      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
                         <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1" data-info-title="Clamor Mine" data-info-content="A proximity-activated explosive mine.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Clamor.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1" data-info-title="Flame Grenade" data-info-content="Incendiary grenade, creates a burning area.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/FlameGranade.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1" data-info-title="Flashbang" data-info-content="Blinds and disorients enemies.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/FlashBang.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1" data-info-title="Frag Grenade" data-info-content="Standard explosive grenade.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Granate.jpg" class="img_con"></div></li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1" data-info-title="Smoke Grenade" data-info-content="Creates a smoke screen for concealment.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/SmokkeGranade.jpg" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Magnetic Grenade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Magnetic Grenade.png" data-cost="1" data-info-title="Magnetic Grenade" data-info-content="Attaches to metallic surfaces before detonating.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Magnetic Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Decoy Grenade.png" data-cost="2">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Decoy Grenade.png" data-cost="2" data-info-title="Decoy Grenade" data-info-content="Emits sounds to distract enemies.">
                         <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Decoy Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Door Breacher.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Door Breacher.png" data-cost="1" data-info-title="Door Breacher" data-info-content="Used to quickly open locked doors.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Door Breacher.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/EMP Grenade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/EMP Grenade.png" data-cost="1" data-info-title="EMP Grenade" data-info-content="Disables electronic devices.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/EMP Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Panic Gas Grenade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Panic Gas Grenade.png" data-cost="1" data-info-title="Panic Gas Grenade" data-info-content="Releases a gas that causes panic and disorientation.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Panic Gas Grenade.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Mine.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/Mine.png" data-cost="1" data-info-title="Proximity Mine" data-info-content="Explodes when an enemy approaches.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Mine.png" class="img_con"></div>
                       </li>
-                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SafetyGranade.png" data-cost="1">
+                      <li class="dropdown-item" data-image="Media/UiElements/Granades/SafetyGranade.png" data-cost="1" data-info-title="Safety Grenade" data-info-content="A non-lethal grenade for training or incapacitation.">
                         <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/SafetyGranade.png" class="img_con"></div>
                       </li>
 
@@ -379,11 +368,11 @@
           </div>
           <div class="ItemsInfo_Group">
             <div class="NameInfo">
-              Topic
+              <div id="item-info-title">Topic-NoN</div>
             </div>
 
             <div class="ContentInfo">
-              Content
+              <div id="item-info-content">Content</div>
             </div>
 
           </div>
@@ -393,6 +382,5 @@
 </body>
 
 
-<!--Java Script-->
 <script src="script.js"></script>
 </html>
