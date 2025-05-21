@@ -45,7 +45,7 @@ h2 {
 
 /* Menu */
 .Menu_Main {
-  position: absolute;
+  position: fixed;
   transform: translateY(-50%) translateX(-80%);
   top: 50%;
   left: 0;
@@ -111,21 +111,30 @@ h2 {
     visibility: visible;
   }
 
-/*NPC*/
-.NPC{
+/*ChaePreviewPic*/
+  /*NPC*/
+  .NPC{
   position: absolute;
-height: 60%;
-bottom: 0;
-right: 0;
-}
+  height: 60%;
+  bottom: 0;
+  right: 0;
+  }
 
+  /*DeltaChar*/
+  .DeltaChar{
+  position: relative;
+  height: 60%; 
+  width: 100%; 
+  object-fit: contain; 
 
-/* Inventory fields (hidden) */
+  }
+
 .inventory {
   visibility: hidden;
 }
 
 .TotalPoints {
+
   border: none;
   background-color: transparent;
   width: 2rem;
@@ -134,16 +143,20 @@ right: 0;
     font-family: "Bebas Neue", sans-serif;
   font-weight: 700;
   font-style: normal;
-
-
   
 }
 
+
 /* Hero navigation */
+.InvHeader{
+position: absolute;
+top: 0;
+
+}
+
 .HeroInv {
-  position: absolute;
+position: relative;
   top: 0;
- 
   left: 0;
   width: 100%;
   height: auto;
@@ -174,6 +187,9 @@ align-self: center;
 
 
 .PointCount{
+position: relative;
+top: 0;
+margin: 10px;
 border-radius: 1rem;
 border: solid 2px #aaa ;
 padding: 1rem;
@@ -186,173 +202,269 @@ width:fit-content;
 }
 
 
-/*main item_con*/
-.item_con {
-position: relative;
-width: 100%;
-height: fit-content;
-color: whitesmoke;
+/*dropdown item_con*/
+  .item_con {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  color: whitesmoke;
 
-}
-
-
-  /*img item_con*/
-  .img_con {
-    z-index: -1;
   }
 
-/*points item_con*/
-  .points_con {
+
+    /*img item_con*/
+    .img_con {
+      z-index: -1;
+    }
+
+  /*points item_con*/
+    .points_con {
+      position: absolute;
+      background-color: #8a8a8a;
+      width: 20%;
+      aspect-ratio: 1 / 1;
+      top: 0px;
+      left: 0;
+      content: unset;
+      font-weight: bold;
+      font-size: 1.5vw;
+      color: black;
+      z-index: 1;
+      align-content: center;
+
+
+  }
+
+
+    /*info item_con*/
+    .info_con {
+      position: absolute;
+      background-color: #c5850f ;
+      width: 20%;
+      aspect-ratio: 1 / 1;
+      top: 0;
+      right: 0;
+      align-content: center;
+      content: unset;
+      font-weight: bold;
+      font-size: 1.5vw;
+      color: black;
+      z-index: 1;
+    }
+
+
+  /* Equipment slots container */
+  .Equipmants {
+    height: 100%;
+      gap: 2vw;
+      width: 90%;
+  }
+
+  /* Dropdown component */
+
+  .selector-button {
+    background: none;
+    border: none;
+    padding: 0;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .selector-button img {
+      background: none;
+      padding: 0;
+      display: block;
+      width: 100px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+
+  }
+
+  .selector-button.selected img {
+    border-color: cyan;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+
+  .dropdown-list {
+    display: none;
+    list-style: none;
+    top: 100%;
+    padding: 5px;
+    margin: 0;
+    background: #222;
     position: absolute;
-    background-color: #8a8a8a;
-    width: 20%;
-    aspect-ratio: 1 / 1;
-    top: 0px;
-    left: 0;
-    content: unset;
-    font-weight: bold;
-    font-size: 1.5vw;
-    color: black;
-    z-index: 1;
+    z-index: 1000;
+    width: fit-content; 
+    border: 1px solid #ccc;
+
+  }
+
+  .dropdown-item img {
+        width: 100%;
+
+        margin-bottom: 5px;
+        cursor: pointer;
+  }
 
 
-}
 
 
-  /*info item_con*/
-  .info_con {
-    position: absolute;
-    background-color: #c5850f ;
-    width: 20%;
-    aspect-ratio: 1 / 1;
+  /* For selected loadout preview if needed */
+  .selected-items-container {
+
+    padding: 10px;
+    border: 2px solid #aaa;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #000;
+  }
+
+  .selected-item {
+    width: 100%;
+    border: 1px solid #666;
+    border-radius: 5px;
+  }
+
+
+  /*Dropdown Size*/
+  .dropdown 
+  #vest,
+  #melee,
+  #weapon1,
+  #weapon2,
+  #equipment1,
+  #equipment2,
+  #equipment3,
+  #granade1,
+  #granade2,
+  #granade3
+
+  {
+  width: 15vw; /*change dropdown size*/
+  max-width: 175px;
+
+  }
+
+  /*Dropdown Positions*/
+  .VWC_Group{
+    position: relative;
+    display: flex; 
+    flex-direction: row;
     top: 0;
     right: 0;
+    gap: 5px;
+    width: 100%;
 
-    content: unset;
-    font-weight: bold;
-    font-size: 1.5vw;
-    color: black;
-    z-index: 1;
+  }
+    .VW_Group{
+      position: relative;
+      display: flex;
+      flex-direction: column; 
+      top: 0;
+      left: 0;
+      gap: 5px;
+    }
+      .VM_Group{
+        position: relative;
+        display: flex;
+        flex-direction: row; 
+        top: 0;
+        right: 0;
+        gap: 5px;
+      }
+
+    .Char_Group{
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: center; 
+      order: 2;
+      margin-left: auto;
+
+    }
+    .CharSelector{
+      background-color: #666;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      height: fit-content;
+
+      }
+      /*CharName*/
+      .CharName{
+        height: 1rem;
+
+      }
+
+      /*button*/
+      .SwipeLeft_btn{
+            background-color: #dbdbdb ;
+            width: 2vw;
+            aspect-ratio: 1 / 1;
+            top: 0;
+            right: 0;
+            align-content: center;
+            content: unset;
+            font-weight: bold;
+            font-size: 1.5vw;
+            color: black;
+            z-index: 1;
+
+        }
+
+      .SwipeRight_btn{
+            background-color: #dbdbdb ;
+            width: 2vw;
+            aspect-ratio: 1 / 1;
+            top: 0;
+            right: 0;
+            align-content: center;
+            content: unset;
+            font-weight: bold;
+            font-size: 1.5vw;
+            color: black;
+            z-index: 1;
+
+
+    }
+
+
+  .Vest_Grp{
+  width: fit-content;
+
+
+  }
+
+  .E-G_Group{
+  position: absolute;
+  top: 20%;
+  right: 50%;
+  transform: translateX(50%);
+  gap: 5px;
+
   }
 
 
-/* Equipment slots container */
-.Equipmants {
-
-    gap: 2vw;
-    width: 90%;
-}
-
-/* Dropdown component */
-
-.selector-button {
-  background: none;
-  border: none;
-  padding: 0;
-  display: inline-block;
-  width: 100%;
-}
-
-.selector-button img {
-    background: none;
-    padding: 0;
-    display: block;
-    width: 100px;
-    border: 3px solid transparent;
-    border-radius: 3px;
-    cursor: pointer;
-
-}
-
-.selector-button.selected img {
-  border-color: cyan;
-}
-
-.dropdown {
-  position: relative;
-}
-
-
-.dropdown-list {
-  display: none;
-  list-style: none;
-  top: 100%;
-  padding: 5px;
-  margin: 0;
-  background: #222;
-  position: absolute;
-  z-index: 1000;
-  width: fit-content; 
-  border: 1px solid #ccc;
-
-}
-
-.dropdown-item img {
-      width: 100%;
-
-      margin-bottom: 5px;
-      cursor: pointer;
-}
-
-
-
-
-/* For selected loadout preview if needed */
-.selected-items-container {
-
-  padding: 10px;
-  border: 2px solid #aaa;
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #000;
-}
-
-.selected-item {
-  width: 100%;
-  border: 1px solid #666;
-  border-radius: 5px;
-}
-
-
-/*Dropdown Size*/
-.dropdown #vest,
-#equipment1,
-#equipment2,
-#equipment3,
-#granade1,
-#granade2,
-#granade3{
-width: 15vw; /*change dropdown size*/
-max-width: 175px;
-
-}
-
-/*Dropdown Positions*/
-.Vest_Grp{
-width: fit-content;
-
-
-}
-
-.E-G_Group{
-position: absolute;
-top: 20%;
-right: 50%;
-transform: translateX(50%);
-
-}
-
-
-.E_Group {
-  width: fit-content;
-  display: flex;
-  flex-direction: row;
-
-}
-
-.G_Group {
-   width: fit-content;
-  display: flex;
+  .E_Group {
+    width: fit-content;
+    display: flex;
     flex-direction: row;
+    gap: 5px;
 
-}
+  }
+
+  .G_Group {
+    width: fit-content;
+    display: flex;
+      flex-direction: row;
+      gap: 5px;
+
+  }
