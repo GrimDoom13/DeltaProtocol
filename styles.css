@@ -53,7 +53,9 @@ h2 {
   align-items: center;
   justify-content: center;
   flex-direction: column;
- width: 30%;
+  width: 30%;
+  min-width: 300px;
+  z-index: 9999;
   }
 
   .MenueButton {
@@ -438,7 +440,7 @@ margin: 2px;
         align-content: center;
         content: unset;
         font-weight: bold;
-        font-size: 2vw;
+        font-size: 100%;
         color: black;
         z-index: 1;
 
@@ -452,7 +454,7 @@ margin: 2px;
             align-content: center;
             content: unset;
             font-weight: bold;
-            font-size: 2vw;
+            font-size: 100%;
             color: black;
             z-index: 1;
 
