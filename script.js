@@ -18,8 +18,8 @@ function updateInfoPanel(title, content) {
         if (content) {
             const lines = content.split(' | '); // Split by |
             const ulElement = document.createElement('ul');
-            ulElement.style.listStyleType = 'none'; // remove bullet points
-            ulElement.style.paddingLeft = '0'; // remove default padding
+            ulElement.style.listStyleType = 'none'; 
+            ulElement.style.paddingLeft = '0'; 
 
             lines.forEach(line => {
                 const liElement = document.createElement('li');
@@ -28,7 +28,7 @@ function updateInfoPanel(title, content) {
             });
             itemInfoContent.appendChild(ulElement);
         } else {
-            itemInfoContent.textContent = 'Content'; // Fallback if no content
+            itemInfoContent.textContent = 'Content'; 
         }
     }
 }
@@ -61,7 +61,7 @@ function selectSlot(slotId) {
 document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
     const dropdownList = dropdownContainer.querySelector('.dropdown-list');
     if (dropdownList) {
-        // Event listener for dropdown item clicks (to select an item)
+        // dropdown clicks event
         dropdownList.addEventListener('click', (event) => {
             const listItem = event.target.closest('.dropdown-item');
             if (listItem && activeSlot) {
@@ -108,7 +108,7 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
             }
         });
 
-        // Add hover effects for dropdown items
+        //dropdown hover
         dropdownList.querySelectorAll('.dropdown-item').forEach(item => {
             const infoButton = item.querySelector('.info_con');
             if (infoButton) {
@@ -128,7 +128,7 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
 });
 
 document.addEventListener('click', (e) => {
-    // Close dropdowns if click is outside any dropdown or selector button
+    // Close dropdowns
     if (!e.target.closest('.dropdown') && !e.target.closest('.selector-button')) {
         document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
         document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
@@ -204,6 +204,7 @@ const deltaCharacters = [
     },
 ];
 
+//char info update system
 let currentCharIndex = 0;
 
 function updateDeltaCharDisplay() {
@@ -213,14 +214,14 @@ function updateDeltaCharDisplay() {
     const char = deltaCharacters[currentCharIndex];
 
     if (deltaChar && charName && statsContainer && char) {
-        // Update character image
+        
         deltaChar.src = char.image;
         deltaChar.alt = char.name;
         
-        // Update character name
+        
         charName.textContent = char.name;
         
-        // Update character stats with better formatting
+        
         statsContainer.innerHTML = `
             <div class="stat-section">
                 <h4>Implants:</h4>
@@ -248,12 +249,12 @@ function initializeCharacterSwitching() {
 
     const leftBtn = document.getElementById('Swipeleft_btn');
     const rightBtn = document.getElementById('Swiperight_btn');
-
+// Save character index
     if (leftBtn) {
         leftBtn.addEventListener('click', () => {
             currentCharIndex = (currentCharIndex - 1 + deltaCharacters.length) % deltaCharacters.length;
             updateDeltaCharDisplay();
-            localStorage.setItem('currentCharIndex', currentCharIndex); // Save character index
+            localStorage.setItem('currentCharIndex', currentCharIndex);
         });
     } else {
         console.error('SwipeLeft_btn not found');
@@ -263,7 +264,7 @@ function initializeCharacterSwitching() {
         rightBtn.addEventListener('click', () => {
             currentCharIndex = (currentCharIndex + 1) % deltaCharacters.length;
             updateDeltaCharDisplay();
-            localStorage.setItem('currentCharIndex', currentCharIndex); // Save character index
+            localStorage.setItem('currentCharIndex', currentCharIndex); 
         });
     } else {
         console.error('Swiperight_btn not found');
@@ -273,37 +274,37 @@ function initializeCharacterSwitching() {
     const savedCharIndex = localStorage.getItem('currentCharIndex');
     if (savedCharIndex !== null) {
         currentCharIndex = parseInt(savedCharIndex, 10);
-        // Ensure index is within bounds
+    // Ensure index is within bounds
         if (currentCharIndex >= deltaCharacters.length) {
             currentCharIndex = 0;
         }
-        updateDeltaCharDisplay();
+    updateDeltaCharDisplay();
     }
 }
 // Load saved data and initialize display on page load
 document.addEventListener('DOMContentLoaded', function() {
-    // Dropdown limit size and initial info display setup
+    
     const dropdownLists = document.querySelectorAll('.dropdown-list');
 
 
     dropdownLists.forEach(dropdownList => {
-        // Temporarily display to calculate height, then hide
+        //show for calc and hide
         dropdownList.style.display = 'block';
         dropdownList.style.visibility = 'hidden';
 
         const firstItem = dropdownList.querySelector('.dropdown-item');
         if (firstItem) {
-            const itemHeight = firstItem.scrollHeight; // Use scrollHeight of an item
-            const listMaxHeight = itemHeight * 2.5; // Limit to 2.5 items height
+            const itemHeight = firstItem.scrollHeight; 
+            const listMaxHeight = itemHeight * 2.5; 
 
             dropdownList.style.maxHeight = `${listMaxHeight}px`;
             dropdownList.style.overflowY = 'auto';
         }
 
-        dropdownList.style.display = 'none'; // Hide again
-        dropdownList.style.visibility = 'visible'; // Make visible (but hidden by display: none)
-            // Initialize character switching at the end
-    initializeCharacterSwitching();
+        dropdownList.style.display = 'none'; 
+        dropdownList.style.visibility = 'visible';
+        // character switching
+        initializeCharacterSwitching();
     });
 
     // Load total points
@@ -318,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'vest', 'melee', 'weapon1', 'weapon2', 'equipment1', 'equipment2',
         'equipment3', 'granade1', 'granade2', 'granade3', // From invintory.html
         'silens', 'mount1', 'mount2', 'magazine', // From invintory_Accesory.html
-        'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec' // Additional from invintory_Accesory.html
+        'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec' // Asecondary invintory_Accesory.html
     ];
 
     let infoPanelUpdatedBySavedItem = false;
@@ -369,9 +370,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // If no item was loaded from storage, or if the initial item on the page provides info
+    // item plug
     if (!infoPanelUpdatedBySavedItem) {
-        // Initialize info display for the "Nothing" item of the first slot or default
+        
         const initialItem = document.querySelector('.Vest_Grp .dropdown-item[data-cost="0"]'); // Assuming Vest_Grp is typically the first
         if (initialItem) {
             currentSelectedItemTitle = initialItem.getAttribute('data-info-title');
@@ -380,25 +381,5 @@ document.addEventListener('DOMContentLoaded', function() {
         updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
     }
 
-    // Character Selector
-    updateDeltaCharDisplay(); // Initial display of character
 
-    document.getElementById('Swipeleft_btn').addEventListener('click', () => {
-        currentCharIndex = (currentCharIndex - 1 + deltaCharacters.length) % deltaCharacters.length;
-        updateDeltaCharDisplay();
-        localStorage.setItem('currentCharIndex', currentCharIndex); // Save character index
-    });
-
-    document.getElementById('Swiperight_btn').addEventListener('click', () => {
-        currentCharIndex = (currentCharIndex + 1) % deltaCharacters.length;
-        updateDeltaCharDisplay();
-        localStorage.setItem('currentCharIndex', currentCharIndex); // Save character index
-    });
-
-    // Load saved character index
-    const savedCharIndex = localStorage.getItem('currentCharIndex');
-    if (savedCharIndex !== null) {
-        currentCharIndex = parseInt(savedCharIndex, 10);
-        updateDeltaCharDisplay();
-    }
 });
