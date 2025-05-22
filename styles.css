@@ -353,7 +353,7 @@ min-width: 150px;
     height: 100%;
     width: 90%;
     display: flex; 
-    justify-content:end; 
+    justify-content:start; 
     flex-direction: column;
     align-items: center;
     margin-top: 0;
@@ -410,6 +410,14 @@ min-width: 150px;
       min-width: 200px;
 
     }
+
+    .CharStats {
+
+visibility: hidden;
+width: 0;
+height: 0;
+
+    }
     .CharSelector{
       display: flex;
       background-color: #666;
@@ -432,13 +440,14 @@ margin: 2px;
       /*CharImg*/
       .DeltaChar{
         position: relative;
-        width: 100%;
+        width: 60%;
         height: auto;
-
+        margin-left: 10%;
+        margin-right: 10%;
       }
 
       /*button*/
-      .SwipeLeft_btn{
+      #Swipeleft_btn{
         background-color: #dbdbdb ;
         height: 100%;
         aspect-ratio: 1 / 1;
@@ -452,7 +461,7 @@ margin: 2px;
 
         }
 
-      .SwipeRight_btn{
+      #Swiperight_btn{
             background-color: #dbdbdb ;
             height: 100%;
             aspect-ratio: 1 / 1;

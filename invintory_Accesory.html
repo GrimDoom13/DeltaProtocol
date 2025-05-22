@@ -23,7 +23,7 @@
 		<a class = "Invintory" href="invintory.html" >	
 			<button class="MenueButton InvintoryBtn"></button>
 		</a>
-		<a class = "DataBase" href="DataBase.html" >	
+		<a class = "DataBase" href="Codex.html" >	
 			<button class="MenueButton SkilsBtn"></button>
 		</a>
 
@@ -123,7 +123,7 @@
                 <ul class="dropdown-list" id="dropdown_weapon1" >
                   <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
                   data-info-content="No item selected.">
-                  <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg"></div>
+                  <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
                 </li>
                 <li class="dropdown-item" data-image="Media/UiElements/Weapons/MainWeapon/M-16.jpg" data-cost="2" data-info-title="M-16" 
                   data-info-content="Effective Range: 3-75 meters | Damage: 1D10 | Number of Shots: 4 | Accuracy: 1-2 | Special Attack: Headshot increases crit chance by 2 but reduces hit chance by 2 | Points Cost: 2.">
@@ -295,7 +295,7 @@
         <ul class="dropdown-list" id="dropdown_weapon2" >
           <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
             data-info-content="No item selected.">
-            <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg"></div>
+            <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
           </li>
           <li class="dropdown-item" data-image="Media/UiElements/Weapons/SecondartWeapon/Pistol ( 911).jpg" data-cost="1" data-info-title="Pistol ( 911)" 
             data-info-content="Effective Range: 2-20 meters| Damage: 1D4| Number of Shots: 5 | Accuracy: 1 | Special Attack: - Advantage against small targets| Points Cost: 1 | Bonus: Can be used in combination with Riot Shield.">
@@ -375,23 +375,11 @@
             </div>
     </div>
       
-
+<div id="CharStats" class="CharStats"></div>
 </div>
 </body>
 
 
 <script src="script.js"></script>
-<script>
-  // Import Data
-  document.addEventListener('DOMContentLoaded', function() {
-    const savedTotalPoints = localStorage.getItem('totalPoints');
-    if (savedTotalPoints !== null) {
-      totalPoints = parseInt(savedTotalPoints, 10);
-      const totalPointsInput = document.querySelector('.TotalPoints');
-      if (totalPointsInput) {
-        totalPointsInput.value = totalPoints;
-      }
-    }
-  });
-</script>
+
 </html>

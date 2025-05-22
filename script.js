@@ -35,218 +35,370 @@ function updateInfoPanel(title, content) {
 
 function updatePoints(cost, isAdding) {
     totalPoints = isAdding ? totalPoints + cost : totalPoints - cost;
-    if (totalPointsInput) {
-        totalPointsInput.value = totalPoints;
+    if (totalPoints <  0){
+        totalPoints = 0;
     }
-    // Save totalPoints to localStorage immediately after it changes
-    localStorage.setItem('totalPoints', totalPoints);
+    if (totalPoints > 14 ){
+        totalPointsInput.style.color = 'red';
+        
+    }
+    totalPointsInput.value = totalPoints;
+    localStorage.setItem('totalPoints', totalPoints); // Auto-save total points
 }
 
 function selectSlot(slotId) {
-    // Hide previous dropdown if any
-    if (activeSlot && activeSlot !== slotId) {
-        const prevDropdown = document.getElementById(`dropdown_${activeSlot}`);
-        if (prevDropdown) {
-            prevDropdown.style.display = 'none';
-        }
+    document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
+    document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
+    activeSlot = slotId;
+    const dropdown = document.getElementById(`dropdown_${slotId}`);
+    if (dropdown) {
+        dropdown.style.display = 'block';
     }
+    const currentButton = event.currentTarget;
+    currentButton.classList.add('selected');
+}
 
-    const dropdownList = document.getElementById(`dropdown_${slotId}`);
+document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
+    const dropdownList = dropdownContainer.querySelector('.dropdown-list');
     if (dropdownList) {
-        dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
-        activeSlot = slotId; // Set the currently active slot
+        // Event listener for dropdown item clicks (to select an item)
+        dropdownList.addEventListener('click', (event) => {
+            const listItem = event.target.closest('.dropdown-item');
+            if (listItem && activeSlot) {
+                const targetImage = document.getElementById(activeSlot);
+                const selectorButton = targetImage.parentNode;
+                const selectedItemCon = selectorButton.querySelector('.selected-item-con');
 
-        // Close dropdown if clicked outside
-        document.addEventListener('click', function(event) {
-            const isClickInside = dropdownList.contains(event.target) || document.querySelector(`.dropdown.${slotId.charAt(0).toUpperCase() + slotId.slice(1)} .selector-button`).contains(event.target);
-            if (!isClickInside && dropdownList.style.display === 'block') {
-                dropdownList.style.display = 'none';
-                activeSlot = null;
+                if (targetImage && selectorButton && selectedItemCon) {
+                    const newSrc = listItem.getAttribute('data-image');
+                    const newCost = parseInt(listItem.getAttribute('data-cost'));
+                    const previousCost = parseInt(targetImage.dataset.cost || 0);
+
+                    updatePoints(previousCost, false);
+                    updatePoints(newCost, true);
+
+                    targetImage.src = newSrc;
+                    targetImage.dataset.cost = newCost;
+
+                    // Save selected item to localStorage
+                    localStorage.setItem(`selectedItem_${activeSlot}_image`, newSrc);
+                    localStorage.setItem(`selectedItem_${activeSlot}_cost`, newCost);
+                    localStorage.setItem(`selectedItem_${activeSlot}_title`, listItem.getAttribute('data-info-title'));
+                    localStorage.setItem(`selectedItem_${activeSlot}_content`, listItem.getAttribute('data-info-content'));
+
+                    const itemCon = listItem.querySelector('.item_con');
+                    let itemConContent = '';
+                    if (itemCon) {
+                        itemCon.childNodes.forEach(node => {
+                            if (node.nodeType === Node.ELEMENT_NODE && !node.classList.contains('img_con')) {
+                                itemConContent += node.outerHTML;
+                            }
+                        });
+                    }
+                    selectedItemCon.innerHTML = itemConContent;
+                    document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
+                    document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
+                    activeSlot = null;
+
+                    // Update and store info for the selected item
+                    currentSelectedItemTitle = listItem.getAttribute('data-info-title');
+                    currentSelectedItemContent = listItem.getAttribute('data-info-content');
+                    updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
+                }
+            }
+        });
+
+        // Add hover effects for dropdown items
+        dropdownList.querySelectorAll('.dropdown-item').forEach(item => {
+            const infoButton = item.querySelector('.info_con');
+            if (infoButton) {
+                const title = item.getAttribute('data-info-title');
+                const content = item.getAttribute('data-info-content');
+
+                infoButton.addEventListener('mouseenter', () => {
+                    updateInfoPanel(title, content);
+                });
+
+                infoButton.addEventListener('mouseleave', () => {
+                    updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
+                });
             }
         });
     }
-}
+});
 
-document.addEventListener('click', function(event) {
-    const selectorButtons = document.querySelectorAll('.selector-button');
-    let clickedOnButton = false;
-    selectorButtons.forEach(button => {
-        if (button.contains(event.target)) {
-            clickedOnButton = true;
-        }
-    });
-
-    if (!clickedOnButton && activeSlot) {
-        const currentDropdown = document.getElementById(`dropdown_${activeSlot}`);
-        if (currentDropdown) {
-            currentDropdown.style.display = 'none';
-        }
+document.addEventListener('click', (e) => {
+    // Close dropdowns if click is outside any dropdown or selector button
+    if (!e.target.closest('.dropdown') && !e.target.closest('.selector-button')) {
+        document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
+        document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
         activeSlot = null;
     }
 });
 
-// Dropdown limit size and initial info display
-document.addEventListener('DOMContentLoaded', function () {
+// Character data
+const deltaCharacters = [
+    {
+        name: "Nomad",
+        image: "Media/UiElements/The Squad/Nomad.png",
+        implants: {
+            image: "Media/UiElements/Implants/NomadImplant.png",
+            text: "Cybernetic reflex boost, +2 to reaction time"
+        },
+        characteristics: {
+            image: "Media/UiElements/Characteristics/NomadStats.png",
+            text: "HP: 10 | Speed: 6m | Armor: Light"
+        },
+        abilities: {
+            image: "Media/UiElements/Abilities/NomadAbility.png",
+            text: "Ghost Walk - Become invisible for 1 round"
+        }
+    },
+    {
+        name: "FatMan",
+        image: "Media/UiElements/The Squad/FatMan.png",
+        implants: {
+            image: "Media/UiElements/Implants/FatManImplant.png",
+            text: "Armor plating system, +3 to damage resistance"
+        },
+        characteristics: {
+            image: "Media/UiElements/Characteristics/FatManStats.png",
+            text: "HP: 15 | Speed: 4m | Armor: Heavy"
+        },
+        abilities: {
+            image: "Media/UiElements/Abilities/FatManAbility.png",
+            text: "Shield Wall - Protect allies behind you for 2 rounds"
+        }
+    },
+    {
+        name: "Artemis",
+        image: "Media/UiElements/The Squad/Artemis.png",
+        implants: {
+            image: "Media/UiElements/Implants/AsterisImplant.png",
+            text: "Neural interface, +2 to hacking and tech skills"
+        },
+        characteristics: {
+            image: "Media/UiElements/Characteristics/AsterisStats.png",
+            text: "HP: 8 | Speed: 5m | Armor: Light"
+        },
+        abilities: {
+            image: "Media/UiElements/Abilities/AsterisAbility.png",
+            text: "System Override - Disable enemy electronics for 1 round"
+        }
+    },
+    {
+        name: "Tiffany",
+        image: "Media/UiElements/The Squad/Tiffany.png",
+        implants: {
+            image: "Media/UiElements/Implants/TiffanyImplant.png",
+            text: "Biometric scanner, +3 to medical and support actions"
+        },
+        characteristics: {
+            image: "Media/UiElements/Characteristics/TiffanyStats.png",
+            text: "HP: 9 | Speed: 5m | Armor: Light"
+        },
+        abilities: {
+            image: "Media/UiElements/Abilities/TiffanyAbility.png",
+            text: "Field Medic - Instantly heal 5 HP to any ally"
+        }
+    },
+];
+
+let currentCharIndex = 0;
+
+function updateDeltaCharDisplay() {
+    const deltaChar = document.querySelector('.DeltaChar');
+    const charName = document.querySelector('.CharName');
+    const statsContainer = document.getElementById('CharStats');
+    const char = deltaCharacters[currentCharIndex];
+
+    if (deltaChar && charName && statsContainer && char) {
+        // Update character image
+        deltaChar.src = char.image;
+        deltaChar.alt = char.name;
+        
+        // Update character name
+        charName.textContent = char.name;
+        
+        // Update character stats with better formatting
+        statsContainer.innerHTML = `
+            <div class="stat-section">
+                <h4>Implants:</h4>
+                <p>${char.implants.text}</p>
+            </div>
+            <div class="stat-section">
+                <h4>Characteristics:</h4>
+                <p>${char.characteristics.text}</p>
+            </div>
+            <div class="stat-section">
+                <h4>Abilities:</h4>
+                <p>${char.abilities.text}</p>
+            </div>
+        `;
+        
+        console.log(`Character switched to: ${char.name} (Index: ${currentCharIndex})`);
+    } else {
+        console.error('Missing elements or character data for character switching');
+    }
+}
+
+function initializeCharacterSwitching() {
+    // Character Selector
+    updateDeltaCharDisplay(); // Initial display of character
+
+    const leftBtn = document.getElementById('Swipeleft_btn');
+    const rightBtn = document.getElementById('Swiperight_btn');
+
+    if (leftBtn) {
+        leftBtn.addEventListener('click', () => {
+            currentCharIndex = (currentCharIndex - 1 + deltaCharacters.length) % deltaCharacters.length;
+            updateDeltaCharDisplay();
+            localStorage.setItem('currentCharIndex', currentCharIndex); // Save character index
+        });
+    } else {
+        console.error('SwipeLeft_btn not found');
+    }
+
+    if (rightBtn) {
+        rightBtn.addEventListener('click', () => {
+            currentCharIndex = (currentCharIndex + 1) % deltaCharacters.length;
+            updateDeltaCharDisplay();
+            localStorage.setItem('currentCharIndex', currentCharIndex); // Save character index
+        });
+    } else {
+        console.error('Swiperight_btn not found');
+    }
+
+    // Load saved character index
+    const savedCharIndex = localStorage.getItem('currentCharIndex');
+    if (savedCharIndex !== null) {
+        currentCharIndex = parseInt(savedCharIndex, 10);
+        // Ensure index is within bounds
+        if (currentCharIndex >= deltaCharacters.length) {
+            currentCharIndex = 0;
+        }
+        updateDeltaCharDisplay();
+    }
+}
+// Load saved data and initialize display on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Dropdown limit size and initial info display setup
     const dropdownLists = document.querySelectorAll('.dropdown-list');
 
+
     dropdownLists.forEach(dropdownList => {
-        const itemCon = dropdownList.querySelector('.item_con');
+        // Temporarily display to calculate height, then hide
+        dropdownList.style.display = 'block';
+        dropdownList.style.visibility = 'hidden';
 
-        if (itemCon) {
-            dropdownList.style.display = 'block';
-            dropdownList.style.visibility = 'hidden';
-
-            const itemHeight = itemCon.scrollHeight;
-            const listMaxHeight = itemHeight * 2.5;
+        const firstItem = dropdownList.querySelector('.dropdown-item');
+        if (firstItem) {
+            const itemHeight = firstItem.scrollHeight; // Use scrollHeight of an item
+            const listMaxHeight = itemHeight * 2.5; // Limit to 2.5 items height
 
             dropdownList.style.maxHeight = `${listMaxHeight}px`;
             dropdownList.style.overflowY = 'auto';
-
-            dropdownList.style.display = 'none';
-            dropdownList.style.visibility = 'visible';
         }
+
+        dropdownList.style.display = 'none'; // Hide again
+        dropdownList.style.visibility = 'visible'; // Make visible (but hidden by display: none)
+            // Initialize character switching at the end
+    initializeCharacterSwitching();
     });
 
-    // Initialize info display for the "Nothing" item of the first slot
-    const initialItem = document.querySelector('.Vest_Grp .dropdown-item[data-cost="0"]');
-    if (initialItem) {
-        // Set and store the initial selected item's info
-        currentSelectedItemTitle = initialItem.getAttribute('data-info-title');
-        currentSelectedItemContent = initialItem.getAttribute('data-info-content');
-        updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
-    } else {
-        // Fallback if no initial item is found
-        updateInfoPanel('Topic-NoN', 'Content');
-    }
-
-    // Load saved data for all dropdowns on page load
-    loadAllDropdownStates();
-
-    // Attach click listeners to dropdown items to save their state
-    document.querySelectorAll('.dropdown-item').forEach(item => {
-        item.addEventListener('click', function() {
-            const slotId = this.closest('.dropdown-list').id.replace('dropdown_', '');
-            const selectorButton = document.querySelector(`#${slotId}`); // The img element within the selector-button
-            const selectedItemImage = this.getAttribute('data-image');
-            const selectedItemCost = parseInt(this.getAttribute('data-cost'), 10);
-            const selectedItemTitle = this.getAttribute('data-info-title');
-            const selectedItemContent = this.getAttribute('data-info-content');
-
-            const prevCost = parseInt(selectorButton.dataset.cost || '0', 10);
-
-            // Update points only if the cost has changed or it's the initial selection
-            if (prevCost !== selectedItemCost || !selectorButton.dataset.cost) {
-                if (prevCost > 0) {
-                    updatePoints(prevCost, false); // Subtract previous cost
-                }
-                if (selectedItemCost > 0) {
-                    updatePoints(selectedItemCost, true); // Add new cost
-                }
-            } else if (prevCost === 0 && selectedItemCost === 0) {
-                 // If both previous and current are 0, do nothing regarding points
-            }
-
-
-            // Update the image of the selector button
-            selectorButton.src = selectedItemImage;
-            selectorButton.alt = selectedItemTitle;
-
-            // Store selected item data in a dataset on the image element for easy retrieval
-            selectorButton.dataset.image = selectedItemImage;
-            selectorButton.dataset.cost = selectedItemCost;
-            selectorButton.dataset.title = selectedItemTitle;
-            selectorButton.dataset.content = selectedItemContent;
-
-            // Update info panel
-            updateInfoPanel(selectedItemTitle, selectedItemContent);
-
-            // Save the state of this specific dropdown
-            saveDropdownState(slotId, {
-                image: selectedItemImage,
-                cost: selectedItemCost,
-                title: selectedItemTitle,
-                content: selectedItemContent
-            });
-
-            // Hide the dropdown list
-            this.closest('.dropdown-list').style.display = 'none';
-            activeSlot = null;
-        });
-    });
-});
-
-
-// Functions to save and load all dropdown states
-function saveDropdownState(slotId, state) {
-    localStorage.setItem(`selected_${slotId}`, JSON.stringify(state));
-}
-
-function loadDropdownState(slotId) {
-    const savedState = localStorage.getItem(`selected_${slotId}`);
-    if (savedState) {
-        return JSON.parse(savedState);
-    }
-    return null;
-}
-
-function loadAllDropdownStates() {
-    let loadedTotalPoints = 0; // Recalculate total points from loaded items
-
-    document.querySelectorAll('.selector-button img').forEach(imgElement => {
-        const slotId = imgElement.id;
-        if (slotId) {
-            const savedState = loadDropdownState(slotId);
-            if (savedState) {
-                imgElement.src = savedState.image;
-                imgElement.alt = savedState.title;
-                imgElement.dataset.image = savedState.image;
-                imgElement.dataset.cost = savedState.cost;
-                imgElement.dataset.title = savedState.title;
-                imgElement.dataset.content = savedState.content;
-
-                loadedTotalPoints += savedState.cost; // Add cost to recalculate total points
-            } else {
-                // If no saved state, initialize with 'Nothing' for that slot
-                const initialItem = document.querySelector(`#dropdown_${slotId} .dropdown-item[data-cost="0"]`);
-                if (initialItem) {
-                    const initialImage = initialItem.getAttribute('data-image');
-                    const initialCost = parseInt(initialItem.getAttribute('data-cost'), 10);
-                    const initialTitle = initialItem.getAttribute('data-info-title');
-                    const initialContent = initialItem.getAttribute('data-info-content');
-
-                    imgElement.src = initialImage;
-                    imgElement.alt = initialTitle;
-                    imgElement.dataset.image = initialImage;
-                    imgElement.dataset.cost = initialCost;
-                    imgElement.dataset.title = initialTitle;
-                    imgElement.dataset.content = initialContent;
-                    loadedTotalPoints += initialCost;
-                }
-            }
-        }
-    });
-
-    // Update the totalPoints global variable and input field
-    totalPoints = loadedTotalPoints;
-    if (totalPointsInput) {
+    // Load total points
+    const savedTotalPoints = localStorage.getItem('totalPoints');
+    if (savedTotalPoints !== null) {
+        totalPoints = parseInt(savedTotalPoints, 10);
         totalPointsInput.value = totalPoints;
     }
 
-    // Load and update the info panel for the *first* dropdown's saved item on page load
-    const firstDropdownImg = document.querySelector('.selector-button img[id="vest"]'); // Assuming 'vest' is the first dropdown
-    if (firstDropdownImg && firstDropdownImg.dataset.title && firstDropdownImg.dataset.content) {
-        updateInfoPanel(firstDropdownImg.dataset.title, firstDropdownImg.dataset.content);
-    } else {
-        // Fallback to default if no saved item for the first dropdown
-        updateInfoPanel('Topic-NoN', 'Content');
+    // List of all slot IDs to iterate through for loading
+    const slotIds = [
+        'vest', 'melee', 'weapon1', 'weapon2', 'equipment1', 'equipment2',
+        'equipment3', 'granade1', 'granade2', 'granade3', // From invintory.html
+        'silens', 'mount1', 'mount2', 'magazine', // From invintory_Accesory.html
+        'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec' // Additional from invintory_Accesory.html
+    ];
+
+    let infoPanelUpdatedBySavedItem = false;
+
+    slotIds.forEach(slotId => {
+        const savedImage = localStorage.getItem(`selectedItem_${slotId}_image`);
+        const savedCost = localStorage.getItem(`selectedItem_${slotId}_cost`);
+        const savedTitle = localStorage.getItem(`selectedItem_${slotId}_title`);
+        const savedContent = localStorage.getItem(`selectedItem_${slotId}_content`);
+
+        const targetImage = document.getElementById(slotId);
+        if (targetImage && savedImage) {
+            // Restore image and cost
+            targetImage.src = savedImage;
+            targetImage.dataset.cost = parseInt(savedCost || 0);
+
+            // Restore the selected-item-con display based on the saved item
+            const selectorButton = targetImage.parentNode;
+            const selectedItemCon = selectorButton.querySelector('.selected-item-con');
+            if (selectedItemCon) {
+                const dropdownList = document.getElementById(`dropdown_${slotId}`);
+                if (dropdownList) {
+                    const listItem = Array.from(dropdownList.children).find(item =>
+                        item.getAttribute('data-image') === savedImage
+                    );
+                    if (listItem) {
+                        const itemCon = listItem.querySelector('.item_con');
+                        let itemConContent = '';
+                        if (itemCon) {
+                            itemCon.childNodes.forEach(node => {
+                                if (node.nodeType === Node.ELEMENT_NODE && !node.classList.contains('img_con')) {
+                                    itemConContent += node.outerHTML;
+                                }
+                            });
+                        }
+                        selectedItemCon.innerHTML = itemConContent;
+                    }
+                }
+            }
+
+            // Update info panel if this is the last saved item (or the first one encountered)
+            if (savedTitle && savedContent && !infoPanelUpdatedBySavedItem) {
+                currentSelectedItemTitle = savedTitle;
+                currentSelectedItemContent = savedContent;
+                updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
+                infoPanelUpdatedBySavedItem = true; // Set flag to only update with one saved item's info
+            }
+        }
+    });
+
+    // If no item was loaded from storage, or if the initial item on the page provides info
+    if (!infoPanelUpdatedBySavedItem) {
+        // Initialize info display for the "Nothing" item of the first slot or default
+        const initialItem = document.querySelector('.Vest_Grp .dropdown-item[data-cost="0"]'); // Assuming Vest_Grp is typically the first
+        if (initialItem) {
+            currentSelectedItemTitle = initialItem.getAttribute('data-info-title');
+            currentSelectedItemContent = initialItem.getAttribute('data-info-content');
+        }
+        updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
     }
 
-    // Explicitly load totalPoints if it was saved separately (from invintory.html)
-    const savedTotalPointsFromInv = localStorage.getItem('totalPoints');
-    if (savedTotalPointsFromInv !== null) {
-        totalPoints = parseInt(savedTotalPointsFromInv, 10);
-        if (totalPointsInput) {
-            totalPointsInput.value = totalPoints;
-        }
+    // Character Selector
+    updateDeltaCharDisplay(); // Initial display of character
+
+    document.getElementById('Swipeleft_btn').addEventListener('click', () => {
+        currentCharIndex = (currentCharIndex - 1 + deltaCharacters.length) % deltaCharacters.length;
+        updateDeltaCharDisplay();
+        localStorage.setItem('currentCharIndex', currentCharIndex); // Save character index
+    });
+
+    document.getElementById('Swiperight_btn').addEventListener('click', () => {
+        currentCharIndex = (currentCharIndex + 1) % deltaCharacters.length;
+        updateDeltaCharDisplay();
+        localStorage.setItem('currentCharIndex', currentCharIndex); // Save character index
+    });
+
+    // Load saved character index
+    const savedCharIndex = localStorage.getItem('currentCharIndex');
+    if (savedCharIndex !== null) {
+        currentCharIndex = parseInt(savedCharIndex, 10);
+        updateDeltaCharDisplay();
     }
-}
+});
