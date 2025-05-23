@@ -3,15 +3,16 @@ let totalPoints = 0;
 const totalPointsInput = document.querySelector('.TotalPoints');
 const itemInfoTitle = document.getElementById('item-info-title');
 const itemInfoContent = document.getElementById('item-info-content');
-const atachment_con = document.getElementById('Atachment_Con');
+const atachment_con = document.getElementById('Atachment_Con'); // Referencing the single Atachment_Con
+
 
 // Store the title and content of the currently selected item
 let currentSelectedItemTitle = 'Topic-NoN';
 let currentSelectedItemContent = 'Content';
-let currentSelectedItemAtachment = 'Atachments';
+let currentSelectedItemWeaponId = null; // To track which weapon's attachments should be displayed
 
 // Helper function to update the info panel with multi-line content
-function updateInfoPanel(title, content, atachment_con) {
+function updateInfoPanel(title, content) {
     if (itemInfoTitle) {
         itemInfoTitle.textContent = title || 'Topic-NoN';
     }
@@ -20,8 +21,8 @@ function updateInfoPanel(title, content, atachment_con) {
         if (content) {
             const lines = content.split(' | '); // Split by |
             const ulElement = document.createElement('ul');
-            ulElement.style.listStyleType = 'none'; 
-            ulElement.style.paddingLeft = '0'; 
+            ulElement.style.listStyleType = 'none';
+            ulElement.style.paddingLeft = '0';
 
             lines.forEach(line => {
                 const liElement = document.createElement('li');
@@ -30,26 +31,19 @@ function updateInfoPanel(title, content, atachment_con) {
             });
             itemInfoContent.appendChild(ulElement);
         } else {
-            itemInfoContent.textContent = 'Content'; 
+            itemInfoContent.textContent = 'Content';
         }
     }
 }
 
-//Atachments 
-
-
-
-
-
 function updatePoints(cost, isAdding) {
     totalPoints = isAdding ? totalPoints + cost : totalPoints - cost;
-    if (totalPoints <  0){
+    if (totalPoints < 0) {
         totalPoints = 0;
     }
-    if (totalPoints > 14 ){
+    if (totalPoints > 14) {
         totalPointsInput.style.color = 'red';
-        
-    }
+    } 
     totalPointsInput.value = totalPoints;
     localStorage.setItem('totalPoints', totalPoints); // Auto-save total points
 }
@@ -57,6 +51,7 @@ function updatePoints(cost, isAdding) {
 function selectSlot(slotId) {
     document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
     document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
+    
     activeSlot = slotId;
     const dropdown = document.getElementById(`dropdown_${slotId}`);
     if (dropdown) {
@@ -64,7 +59,83 @@ function selectSlot(slotId) {
     }
     const currentButton = event.currentTarget;
     currentButton.classList.add('selected');
+
+    // If a weapon is selected, update currentSelectedItemWeaponId and its attachment display
+    if (slotId === 'weapon1') {
+        currentSelectedItemWeaponId = 'weapon1';
+        updateWeaponAttachmentsDisplay(currentSelectedItemWeaponId);
+        atachment_con.style.display = 'block'; // Show the attachment display
+    } else if (slotId === 'weapon2') {
+        currentSelectedItemWeaponId = 'weapon2';
+        updateWeaponAttachmentsDisplay(currentSelectedItemWeaponId);
+        atachment_con.style.display = 'block'; // Show the attachment display
+    } else {
+        // If an attachment slot is selected, check which weapon it belongs to
+        const parentWA_Group = currentButton.closest('.WA_Group');
+        if (parentWA_Group) {
+            if (parentWA_Group.querySelector('#weapon1')) {
+                currentSelectedItemWeaponId = 'weapon1';
+                updateWeaponAttachmentsDisplay(currentSelectedItemWeaponId);
+                atachment_con.style.display = 'block';
+            } else if (parentWA_Group.querySelector('#weapon2')) {
+                currentSelectedItemWeaponId = 'weapon2';
+                updateWeaponAttachmentsDisplay(currentSelectedItemWeaponId);
+                atachment_con.style.display = 'block';
+            } else {
+                // If a non-weapon slot is selected and it's not part of a weapon group (e.g., if there were other non-weapon dropdowns),
+                // you might want to hide the attachment display or show a default message.
+                atachment_con.style.display = 'none';
+                currentSelectedItemWeaponId = null;
+            }
+        } else {
+            // If the selected slot is not a weapon and not part of a weapon group, hide attachment display
+            atachment_con.style.display = 'none';
+            currentSelectedItemWeaponId = null;
+        }
+    }
 }
+
+
+// Function to update the attachments display for a specific weapon in the single Atachment_Con
+function updateWeaponAttachmentsDisplay(weaponSlotId) {
+    let attachmentsContent = '';
+    const attachments = [];
+
+    // Determine relevant attachment slot IDs based on the weapon slot ID
+    let attachmentSlotIds = [];
+    if (weaponSlotId === 'weapon1') {
+        attachmentSlotIds = ['silens', 'mount1', 'mount2', 'scope', 'stock', 'magazine'];
+    } else if (weaponSlotId === 'weapon2') {
+        attachmentSlotIds = ['silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec'];
+    }
+
+    attachmentSlotIds.forEach(slotId => {
+        const savedTitle = localStorage.getItem(`selectedItem_${slotId}_title`);
+        const savedContent = localStorage.getItem(`selectedItem_${slotId}_content`);
+        if (savedTitle && savedTitle !== 'Nothing') {
+            attachments.push({ title: savedTitle, content: savedContent });
+        }
+    });
+
+    if (attachments.length > 0) {
+        attachmentsContent = `<h5>Attachments for ${weaponSlotId === 'weapon1' ? 'Main Weapon' : 'Secondary Weapon'}:</h5><ul>`;
+        attachments.forEach(attachment => {
+            attachmentsContent += `<li><strong>${attachment.title}</strong>: `;
+            // Split content by ' | ' and format as a nested unordered list
+            const contentLines = attachment.content.split(' | ');
+            attachmentsContent += `<ul>`;
+            contentLines.forEach(line => {
+                attachmentsContent += `<li>${line.trim()}</li>`;
+            });
+            attachmentsContent += `</ul></li>`;
+        });
+        attachmentsContent += '</ul>';
+    } else {
+        attachmentsContent = `No ${weaponSlotId === 'weapon1' ? 'Main Weapon' : 'Secondary Weapon'} Atachment Selected`;
+    }
+    atachment_con.innerHTML = attachmentsContent;
+}
+
 
 document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
     const dropdownList = dropdownContainer.querySelector('.dropdown-list');
@@ -112,6 +183,21 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
                     currentSelectedItemTitle = listItem.getAttribute('data-info-title');
                     currentSelectedItemContent = listItem.getAttribute('data-info-content');
                     updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
+
+                    // If an attachment is selected, ensure the weapon's attachments display is updated
+                    // We need to know which weapon's attachment set this belongs to.
+                    const parentWA_Group = targetImage.closest('.WA_Group');
+                    if (parentWA_Group) {
+                        if (parentWA_Group.querySelector('#weapon1')) {
+                            currentSelectedItemWeaponId = 'weapon1';
+                        } else if (parentWA_Group.querySelector('#weapon2')) {
+                            currentSelectedItemWeaponId = 'weapon2';
+                        }
+                        if (currentSelectedItemWeaponId) {
+                            updateWeaponAttachmentsDisplay(currentSelectedItemWeaponId);
+                            atachment_con.style.display = 'block'; // Ensure it's visible
+                        }
+                    }
                 }
             }
         });
@@ -141,6 +227,9 @@ document.addEventListener('click', (e) => {
         document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
         document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
         activeSlot = null;
+        // Hide the attachment display when clicking outside
+        atachment_con.style.display = 'none';
+        currentSelectedItemWeaponId = null; // Clear the active weapon for attachments
     }
 });
 
@@ -186,7 +275,7 @@ const deltaCharacters = [
             text: "Neural interface, +2 to hacking and tech skills"
         },
         characteristics: {
-            image: "Media/UiElements/Characteristics/AsterisStats.png",
+            image: "Media/UiElements/Characteristics/FatManStats.png",
             text: "HP: 8 | Speed: 5m | Armor: Light"
         },
         abilities: {
@@ -326,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const slotIds = [
         'vest', 'melee', 'weapon1', 'weapon2', 'equipment1', 'equipment2',
         'equipment3', 'granade1', 'granade2', 'granade3', // From invintory.html
-        'silens', 'mount1', 'mount2', 'magazine', // From Atachments.html
+        'silens', 'mount1', 'mount2', 'magazine', 'scope', 'stock', // From Atachments.html
         'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec' // Asecondary Atachments.html
     ];
 
@@ -378,16 +467,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Initial state: hide the attachment display
+    atachment_con.style.display = 'none';
+
     // item plug
     if (!infoPanelUpdatedBySavedItem) {
-        
-        const initialItem = document.querySelector('.Vest_Grp .dropdown-item[data-cost="0"]'); // Assuming Vest_Grp is typically the first
+        const initialItem = document.querySelector('.dropdown-item[data-cost="0"]'); // Assuming the first "Nothing" item
         if (initialItem) {
             currentSelectedItemTitle = initialItem.getAttribute('data-info-title');
             currentSelectedItemContent = initialItem.getAttribute('data-info-content');
         }
         updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
     }
-
-
 });
