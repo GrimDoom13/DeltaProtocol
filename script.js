@@ -249,7 +249,10 @@ const deltaCharacters = [
             text: "Ghost Walk - Become invisible for 1 round"
         },
         costReductions: [],
-        combinedCostReductions: []
+        combinedCostReductions: [
+            { itemNames: ["Pistol", "Knife"], reduction: 1 },
+            { itemNames: ["Pistol", "Dildo"], reduction: 1 }
+        ]
     },
     {
         name: "FatMan",
@@ -267,7 +270,10 @@ const deltaCharacters = [
             text: "Shield Wall - Protect allies behind you for 2 rounds"
         },
         costReductions: [],
-        combinedCostReductions: []
+        combinedCostReductions: [
+            { itemNames: ["Pistol", "Knife"], reduction: 1 },
+            { itemNames: ["Pistol", "Dildo"], reduction: 1 }
+        ]
     },
     {
         name: "Artemis",
@@ -287,7 +293,10 @@ const deltaCharacters = [
         costReductions: [
 
         ],
-        combinedCostReductions: []
+        combinedCostReductions: [
+            { itemNames: ["Pistol", "Knife"], reduction: 1 },
+            { itemNames: ["Pistol", "Dildo"], reduction: 1 }
+        ]
     },
     {
         name: "Tiffany",
