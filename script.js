@@ -251,6 +251,7 @@ const deltaCharacters = [
         costReductions: [],
         combinedCostReductions: [
             { itemNames: ["Pistol", "Knife"], reduction: 1 },
+            { itemNames: ["Pistol", "Dildo_Purple"], reduction: 1 },
             { itemNames: ["Pistol", "Dildo"], reduction: 1 }
         ]
     },
@@ -272,6 +273,7 @@ const deltaCharacters = [
         costReductions: [],
         combinedCostReductions: [
             { itemNames: ["Pistol", "Knife"], reduction: 1 },
+            { itemNames: ["Pistol", "Dildo_Purple"], reduction: 1 },
             { itemNames: ["Pistol", "Dildo"], reduction: 1 }
         ]
     },
@@ -295,6 +297,7 @@ const deltaCharacters = [
         ],
         combinedCostReductions: [
             { itemNames: ["Pistol", "Knife"], reduction: 1 },
+            { itemNames: ["Pistol", "Dildo_Purple"], reduction: 1 },
             { itemNames: ["Pistol", "Dildo"], reduction: 1 }
         ]
     },
@@ -318,6 +321,7 @@ const deltaCharacters = [
         ],
         combinedCostReductions: [
             { itemNames: ["Pistol", "Knife"], reduction: 1 },
+            { itemNames: ["Pistol", "Dildo_Purple"], reduction: 1 },
             { itemNames: ["Pistol", "Dildo"], reduction: 1 }
         ]
     },

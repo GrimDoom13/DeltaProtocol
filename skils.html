@@ -49,42 +49,42 @@
     <script>
         const abilities = {
             sniper: [
-				{ name: "Sniper", cooldown: 0, description: "סיכוי פגיע +2.אם האויב נמצא במרחק של 10 מטרים מהטווח פגיע האפקטיבי המרבי של הנשק, הנזק גדל ב+2.", img: "Media/UiElements/Unsorted/img/XCOM2_Sharpshooter_icon.png" },
-                { name: "Quick Shot", cooldown: 3, description: "כשה אתה יוראה במטרה עם אקדח. אתה לא מבזבז פעולה כדי לבצע את ההתקפה הזו. (cooldown 3)", img: "Media/UiElements/Unsorted/img/Quickdraw.png" },
-                { name: "Lightning Hands", cooldown: 0, description: "מגדיל את הנזק מאקדח ב-2", img: "Media/UiElements/Unsorted/img/Lightning_Hands.png" }/*,
-                { name: "Faceoff", cooldown: 4, description: "יריאה מאקדח פעם אחת על כל מטרה שאתה רואה.(coldawn 4 תורות)", img: "Media/UiElements/Unsorted/img/Faceoff.png" },
-                { name: "Reaper", cooldown: 0, description: "כל הריגה מגדילה את סיכוי הפגיעה הקריטי שלך ב+1. הבונוס עד למקסימום של +4.", img: "Media/UiElements/Unsorted/img/Reaper.png" }*/
+				{ name: "Sniper", cooldown: 0, description: "סיכוי פגיע +2.אם האויב נמצא במרחק של 10 מטרים מהטווח פגיע האפקטיבי המרבי של הנשק, הנזק גדל ב+2.", img: "Media/UiElements/Unsorted/img//XCOM2_Sharpshooter_icon.png" },
+                { name: "Quick Shot", cooldown: 3, description: "כשה אתה יוראה במטרה עם אקדח. אתה לא מבזבז פעולה כדי לבצע את ההתקפה הזו. (cooldown 3)", img: "Media/UiElements/Unsorted/img//Quickdraw.png" },
+                { name: "Lightning Hands", cooldown: 0, description: "מגדיל את הנזק מאקדח ב-2", img: "Media/UiElements/Unsorted/img//Lightning_Hands.png" },
+                { name: "Faceoff", cooldown: 4, description: "יריאה מאקדח פעם אחת על כל מטרה שאתה רואה.(coldawn 4 תורות)", img: "Media/UiElements/Unsorted/img//Faceoff.png" },/*
+                { name: "Reaper", cooldown: 0, description: "כל הריגה מגדילה את סיכוי הפגיעה הקריטי שלך ב+1. הבונוס עד למקסימום של +4.", img: "Media/UiElements/Unsorted/img//Reaper.png" }*/
             ],
             medic: [
-				{ name: "Medic", cooldown: 0, description: "יכול להישתמש ב תיק עזרה ראשונה 4 פעמים במקום פעם אחת.אתה מטפל ביעילות כפולה.", img: "Media/UiElements/Unsorted/img/XCOM-EU_OTS_-_Rapid_Recovery.png" },
-                { name: "Drone heal", cooldown: 200, description: "הרחפן מסוגל להשתמש מרחוק ביכולות 'ריפוי' ו'ייצוב'לגרמלין יש מטען אחד,עד 30 מטר", img: "Media/UiElements/Unsorted/img/Medical_Protocol.png" },
-				{ name: "Negative effect", cooldown: 0, description: "מרפא השפעות שליליות", img: "Media/UiElements/Unsorted/img/XEU_Psionic_PsiPanic.png" }/*,
-                { name: "Hidden Pocket", cooldown: 0, description: "תא נוסף לציוד מיוחד. +הנזק לנגועים גדל ב-50%.", img: "Media/UiElements/Unsorted/img/XCOM-EU_OTS_-_Don%27t_Die_On_Me.png" },
-                { name: "Medic drone", cooldown: 200, description: "הרחפן מסוגל להשתמש מרחוק ביכולות "ריפוי" ו"ייצוב". לגרמלין כמות מטענים השווה ל כמות medpack שלחה.(עד 25 מטר)", img: "Media/UiElements/Unsorted/img/Field_Medic.png" }*/
+				{ name: "Medic", cooldown: 0, description: "יכול להישתמש ב תיק עזרה ראשונה 4 פעמים במקום פעם אחת.אתה מטפל ביעילות כפולה.", img: "Media/UiElements/Unsorted/img//XCOM-EU_OTS_-_Rapid_Recovery.png" },
+                { name: "Drone heal", cooldown: 200, description: "הרחפן מסוגל להשתמש מרחוק ביכולות 'ריפוי' ו'ייצוב'לגרמלין יש מטען אחד,עד 30 מטר", img: "Media/UiElements/Unsorted/img//Medical_Protocol.png" },
+				{ name: "Negative effect", cooldown: 0, description: "מרפא השפעות שליליות", img: "Media/UiElements/Unsorted/img//XEU_Psionic_PsiPanic.png" },
+                { name: "Hidden Pocket", cooldown: 0, description: "תא נוסף לציוד מיוחד. +הנזק לנגועים גדל ב-50%.", img: "Media/UiElements/Unsorted/img//XCOM-EU_OTS_-_Don7t_Die_On_Me.png" },/*
+                { name: "Medic drone", cooldown: 200, description: "הרחפן מסוגל להשתמש מרחוק ביכולות "ריפוי" ו"ייצוב". לגרמלין כמות מטענים השווה ל כמות medpack שלחה.(עד 25 מטר)", img: "Media/UiElements/Unsorted/img//Field_Medic.png" }*/
             ],
             grenaider: [
-				{ name: "Grenaider", cooldown: 0, description: "יכול לסחוב X2 רימוניםרדיוס פגיה וזריקה של רימונים X2 (זריקה עד 50 מטר)", img: "Media/UiElements/Unsorted/img/XCOM2_Grenaider_icon.png" },
-                { name: "Spicy stuffing", cooldown: 0, description: "רימונים גורמים ל-3 נזקים נוספ.", img: "Media/UiElements/Unsorted/img/XEU_Assault_Aggression.png" },
-                { name: "Hidden pocket", cooldown: 0, description: "ניתן להשתמש ברימון בתא המיועד פעמיים.", img: "Media/UiElements/Unsorted/img/Heavy_Ordnance.png" }/*,
-                { name: "Too much ammunition", cooldown: 0, description: "ירה במטרה פעמיים בדיוק -2. (לא מסיים את התור)", img: "Media/UiElements/Unsorted/img/Chain_Shot.png" },
-                { name: "Alertness", cooldown: 0, description: "יכול לירות יריית Overwatch שנייה אם הראשונה פוגעת במטרה.", img: "Media/UiElements/Unsorted/img/XEU_Heavy_RapidReaction.png" }*/
+				{ name: "Grenaider", cooldown: 0, description: "יכול לסחוב X2 רימוניםרדיוס פגיה וזריקה של רימונים X2 (זריקה עד 50 מטר)", img: "Media/UiElements/Unsorted/img//XCOM2_Grenaider_icon.png" },
+                { name: "Spicy stuffing", cooldown: 0, description: "רימונים גורמים ל-3 נזקים נוספ.", img: "Media/UiElements/Unsorted/img//XEU_Assault_Aggression.png" },
+                { name: "Hidden pocket", cooldown: 0, description: "ניתן להשתמש ברימון בתא המיועד פעמיים.", img: "Media/UiElements/Unsorted/img//Heavy_Ordnance.png" },
+                { name: "Too much ammunition", cooldown: 0, description: "ירה במטרה פעמיים בדיוק -2. (לא מסיים את התור)", img: "Media/UiElements/Unsorted/img//Chain_Shot.png" },/*
+                { name: "Alertness", cooldown: 0, description: "יכול לירות יריית Overwatch שנייה אם הראשונה פוגעת במטרה.", img: "Media/UiElements/Unsorted/img//XEU_Heavy_RapidReaction.png" }*/
             ],
             engineer: [
-				{ name: "Engineer", cooldown: 0, description: "Квалифицированный специалист в области технологий, может взламывать компьютеры, двери и ворота.Тихий дрон и 'מחשיר הלם' стоят по 1 очкоу.", img: "Media/UiElements/Unsorted/img/XCOM2_Specialist_icon.png" },
-                { name: "Мечебный Дрон", cooldown: 200, description: "Дрон способен использовать 'исцеляющие' и 'стабилизирующие' способности на расстоянии. У Гремлина один заряд, до 25 метров.", img: "Media/UiElements/Unsorted/img/Medical_Protocol.png" },
-                { name: "Взломщик", cooldown: 3, description: "Удалёный взлом через дрон", img: "Media/UiElements/Unsorted/img/XComEW_EXALT_Comm_Hack_icon.png" }/*,
-                { name: "Хаекр", cooldown: 0, description: "אתה יכול להשתמש ברחפן נגד רובוטים ומטרות מכניות כדי לפרוץ אותם ולהשתלט עליהם.", img: "Media/UiElements/Unsorted/img/Haywire_Protocol.png" },
-                { name: "Бдительность", cooldown: 0, description: "גם אם תבזבז את כל הפעולות שלך,אתה יכול לעבור למצב תצפית 'Overwatch' בסוף התור שלך.", img: "Media/UiElements/Unsorted/img/XComEW_Advanced_Fire_Control_icon.png" }*/
+				{ name: "Engineer", cooldown: 0, description: "Квалифицированный специалист в области технологий, может взламывать компьютеры, двери и ворота.Тихий дрон и 'מחשיר הלם' стоят по 1 очкоу.", img: "Media/UiElements/Unsorted/img//XCOM2_Specialist_icon.png" },
+                { name: "Мечебный Дрон", cooldown: 200, description: "Дрон способен использовать 'исцеляющие' и 'стабилизирующие' способности на расстоянии. У Гремлина один заряд, до 25 метров.", img: "Media/UiElements/Unsorted/img//Medical_Protocol.png" },
+                { name: "Взломщик", cooldown: 3, description: "Удалёный взлом через дрон", img: "Media/UiElements/Unsorted/img//XComEW_EXALT_Comm_Hack_icon.png" },
+                { name: "Хаекр", cooldown: 0, description: "אתה יכול להשתמש ברחפן נגד רובוטים ומטרות מכניות כדי לפרוץ אותם ולהשתלט עליהם.", img: "Media/UiElements/Unsorted/img//Haywire_Protocol.png" },/*
+                { name: "Бдительность", cooldown: 0, description: "גם אם תבזבז את כל הפעולות שלך,אתה יכול לעבור למצב תצפית 'Overwatch' בסוף התור שלך.", img: "Media/UiElements/Unsorted/img//XComEW_Advanced_Fire_Control_icon.png" }*/
             ]
         };
 
         const baseAbilities = [
-            { name: "ארטילריה", cooldown: 200, description: "רדיוס 25 מטרים 5ד100 נזק פעם אחת למשימה", img: "Media/UiElements/Unsorted/img/striking-splinter.png" },
-            { name: "סיוע אווירי", cooldown: 200, description: "שביל של 3 מטר על 50 מטר 5ד10 פעם במסימה", img: "Media/UiElements/Unsorted/img/striking-arrows.png" },
-            { name: "עבודת צוות", cooldown: 200, description: "חייל יכול להוסיף פעולה אחת לחבר פעם אחת בכל משימה.", img: "Media/UiElements/Unsorted/img/XComEW_Inspired_icon.png" },
-            { name: "אימון סימולטור", cooldown: 200, description: "פעם אחת בכל משימה אתה יכול לזרוק כל קובייה פעם נוספת ולכחת את התוצה החדשה.", img: "Media/UiElements/Unsorted/img/Airborn.png" },
-			{ name: "החזר אש", cooldown: 1, description: "פעם אחת בכל סיבוב, אתה יכול לירות באקדח שלך על המטרה שתקפה אותך.", img: "Media/UiElements/Unsorted/img/Return_Fire.png" },
-            { name: "יורים בריצה", cooldown: 2, description: "בעזרת יכולת זו ניתן לזוז ובסוף התנועה לירות ירייה", img: "Media/UiElements/Unsorted/img/XEU_Assault_RunAndGun.png" }
+            { name: "ארטילריה", cooldown: 200, description: "רדיוס 25 מטרים 5ד100 נזק פעם אחת למשימה", img: "Media/UiElements/Unsorted/img//striking-splinter.png" },
+            { name: "סיוע אווירי", cooldown: 200, description: "שביל של 3 מטר על 50 מטר 5ד10 פעם במסימה", img: "Media/UiElements/Unsorted/img//striking-arrows.png" },
+            { name: "עבודת צוות", cooldown: 200, description: "חייל יכול להוסיף פעולה אחת לחבר פעם אחת בכל משימה.", img: "Media/UiElements/Unsorted/img//XComEW_Inspired_icon.png" },
+            { name: "אימון סימולטור", cooldown: 200, description: "פעם אחת בכל משימה אתה יכול לזרוק כל קובייה פעם נוספת ולכחת את התוצה החדשה.", img: "Media/UiElements/Unsorted/img//Airborn.png" },
+			{ name: "החזר אש", cooldown: 1, description: "פעם אחת בכל סיבוב, אתה יכול לירות באקדח שלך על המטרה שתקפה אותך.", img: "Media/UiElements/Unsorted/img//Return_Fire.png" },
+            { name: "יורים בריצה", cooldown: 2, description: "בעזרת יכולת זו ניתן לזוז ובסוף התנועה לירות ירייה", img: "Media/UiElements/Unsorted/img//XEU_Assault_RunAndGun.png" }
         ];
 		
 		
