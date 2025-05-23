@@ -3,13 +3,15 @@ let totalPoints = 0;
 const totalPointsInput = document.querySelector('.TotalPoints');
 const itemInfoTitle = document.getElementById('item-info-title');
 const itemInfoContent = document.getElementById('item-info-content');
+const atachment_con = document.getElementById('Atachment_Con');
 
 // Store the title and content of the currently selected item
 let currentSelectedItemTitle = 'Topic-NoN';
 let currentSelectedItemContent = 'Content';
+let currentSelectedItemAtachment = 'Atachments';
 
 // Helper function to update the info panel with multi-line content
-function updateInfoPanel(title, content) {
+function updateInfoPanel(title, content, atachment_con) {
     if (itemInfoTitle) {
         itemInfoTitle.textContent = title || 'Topic-NoN';
     }
@@ -32,6 +34,12 @@ function updateInfoPanel(title, content) {
         }
     }
 }
+
+//Atachments 
+
+
+
+
 
 function updatePoints(cost, isAdding) {
     totalPoints = isAdding ? totalPoints + cost : totalPoints - cost;
@@ -295,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const firstItem = dropdownList.querySelector('.dropdown-item');
         if (firstItem) {
             const itemHeight = firstItem.scrollHeight; 
-            const listMaxHeight = itemHeight * 2.5; 
+            const listMaxHeight = itemHeight * 5; 
 
             dropdownList.style.maxHeight = `${listMaxHeight}px`;
             dropdownList.style.overflowY = 'auto';
@@ -318,8 +326,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const slotIds = [
         'vest', 'melee', 'weapon1', 'weapon2', 'equipment1', 'equipment2',
         'equipment3', 'granade1', 'granade2', 'granade3', // From invintory.html
-        'silens', 'mount1', 'mount2', 'magazine', // From invintory_Accesory.html
-        'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec' // Asecondary invintory_Accesory.html
+        'silens', 'mount1', 'mount2', 'magazine', // From Atachments.html
+        'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec' // Asecondary Atachments.html
     ];
 
     let infoPanelUpdatedBySavedItem = false;
