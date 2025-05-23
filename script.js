@@ -3,13 +3,14 @@ let totalPoints = 0;
 const totalPointsInput = document.querySelector('.TotalPoints');
 const itemInfoTitle = document.getElementById('item-info-title');
 const itemInfoContent = document.getElementById('item-info-content');
-const atachment_con = document.getElementById('Atachment_Con'); // Referencing the single Atachment_Con
-
+const atachment_con = document.getElementById('Atachment_Con');
 
 // Store the title and content of the currently selected item
 let currentSelectedItemTitle = 'Topic-NoN';
 let currentSelectedItemContent = 'Content';
-let currentSelectedItemWeaponId = null; // To track which weapon's attachments should be displayed
+
+// To track which weapon's attachments should be displayed
+let currentSelectedItemWeaponId = null;
 
 // Helper function to update the info panel with multi-line content
 function updateInfoPanel(title, content) {
@@ -36,17 +37,25 @@ function updateInfoPanel(title, content) {
     }
 }
 
-function updatePoints(cost, isAdding) {
-    totalPoints = isAdding ? totalPoints + cost : totalPoints - cost;
-    if (totalPoints < 0) {
-        totalPoints = 0;
-    }
-    if (totalPoints > 14) {
-        totalPointsInput.style.color = 'red';
-    } 
-    totalPointsInput.value = totalPoints;
-    localStorage.setItem('totalPoints', totalPoints); // Auto-save total points
+// updatePoints will now simply add/subtract the item's raw cost,
+// and then trigger a full recalculation to handle all bonuses.
+function updatePoints(cost, isAdding) { // Removed itemName parameter as it's handled by recalculate
+    // This function will no longer apply specific reductions directly.
+    // It's purpose is to trigger the full recalculation.
+    // However, for immediate feedback on the totalPoints input,
+    // we will still update totalPoints, but the authoritative value
+    // will come from recalculateTotalPointsBasedOnSelections after an item change.
+    
+    // For now, we'll let recalculateTotalPointsBasedOnSelections handle the actual point logic.
+    // This function's direct manipulation of totalPoints is less critical now.
+    // It's crucial that `recalculateTotalPointsBasedOnSelections()` is called after any item change.
+
+    // A simpler approach for updatePoints in this model:
+    // It's mainly called when a new item is selected.
+    // The previous item's cost is removed, new item's cost is added.
+    // Then, recalculateTotalPointsBasedOnSelections takes care of all rules.
 }
+
 
 function selectSlot(slotId) {
     document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
@@ -118,7 +127,7 @@ function updateWeaponAttachmentsDisplay(weaponSlotId) {
     });
 
     if (attachments.length > 0) {
-        attachmentsContent = `<h5>Attachments for ${weaponSlotId === 'weapon1' ? 'Main Weapon' : 'Secondary Weapon'}:</h5><ul>`;
+        attachmentsContent = `<h5>Attachments for ${weaponSlotId === 'weapon1' ? 'Weapon 1' : 'Weapon 2'}:</h5><ul>`;
         attachments.forEach(attachment => {
             attachmentsContent += `<li><strong>${attachment.title}</strong>: `;
             // Split content by ' | ' and format as a nested unordered list
@@ -131,7 +140,7 @@ function updateWeaponAttachmentsDisplay(weaponSlotId) {
         });
         attachmentsContent += '</ul>';
     } else {
-        attachmentsContent = `No ${weaponSlotId === 'weapon1' ? 'Main Weapon' : 'Secondary Weapon'} Atachment Selected`;
+        attachmentsContent = `No Attachments Selected for ${weaponSlotId === 'weapon1' ? 'Weapon 1' : 'Weapon 2'}`;
     }
     atachment_con.innerHTML = attachmentsContent;
 }
@@ -151,19 +160,22 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
                 if (targetImage && selectorButton && selectedItemCon) {
                     const newSrc = listItem.getAttribute('data-image');
                     const newCost = parseInt(listItem.getAttribute('data-cost'));
-                    const previousCost = parseInt(targetImage.dataset.cost || 0);
+                    // const previousCost = parseInt(targetImage.dataset.cost || 0); // Not needed with full recalculation
+                    const newItemName = listItem.getAttribute('data-info-title'); // Get the item name
 
-                    updatePoints(previousCost, false);
-                    updatePoints(newCost, true);
-
+                    // Update the dataset on the targetImage for recalculation
                     targetImage.src = newSrc;
                     targetImage.dataset.cost = newCost;
+                    targetImage.dataset.title = newItemName; // Store the title on the target image for future reference
 
                     // Save selected item to localStorage
                     localStorage.setItem(`selectedItem_${activeSlot}_image`, newSrc);
                     localStorage.setItem(`selectedItem_${activeSlot}_cost`, newCost);
-                    localStorage.setItem(`selectedItem_${activeSlot}_title`, listItem.getAttribute('data-info-title'));
+                    localStorage.setItem(`selectedItem_${activeSlot}_title`, newItemName); // Save the title
                     localStorage.setItem(`selectedItem_${activeSlot}_content`, listItem.getAttribute('data-info-content'));
+
+                    // Now, trigger the full recalculation after the item is "selected"
+                    recalculateTotalPointsBasedOnSelections();
 
                     const itemCon = listItem.querySelector('.item_con');
                     let itemConContent = '';
@@ -180,7 +192,7 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
                     activeSlot = null;
 
                     // Update and store info for the selected item
-                    currentSelectedItemTitle = listItem.getAttribute('data-info-title');
+                    currentSelectedItemTitle = newItemName; // Use the new item name
                     currentSelectedItemContent = listItem.getAttribute('data-info-content');
                     updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
 
@@ -249,7 +261,9 @@ const deltaCharacters = [
         abilities: {
             image: "Media/UiElements/Abilities/NomadAbility.png",
             text: "Ghost Walk - Become invisible for 1 round"
-        }
+        },
+        costReductions: [],
+        combinedCostReductions: []
     },
     {
         name: "FatMan",
@@ -265,7 +279,9 @@ const deltaCharacters = [
         abilities: {
             image: "Media/UiElements/Abilities/FatManAbility.png",
             text: "Shield Wall - Protect allies behind you for 2 rounds"
-        }
+        },
+        costReductions: [],
+        combinedCostReductions: []
     },
     {
         name: "Artemis",
@@ -275,13 +291,17 @@ const deltaCharacters = [
             text: "Neural interface, +2 to hacking and tech skills"
         },
         characteristics: {
-            image: "Media/UiElements/Characteristics/FatManStats.png",
+            image: "Media/UiElements/Characteristics/AsterisStats.png",
             text: "HP: 8 | Speed: 5m | Armor: Light"
         },
         abilities: {
             image: "Media/UiElements/Abilities/AsterisAbility.png",
             text: "System Override - Disable enemy electronics for 1 round"
-        }
+        },
+        costReductions: [
+
+        ],
+        combinedCostReductions: []
     },
     {
         name: "Tiffany",
@@ -297,7 +317,14 @@ const deltaCharacters = [
         abilities: {
             image: "Media/UiElements/Abilities/TiffanyAbility.png",
             text: "Field Medic - Instantly heal 5 HP to any ally"
-        }
+        },
+        costReductions: [
+            { itemName: "Drone", reduction: 2 },
+        ],
+        combinedCostReductions: [
+            { itemNames: ["Pistol", "Knife"], reduction: 1 },
+            { itemNames: ["Pistol", "Dildo"], reduction: 1 }
+        ]
     },
 ];
 
@@ -335,6 +362,8 @@ function updateDeltaCharDisplay() {
         `;
         
         console.log(`Character switched to: ${char.name} (Index: ${currentCharIndex})`);
+        // Recalculate points after character switch, as bonuses might apply/unapply
+        recalculateTotalPointsBasedOnSelections();
     } else {
         console.error('Missing elements or character data for character switching');
     }
@@ -346,7 +375,7 @@ function initializeCharacterSwitching() {
 
     const leftBtn = document.getElementById('Swipeleft_btn');
     const rightBtn = document.getElementById('Swiperight_btn');
-// Save character index
+    // Save character index
     if (leftBtn) {
         leftBtn.addEventListener('click', () => {
             currentCharIndex = (currentCharIndex - 1 + deltaCharacters.length) % deltaCharacters.length;
@@ -371,18 +400,90 @@ function initializeCharacterSwitching() {
     const savedCharIndex = localStorage.getItem('currentCharIndex');
     if (savedCharIndex !== null) {
         currentCharIndex = parseInt(savedCharIndex, 10);
-    // Ensure index is within bounds
+        // Ensure index is within bounds
         if (currentCharIndex >= deltaCharacters.length) {
             currentCharIndex = 0;
         }
     updateDeltaCharDisplay();
     }
 }
+
+// Function to recalculate total points based on current selections and character
+function recalculateTotalPointsBasedOnSelections() {
+    totalPoints = 0; // Reset total points
+    const slotIds = [
+        'vest', 'melee', 'weapon1', 'weapon2', 'equipment1', 'equipment2',
+        'equipment3', 'granade1', 'granade2', 'granade3',
+        'silens', 'mount1', 'mount2', 'magazine', 'scope', 'stock',
+        'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec'
+    ];
+    const currentChar = deltaCharacters[currentCharIndex]; // Get the current character
+
+    // Temporary storage for items involved in combined reductions
+    const combinedReductionItems = {};
+    if (currentChar && currentChar.combinedCostReductions) {
+        currentChar.combinedCostReductions.forEach(rule => {
+            rule.itemNames.forEach(itemName => {
+                combinedReductionItems[itemName] = { rule: rule, count: 0, totalOriginalCost: 0 };
+            });
+        });
+    }
+
+    slotIds.forEach(slotId => {
+        const targetImage = document.getElementById(slotId);
+        if (targetImage) {
+            const itemCost = parseInt(targetImage.dataset.cost || 0);
+            const itemName = localStorage.getItem(`selectedItem_${slotId}_title`); // Get the stored item title from localStorage
+
+            if (itemName && combinedReductionItems[itemName]) {
+                // This item is part of a combined reduction group
+                combinedReductionItems[itemName].count++;
+                combinedReductionItems[itemName].totalOriginalCost += itemCost;
+            } else {
+                // This item is subject to individual reduction or no reduction
+                let effectiveCost = itemCost;
+                if (currentChar && currentChar.costReductions) {
+                    const reductionRule = currentChar.costReductions.find(rule => rule.itemName === itemName);
+                    if (reductionRule) {
+                        effectiveCost = Math.max(0, itemCost - reductionRule.reduction);
+                    }
+                }
+                totalPoints += effectiveCost;
+            }
+        }
+    });
+
+    // Apply combined reductions after all individual items are processed
+    if (currentChar && currentChar.combinedCostReductions) {
+        currentChar.combinedCostReductions.forEach(rule => {
+            let groupOriginalCost = 0;
+            // Sum costs of all items in this group that are currently selected
+            rule.itemNames.forEach(itemNameInGroup => {
+                if (combinedReductionItems[itemNameInGroup] && combinedReductionItems[itemNameInGroup].count > 0) {
+                    groupOriginalCost += combinedReductionItems[itemNameInGroup].totalOriginalCost;
+                }
+            });
+            
+            // Apply the reduction to the total original cost of the group
+            let effectiveGroupCost = Math.max(0, groupOriginalCost - rule.reduction);
+            totalPoints += effectiveGroupCost;
+        });
+    }
+
+    totalPointsInput.value = totalPoints;
+    if (totalPoints > 14) {
+        totalPointsInput.style.color = 'red';
+    } else {
+        totalPointsInput.style.color = 'white'; // Keep the color white when within limits
+    }
+    localStorage.setItem('totalPoints', totalPoints);
+}
+
+
 // Load saved data and initialize display on page load
 document.addEventListener('DOMContentLoaded', function() {
     
     const dropdownLists = document.querySelectorAll('.dropdown-list');
-
 
     dropdownLists.forEach(dropdownList => {
         //show for calc and hide
@@ -391,18 +492,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const firstItem = dropdownList.querySelector('.dropdown-item');
         if (firstItem) {
-            const itemHeight = firstItem.scrollHeight; 
-            const listMaxHeight = itemHeight * 5; 
+            const itemHeight = firstItem.scrollHeight;
+            const listMaxHeight = itemHeight * 5;
 
             dropdownList.style.maxHeight = `${listMaxHeight}px`;
             dropdownList.style.overflowY = 'auto';
         }
 
-        dropdownList.style.display = 'none'; 
+        dropdownList.style.display = 'none';
         dropdownList.style.visibility = 'visible';
-        // character switching
-        initializeCharacterSwitching();
     });
+
+    // character switching - ONLY CALL ONCE AFTER DOM IS LOADED
+    initializeCharacterSwitching();
 
     // Load total points
     const savedTotalPoints = localStorage.getItem('totalPoints');
@@ -414,9 +516,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // List of all slot IDs to iterate through for loading
     const slotIds = [
         'vest', 'melee', 'weapon1', 'weapon2', 'equipment1', 'equipment2',
-        'equipment3', 'granade1', 'granade2', 'granade3', // From invintory.html
-        'silens', 'mount1', 'mount2', 'magazine', 'scope', 'stock', // From Atachments.html
-        'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec' // Asecondary Atachments.html
+        'equipment3', 'granade1', 'granade2', 'granade3',
+        'silens', 'mount1', 'mount2', 'magazine', 'scope', 'stock',
+        'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec'
     ];
 
     let infoPanelUpdatedBySavedItem = false;
@@ -429,9 +531,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const targetImage = document.getElementById(slotId);
         if (targetImage && savedImage) {
-            // Restore image and cost
+            // Restore image, cost, and title
             targetImage.src = savedImage;
             targetImage.dataset.cost = parseInt(savedCost || 0);
+            targetImage.dataset.title = savedTitle; // Restore the title
 
             // Restore the selected-item-con display based on the saved item
             const selectorButton = targetImage.parentNode;
@@ -467,12 +570,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Recalculate points once all items are loaded and character is set
+    recalculateTotalPointsBasedOnSelections();
+
     // Initial state: hide the attachment display
     atachment_con.style.display = 'none';
 
     // item plug
     if (!infoPanelUpdatedBySavedItem) {
-        const initialItem = document.querySelector('.dropdown-item[data-cost="0"]'); // Assuming the first "Nothing" item
+        
+        const initialItem = document.querySelector('.Vest_Grp .dropdown-item[data-cost="0"]'); // Assuming Vest_Grp is typically the first
         if (initialItem) {
             currentSelectedItemTitle = initialItem.getAttribute('data-info-title');
             currentSelectedItemContent = initialItem.getAttribute('data-info-content');
