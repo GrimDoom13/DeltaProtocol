@@ -5,12 +5,18 @@ const itemInfoTitle = document.getElementById('item-info-title');
 const itemInfoContent = document.getElementById('item-info-content');
 const atachment_con = document.getElementById('Atachment_Con');
 
-// Store the title and content of the currently selected item
+// Store the title and content of the currently selected item for the info panel
 let currentSelectedItemTitle = 'Topic-NoN';
 let currentSelectedItemContent = 'Content';
 
 // To track which weapon's attachments should be displayed
 let currentSelectedItemWeaponId = null;
+
+// --- NEW: Centralized storage for all selected items ---
+// This object will hold the current selection for each slot,
+// allowing us to calculate total points based on all selections,
+// regardless of which page the user is on.
+let selectedItems = {};
 
 // Helper function to update the info panel with multi-line content
 function updateInfoPanel(title, content) {
@@ -37,67 +43,44 @@ function updateInfoPanel(title, content) {
     }
 }
 
-// updatePoints will now simply add/subtract the item's raw cost,
-// and then trigger a full recalculation to handle all bonuses.
-function updatePoints(cost, isAdding) { // Removed itemName parameter as it's handled by recalculate
-    // This function will no longer apply specific reductions directly.
-    // It's purpose is to trigger the full recalculation.
-    // However, for immediate feedback on the totalPoints input,
-    // we will still update totalPoints, but the authoritative value
-    // will come from recalculateTotalPointsBasedOnSelections after an item change.
-    
-    // For now, we'll let recalculateTotalPointsBasedOnSelections handle the actual point logic.
-    // This function's direct manipulation of totalPoints is less critical now.
-    // It's crucial that `recalculateTotalPointsBasedOnSelections()` is called after any item change.
-
-    // A simpler approach for updatePoints in this model:
-    // It's mainly called when a new item is selected.
-    // The previous item's cost is removed, new item's cost is added.
-    // Then, recalculateTotalPointsBasedOnSelections takes care of all rules.
-}
-
-
 function selectSlot(slotId) {
+    // Hide all dropdowns and remove selected class from buttons
     document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
     document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
-    
+
+    // Set the active slot
     activeSlot = slotId;
     const dropdown = document.getElementById(`dropdown_${slotId}`);
     if (dropdown) {
-        dropdown.style.display = 'block';
+        dropdown.style.display = 'block'; // Show the dropdown for the active slot
     }
+    // Add selected class to the current button that triggered the selection
     const currentButton = event.currentTarget;
     currentButton.classList.add('selected');
 
-    // If a weapon is selected, update currentSelectedItemWeaponId and its attachment display
-    if (slotId === 'weapon1') {
-        currentSelectedItemWeaponId = 'weapon1';
-        updateWeaponAttachmentsDisplay(currentSelectedItemWeaponId);
-        atachment_con.style.display = 'block'; // Show the attachment display
-    } else if (slotId === 'weapon2') {
-        currentSelectedItemWeaponId = 'weapon2';
+    // Logic to show/hide attachment display based on weapon selection
+    if (slotId === 'weapon1' || slotId === 'weapon2') {
+        currentSelectedItemWeaponId = slotId;
         updateWeaponAttachmentsDisplay(currentSelectedItemWeaponId);
         atachment_con.style.display = 'block'; // Show the attachment display
     } else {
-        // If an attachment slot is selected, check which weapon it belongs to
+        // If an attachment slot is selected, determine its parent weapon
         const parentWA_Group = currentButton.closest('.WA_Group');
         if (parentWA_Group) {
             if (parentWA_Group.querySelector('#weapon1')) {
                 currentSelectedItemWeaponId = 'weapon1';
-                updateWeaponAttachmentsDisplay(currentSelectedItemWeaponId);
-                atachment_con.style.display = 'block';
             } else if (parentWA_Group.querySelector('#weapon2')) {
                 currentSelectedItemWeaponId = 'weapon2';
+            }
+            if (currentSelectedItemWeaponId) {
                 updateWeaponAttachmentsDisplay(currentSelectedItemWeaponId);
                 atachment_con.style.display = 'block';
             } else {
-                // If a non-weapon slot is selected and it's not part of a weapon group (e.g., if there were other non-weapon dropdowns),
-                // you might want to hide the attachment display or show a default message.
                 atachment_con.style.display = 'none';
                 currentSelectedItemWeaponId = null;
             }
         } else {
-            // If the selected slot is not a weapon and not part of a weapon group, hide attachment display
+            // If the selected slot is not a weapon or part of a weapon group, hide attachment display
             atachment_con.style.display = 'none';
             currentSelectedItemWeaponId = null;
         }
@@ -119,10 +102,10 @@ function updateWeaponAttachmentsDisplay(weaponSlotId) {
     }
 
     attachmentSlotIds.forEach(slotId => {
-        const savedTitle = localStorage.getItem(`selectedItem_${slotId}_title`);
-        const savedContent = localStorage.getItem(`selectedItem_${slotId}_content`);
-        if (savedTitle && savedTitle !== 'Nothing') {
-            attachments.push({ title: savedTitle, content: savedContent });
+        // --- MODIFIED: Read from centralized selectedItems object ---
+        const item = selectedItems[slotId];
+        if (item && item.title && item.title !== 'Nothing') {
+            attachments.push({ title: item.title, content: item.content });
         }
     });
 
@@ -160,19 +143,23 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
                 if (targetImage && selectorButton && selectedItemCon) {
                     const newSrc = listItem.getAttribute('data-image');
                     const newCost = parseInt(listItem.getAttribute('data-cost'));
-                    // const previousCost = parseInt(targetImage.dataset.cost || 0); // Not needed with full recalculation
-                    const newItemName = listItem.getAttribute('data-info-title'); // Get the item name
+                    const newItemName = listItem.getAttribute('data-info-title');
+                    const newItemContent = listItem.getAttribute('data-info-content');
 
-                    // Update the dataset on the targetImage for recalculation
+                    // Update the dataset on the targetImage for immediate display
                     targetImage.src = newSrc;
                     targetImage.dataset.cost = newCost;
-                    targetImage.dataset.title = newItemName; // Store the title on the target image for future reference
+                    targetImage.dataset.title = newItemName;
 
-                    // Save selected item to localStorage
-                    localStorage.setItem(`selectedItem_${activeSlot}_image`, newSrc);
-                    localStorage.setItem(`selectedItem_${activeSlot}_cost`, newCost);
-                    localStorage.setItem(`selectedItem_${activeSlot}_title`, newItemName); // Save the title
-                    localStorage.setItem(`selectedItem_${activeSlot}_content`, listItem.getAttribute('data-info-content'));
+                    // --- MODIFIED: Update centralized selectedItems object ---
+                    selectedItems[activeSlot] = {
+                        image: newSrc,
+                        cost: newCost,
+                        title: newItemName,
+                        content: newItemContent
+                    };
+                    // Save the entire selectedItems object to localStorage
+                    localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
 
                     // Now, trigger the full recalculation after the item is "selected"
                     recalculateTotalPointsBasedOnSelections();
@@ -191,13 +178,12 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
                     document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
                     activeSlot = null;
 
-                    // Update and store info for the selected item
-                    currentSelectedItemTitle = newItemName; // Use the new item name
-                    currentSelectedItemContent = listItem.getAttribute('data-info-content');
+                    // Update and store info for the selected item in the info panel
+                    currentSelectedItemTitle = newItemName;
+                    currentSelectedItemContent = newItemContent;
                     updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
 
                     // If an attachment is selected, ensure the weapon's attachments display is updated
-                    // We need to know which weapon's attachment set this belongs to.
                     const parentWA_Group = targetImage.closest('.WA_Group');
                     if (parentWA_Group) {
                         if (parentWA_Group.querySelector('#weapon1')) {
@@ -267,7 +253,7 @@ const deltaCharacters = [
     },
     {
         name: "FatMan",
-        image: "Media/UiElements/The Squad/FatMan.png",
+        image: "Media/UiElements/The Squad/Fatman.png",
         implants: {
             image: "Media/UiElements/Implants/FatManImplant.png",
             text: "Armor plating system, +3 to damage resistance"
@@ -338,14 +324,14 @@ function updateDeltaCharDisplay() {
     const char = deltaCharacters[currentCharIndex];
 
     if (deltaChar && charName && statsContainer && char) {
-        
+
         deltaChar.src = char.image;
         deltaChar.alt = char.name;
-        
-        
+
+
         charName.textContent = char.name;
-        
-        
+
+
         statsContainer.innerHTML = `
             <div class="stat-section">
                 <h4>Implants:</h4>
@@ -360,7 +346,7 @@ function updateDeltaCharDisplay() {
                 <p>${char.abilities.text}</p>
             </div>
         `;
-        
+
         console.log(`Character switched to: ${char.name} (Index: ${currentCharIndex})`);
         // Recalculate points after character switch, as bonuses might apply/unapply
         recalculateTotalPointsBasedOnSelections();
@@ -390,7 +376,7 @@ function initializeCharacterSwitching() {
         rightBtn.addEventListener('click', () => {
             currentCharIndex = (currentCharIndex + 1) % deltaCharacters.length;
             updateDeltaCharDisplay();
-            localStorage.setItem('currentCharIndex', currentCharIndex); 
+            localStorage.setItem('currentCharIndex', currentCharIndex);
         });
     } else {
         console.error('Swiperight_btn not found');
@@ -411,12 +397,6 @@ function initializeCharacterSwitching() {
 // Function to recalculate total points based on current selections and character
 function recalculateTotalPointsBasedOnSelections() {
     totalPoints = 0; // Reset total points
-    const slotIds = [
-        'vest', 'melee', 'weapon1', 'weapon2', 'equipment1', 'equipment2',
-        'equipment3', 'granade1', 'granade2', 'granade3',
-        'silens', 'mount1', 'mount2', 'magazine', 'scope', 'stock',
-        'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec'
-    ];
     const currentChar = deltaCharacters[currentCharIndex]; // Get the current character
 
     // Temporary storage for items involved in combined reductions
@@ -429,11 +409,12 @@ function recalculateTotalPointsBasedOnSelections() {
         });
     }
 
-    slotIds.forEach(slotId => {
-        const targetImage = document.getElementById(slotId);
-        if (targetImage) {
-            const itemCost = parseInt(targetImage.dataset.cost || 0);
-            const itemName = localStorage.getItem(`selectedItem_${slotId}_title`); // Get the stored item title from localStorage
+    // --- MODIFIED: Iterate through the centralized selectedItems object ---
+    for (const slotId in selectedItems) {
+        const item = selectedItems[slotId];
+        if (item && item.cost !== undefined) { // Ensure item and cost exist
+            const itemCost = item.cost;
+            const itemName = item.title;
 
             if (itemName && combinedReductionItems[itemName]) {
                 // This item is part of a combined reduction group
@@ -451,7 +432,7 @@ function recalculateTotalPointsBasedOnSelections() {
                 totalPoints += effectiveCost;
             }
         }
-    });
+    }
 
     // Apply combined reductions after all individual items are processed
     if (currentChar && currentChar.combinedCostReductions) {
@@ -463,7 +444,7 @@ function recalculateTotalPointsBasedOnSelections() {
                     groupOriginalCost += combinedReductionItems[itemNameInGroup].totalOriginalCost;
                 }
             });
-            
+
             // Apply the reduction to the total original cost of the group
             let effectiveGroupCost = Math.max(0, groupOriginalCost - rule.reduction);
             totalPoints += effectiveGroupCost;
@@ -476,13 +457,15 @@ function recalculateTotalPointsBasedOnSelections() {
     } else {
         totalPointsInput.style.color = 'white'; // Keep the color white when within limits
     }
+    // The totalPoints is already saved implicitly when selectedItems is saved,
+    // but we can keep this for explicit clarity if needed for other parts.
     localStorage.setItem('totalPoints', totalPoints);
 }
 
 
 // Load saved data and initialize display on page load
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     const dropdownLists = document.querySelectorAll('.dropdown-list');
 
     dropdownLists.forEach(dropdownList => {
@@ -506,7 +489,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // character switching - ONLY CALL ONCE AFTER DOM IS LOADED
     initializeCharacterSwitching();
 
-    // Load total points
+    // --- NEW: Load centralized selectedItems object ---
+    const savedSelectedItems = localStorage.getItem('selectedItems');
+    if (savedSelectedItems) {
+        try {
+            selectedItems = JSON.parse(savedSelectedItems);
+        } catch (e) {
+            console.error("Error parsing selectedItems from localStorage:", e);
+            selectedItems = {}; // Reset if parsing fails
+        }
+    }
+
+    // Load total points (this will be recalculated from selectedItems anyway, but good for initial display)
     const savedTotalPoints = localStorage.getItem('totalPoints');
     if (savedTotalPoints !== null) {
         totalPoints = parseInt(savedTotalPoints, 10);
@@ -514,6 +508,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // List of all slot IDs to iterate through for loading
+    // This array is now primarily used to identify which DOM elements to update on the current page
     const slotIds = [
         'vest', 'melee', 'weapon1', 'weapon2', 'equipment1', 'equipment2',
         'equipment3', 'granade1', 'granade2', 'granade3',
@@ -523,27 +518,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let infoPanelUpdatedBySavedItem = false;
 
+    // --- MODIFIED: Iterate through selectedItems to update visible DOM elements ---
     slotIds.forEach(slotId => {
-        const savedImage = localStorage.getItem(`selectedItem_${slotId}_image`);
-        const savedCost = localStorage.getItem(`selectedItem_${slotId}_cost`);
-        const savedTitle = localStorage.getItem(`selectedItem_${slotId}_title`);
-        const savedContent = localStorage.getItem(`selectedItem_${slotId}_content`);
-
+        const item = selectedItems[slotId];
         const targetImage = document.getElementById(slotId);
-        if (targetImage && savedImage) {
-            // Restore image, cost, and title
-            targetImage.src = savedImage;
-            targetImage.dataset.cost = parseInt(savedCost || 0);
-            targetImage.dataset.title = savedTitle; // Restore the title
+
+        if (targetImage && item) { // Only update if the element exists on THIS page and item data is saved
+            // Restore image, cost, and title to the DOM element
+            targetImage.src = item.image;
+            targetImage.dataset.cost = item.cost;
+            targetImage.dataset.title = item.title;
 
             // Restore the selected-item-con display based on the saved item
             const selectorButton = targetImage.parentNode;
             const selectedItemCon = selectorButton.querySelector('.selected-item-con');
             if (selectedItemCon) {
+                // Find the corresponding dropdown item to get its display content
                 const dropdownList = document.getElementById(`dropdown_${slotId}`);
                 if (dropdownList) {
-                    const listItem = Array.from(dropdownList.children).find(item =>
-                        item.getAttribute('data-image') === savedImage
+                    const listItem = Array.from(dropdownList.children).find(li =>
+                        li.getAttribute('data-image') === item.image
                     );
                     if (listItem) {
                         const itemCon = listItem.querySelector('.item_con');
@@ -560,25 +554,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Update info panel if this is the last saved item (or the first one encountered)
-            if (savedTitle && savedContent && !infoPanelUpdatedBySavedItem) {
-                currentSelectedItemTitle = savedTitle;
-                currentSelectedItemContent = savedContent;
+            // Update info panel with the last saved item's info (or the first one encountered)
+            if (item.title && item.content && !infoPanelUpdatedBySavedItem) {
+                currentSelectedItemTitle = item.title;
+                currentSelectedItemContent = item.content;
                 updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
                 infoPanelUpdatedBySavedItem = true; // Set flag to only update with one saved item's info
             }
         }
     });
 
-    // Recalculate points once all items are loaded and character is set
+    // Recalculate points once all items are loaded into `selectedItems` and character is set
+    // This will now correctly sum up ALL selected items from localStorage
     recalculateTotalPointsBasedOnSelections();
 
     // Initial state: hide the attachment display
     atachment_con.style.display = 'none';
 
-    // item plug
+    // item plug: If no items were loaded from localStorage to update the info panel,
+    // set a default initial item's info.
     if (!infoPanelUpdatedBySavedItem) {
-        
         const initialItem = document.querySelector('.Vest_Grp .dropdown-item[data-cost="0"]'); // Assuming Vest_Grp is typically the first
         if (initialItem) {
             currentSelectedItemTitle = initialItem.getAttribute('data-info-title');
