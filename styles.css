@@ -615,6 +615,7 @@ margin: 2px;
   display: flex;
   flex-direction: row-reverse;
   margin: 2vw;
+  justify-content: center;
   
 
 }

@@ -452,7 +452,7 @@ function recalculateTotalPointsBasedOnSelections() {
     }
 
     totalPointsInput.value = totalPoints;
-    if (totalPoints > 14) {
+    if (totalPoints > 15) {
         totalPointsInput.style.color = 'red';
     } else {
         totalPointsInput.style.color = 'white'; // Keep the color white when within limits
