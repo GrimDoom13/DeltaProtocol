@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <title>Codex</title>
+
+</head>
+
+<body class="Inv_Body">
+
+  <!--Manim_Menue-->
+  <div class="Menu_Main">
+    <a class="MenueButton" href="index.html"></a>
+		<a class = "Invintory" href="invintory.html" >	
+			<button class="MenueButton InvintoryBtn"></button>
+		</a>
+		<a class = "DataBase" href="Codex_Enemy.html" >	
+			<button class="MenueButton SkilsBtn"></button>
+		</a>
+  </div>
+<!--HearoCodex-->
+      <div class="Hero" style="  background-image: url('Media/UiElements/Codex/CodexNav_ally.png');">
+        <a id="HeroT" href="Codex_Enemy.html">Enemies</a>
+        <a id="HeroT" href="Codex_Personal.html">Personal</a>
+        <a id="HeroT" href="Codex_Allies.html">Allies</a>
+        <a id="HeroT" href="Codex_MemoryRoom.html">Memory Room</a>
+      </div>
+
+<div class="Codex" >
+  <div class="Codex_Con" style="border: 3px  solid #3BC2D4;" >
+    <img src="Media/UiElements/Codex/Enemys/Acid Spit.png" id="CodexContent_img" style="border: 3px  solid #3BC2D4;">
+    <div id="Codex_Title" style="text-align: center; border: 3px  solid #3BC2D4;">Name</div>
+    <p id="Codex_content" style="border: 3px  solid #3BC2D4;" >Description</p>
+
+  </div>
+
+
+
+  <div class="Codex_Selector">
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Allies/Full/Marina Novikova.png"
+            data-name="Marina Novikova"
+            data-description="*Appearance: * 165 cm, slim, with short brown hair and green eyes. She often wears glasses for electronics work but uses contact lenses during missions. | * Features: * Marina is known for her ability to infiltrate the most complex locations silently. She has a small scar on her right cheek from a fight with an infected. She is a master with a knife and prefers light gear to maintain her mobility. | * Codename *: 'Shadow' | * Age * : 28 years | * Class * : Scout | * Rank *: Lieutenant (סגן) * Family status * : Single | * Blood type * : A+ | * Missions completed *: 6">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Allies/Marina Novikova.png"> Marina Novikova</div>
+    </button>
+
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Allies/Full/Alina Petrova.png"
+            data-name="Alina Petrova"
+            data-description=" * Appearance * : 160 cm, slim, with long blonde hair usually braided, and blue eyes. Her face is always friendly, even in the most challenging moments. | * Features *: Alina is known for her kindness and compassion, making her an excellent medic. She always carries a medallion with an angel on it, a gift from her mother. She is extremely attentive to details and capable of providing medical aid in the most extreme conditions.Codename: 'Angel' | * Age * : 27 years | *Class * : Medic | * Rank * : Sergeant (סמל) | * Family status * : Single | * Blood type *: AB- | * Missions completed * : 3">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Allies/Alina Petrova.png"> Alina Petrovar</div>
+    </button>
+
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const codexButtons = document.querySelectorAll('.codex-btn');
+    const contentImg = document.getElementById('CodexContent_img');
+    const contentTitle = document.getElementById('Codex_Title');
+    const contentDescription = document.getElementById('Codex_content');
+
+    // Function to process and format text (for bold and line breaks)
+    function formatText(text) {
+        // Handle bolding: replace *text* with <strong>text</strong>
+        let formattedText = text.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
+        // Handle line breaks: split by '|' and join with <br>
+        formattedText = formattedText.split('|').join('<br>');
+        return formattedText;
+    }
+
+    // Function to update the content display
+    function updateCodexContent(button) {
+        const imageSrc = button.getAttribute('data-image');
+        const name = button.getAttribute('data-name');
+        const description = button.getAttribute('data-description');
+
+        // Remove active class from all buttons
+        codexButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        button.classList.add('active');
+
+        // Update content
+        contentTitle.textContent = name;
+        // Use innerHTML for description to render HTML tags from formatText
+        contentDescription.innerHTML = formatText(description); 
+        
+
+        // Try to load the image, fallback to placeholder if it fails
+        if (imageSrc) {
+            contentImg.src = imageSrc;
+            contentImg.style.display = 'block';
+            
+            // Handle image load error
+            contentImg.onerror = function() {
+                contentImg.style.display = 'none';
+                // If you had a placeholder div, you'd show it here.
+                // Since there's no placeholder div in your provided HTML,
+                // this might just leave the image space blank or show a broken image icon.
+                // If you want to add a text placeholder, you'd need to add a div in your HTML.
+            };
+        } else {
+            contentImg.style.display = 'none';
+            // Same as above, handle placeholder if needed.
+        }
+    }
+
+    // Add click event listeners to all codex buttons
+    codexButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            updateCodexContent(this);
+        });
+    });
+
+    // Optional: Auto-select first item on page load
+    if (codexButtons.length > 0) {
+        updateCodexContent(codexButtons[0]);
+    }
+});
+</script>
+
+</body>
+
+
+<script src="script.js"></script>
+
+</html>

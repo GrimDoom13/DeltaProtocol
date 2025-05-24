@@ -154,7 +154,7 @@ height: 100%;
 
 }
 
-.HeroInv {
+.Hero {
 position: relative;
   top: 0;
   left: 0;
@@ -171,11 +171,8 @@ position: relative;
   justify-content: center;
 
 }
-
-.HeroInv #Invintory,
-.HeroInv #Atachments,
-.HeroInv #Implants,
-.HeroInv #Battel {
+/*Hero Text*/
+.Hero #HeroT {
 align-self: center;
   border: none;
   padding: 1vw 4vw;

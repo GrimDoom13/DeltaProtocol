@@ -4,27 +4,22 @@ const totalPointsInput = document.querySelector('.TotalPoints');
 const itemInfoTitle = document.getElementById('item-info-title');
 const itemInfoContent = document.getElementById('item-info-content');
 const atachment_con = document.getElementById('Atachment_Con');
-
-// Store the title and content of the currently selected item for the info panel
 let currentSelectedItemTitle = 'Topic-NoN';
 let currentSelectedItemContent = 'Content';
 
-// To track which weapon's attachments should be displayed
+
 let currentSelectedItemWeaponId = null;
 
-// --- NEW: Centralized storage for all selected items ---
-// This object will hold the current selection for each slot,
-// allowing us to calculate total points based on all selections,
-// regardless of which page the user is on.
+
 let selectedItems = {};
 
-// Helper function to update the info panel with multi-line content
+
 function updateInfoPanel(title, content) {
     if (itemInfoTitle) {
         itemInfoTitle.textContent = title || 'Topic-NoN';
     }
     if (itemInfoContent) {
-        itemInfoContent.innerHTML = ''; // Clear previous content
+        itemInfoContent.innerHTML = ''; 
         if (content) {
             const lines = content.split(' | '); // Split by |
             const ulElement = document.createElement('ul');
@@ -88,12 +83,12 @@ function selectSlot(slotId) {
 }
 
 
-// Function to update the attachments display for a specific weapon in the single Atachment_Con
+
 function updateWeaponAttachmentsDisplay(weaponSlotId) {
     let attachmentsContent = '';
     const attachments = [];
 
-    // Determine relevant attachment slot IDs based on the weapon slot ID
+
     let attachmentSlotIds = [];
     if (weaponSlotId === 'weapon1') {
         attachmentSlotIds = ['silens', 'mount1', 'mount2', 'scope', 'stock', 'magazine'];
@@ -102,7 +97,7 @@ function updateWeaponAttachmentsDisplay(weaponSlotId) {
     }
 
     attachmentSlotIds.forEach(slotId => {
-        // --- MODIFIED: Read from centralized selectedItems object ---
+
         const item = selectedItems[slotId];
         if (item && item.title && item.title !== 'Nothing') {
             attachments.push({ title: item.title, content: item.content });
@@ -146,12 +141,9 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
                     const newItemName = listItem.getAttribute('data-info-title');
                     const newItemContent = listItem.getAttribute('data-info-content');
 
-                    // Update the dataset on the targetImage for immediate display
                     targetImage.src = newSrc;
                     targetImage.dataset.cost = newCost;
                     targetImage.dataset.title = newItemName;
-
-                    // --- MODIFIED: Update centralized selectedItems object ---
                     selectedItems[activeSlot] = {
                         image: newSrc,
                         cost: newCost,
@@ -161,7 +153,6 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
                     // Save the entire selectedItems object to localStorage
                     localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
 
-                    // Now, trigger the full recalculation after the item is "selected"
                     recalculateTotalPointsBasedOnSelections();
 
                     const itemCon = listItem.querySelector('.item_con');
@@ -183,7 +174,6 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
                     currentSelectedItemContent = newItemContent;
                     updateInfoPanel(currentSelectedItemTitle, currentSelectedItemContent);
 
-                    // If an attachment is selected, ensure the weapon's attachments display is updated
                     const parentWA_Group = targetImage.closest('.WA_Group');
                     if (parentWA_Group) {
                         if (parentWA_Group.querySelector('#weapon1')) {
@@ -193,7 +183,7 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
                         }
                         if (currentSelectedItemWeaponId) {
                             updateWeaponAttachmentsDisplay(currentSelectedItemWeaponId);
-                            atachment_con.style.display = 'block'; // Ensure it's visible
+                            atachment_con.style.display = 'block'; 
                         }
                     }
                 }
@@ -225,9 +215,9 @@ document.addEventListener('click', (e) => {
         document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
         document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
         activeSlot = null;
-        // Hide the attachment display when clicking outside
+       
         atachment_con.style.display = 'none';
-        currentSelectedItemWeaponId = null; // Clear the active weapon for attachments
+        currentSelectedItemWeaponId = null; 
     }
 });
 
@@ -410,7 +400,7 @@ function initializeCharacterSwitching() {
 // Function to recalculate total points based on current selections and character
 function recalculateTotalPointsBasedOnSelections() {
     totalPoints = 0; // Reset total points
-    const currentChar = deltaCharacters[currentCharIndex]; // Get the current character
+    const currentChar = deltaCharacters[currentCharIndex]; 
 
     // Temporary storage for items involved in combined reductions
     const combinedReductionItems = {};
@@ -422,19 +412,19 @@ function recalculateTotalPointsBasedOnSelections() {
         });
     }
 
-    // --- MODIFIED: Iterate through the centralized selectedItems object ---
+   
     for (const slotId in selectedItems) {
         const item = selectedItems[slotId];
-        if (item && item.cost !== undefined) { // Ensure item and cost exist
+        if (item && item.cost !== undefined) { 
             const itemCost = item.cost;
             const itemName = item.title;
 
             if (itemName && combinedReductionItems[itemName]) {
-                // This item is part of a combined reduction group
+                
                 combinedReductionItems[itemName].count++;
                 combinedReductionItems[itemName].totalOriginalCost += itemCost;
             } else {
-                // This item is subject to individual reduction or no reduction
+                
                 let effectiveCost = itemCost;
                 if (currentChar && currentChar.costReductions) {
                     const reductionRule = currentChar.costReductions.find(rule => rule.itemName === itemName);
@@ -447,18 +437,18 @@ function recalculateTotalPointsBasedOnSelections() {
         }
     }
 
-    // Apply combined reductions after all individual items are processed
+   
     if (currentChar && currentChar.combinedCostReductions) {
         currentChar.combinedCostReductions.forEach(rule => {
             let groupOriginalCost = 0;
-            // Sum costs of all items in this group that are currently selected
+            
             rule.itemNames.forEach(itemNameInGroup => {
                 if (combinedReductionItems[itemNameInGroup] && combinedReductionItems[itemNameInGroup].count > 0) {
                     groupOriginalCost += combinedReductionItems[itemNameInGroup].totalOriginalCost;
                 }
             });
 
-            // Apply the reduction to the total original cost of the group
+           
             let effectiveGroupCost = Math.max(0, groupOriginalCost - rule.reduction);
             totalPoints += effectiveGroupCost;
         });
@@ -468,10 +458,9 @@ function recalculateTotalPointsBasedOnSelections() {
     if (totalPoints > 15) {
         totalPointsInput.style.color = 'red';
     } else {
-        totalPointsInput.style.color = 'white'; // Keep the color white when within limits
+        totalPointsInput.style.color = 'white'; 
     }
-    // The totalPoints is already saved implicitly when selectedItems is saved,
-    // but we can keep this for explicit clarity if needed for other parts.
+    
     localStorage.setItem('totalPoints', totalPoints);
 }
 
@@ -499,21 +488,21 @@ document.addEventListener('DOMContentLoaded', function() {
         dropdownList.style.visibility = 'visible';
     });
 
-    // character switching - ONLY CALL ONCE AFTER DOM IS LOADED
+   
     initializeCharacterSwitching();
 
-    // --- NEW: Load centralized selectedItems object ---
+ 
     const savedSelectedItems = localStorage.getItem('selectedItems');
     if (savedSelectedItems) {
         try {
             selectedItems = JSON.parse(savedSelectedItems);
         } catch (e) {
             console.error("Error parsing selectedItems from localStorage:", e);
-            selectedItems = {}; // Reset if parsing fails
+            selectedItems = {};
         }
     }
 
-    // Load total points (this will be recalculated from selectedItems anyway, but good for initial display)
+    
     const savedTotalPoints = localStorage.getItem('totalPoints');
     if (savedTotalPoints !== null) {
         totalPoints = parseInt(savedTotalPoints, 10);
@@ -521,7 +510,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // List of all slot IDs to iterate through for loading
-    // This array is now primarily used to identify which DOM elements to update on the current page
     const slotIds = [
         'vest', 'melee', 'weapon1', 'weapon2', 'equipment1', 'equipment2',
         'equipment3', 'granade1', 'granade2', 'granade3',
@@ -531,13 +519,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let infoPanelUpdatedBySavedItem = false;
 
-    // --- MODIFIED: Iterate through selectedItems to update visible DOM elements ---
+
     slotIds.forEach(slotId => {
         const item = selectedItems[slotId];
         const targetImage = document.getElementById(slotId);
 
-        if (targetImage && item) { // Only update if the element exists on THIS page and item data is saved
-            // Restore image, cost, and title to the DOM element
+        if (targetImage && item) {
             targetImage.src = item.image;
             targetImage.dataset.cost = item.cost;
             targetImage.dataset.title = item.title;
@@ -577,15 +564,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Recalculate points once all items are loaded into `selectedItems` and character is set
-    // This will now correctly sum up ALL selected items from localStorage
+    // Recalculate points once all items are loaded into
     recalculateTotalPointsBasedOnSelections();
 
-    // Initial state: hide the attachment display
+    
     atachment_con.style.display = 'none';
 
-    // item plug: If no items were loaded from localStorage to update the info panel,
-    // set a default initial item's info.
+    
     if (!infoPanelUpdatedBySavedItem) {
         const initialItem = document.querySelector('.Vest_Grp .dropdown-item[data-cost="0"]'); // Assuming Vest_Grp is typically the first
         if (initialItem) {

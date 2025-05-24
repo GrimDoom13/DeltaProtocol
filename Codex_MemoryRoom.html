@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <title>Codex</title>
+
+</head>
+
+<body class="Inv_Body">
+
+  <!--Manim_Menue-->
+  <div class="Menu_Main">
+    <a class="MenueButton" href="index.html"></a>
+		<a class = "Invintory" href="invintory.html" >	
+			<button class="MenueButton InvintoryBtn"></button>
+		</a>
+		<a class = "DataBase" href="Codex_Enemy.html" >	
+			<button class="MenueButton SkilsBtn"></button>
+		</a>
+  </div>
+<!--HearoCodex-->
+      <div class="Hero" style="  background-image: url('Media/UiElements/Codex/CodexNav.png');">
+        <a id="HeroT" href="Codex_Enemy.html">Enemies</a>
+        <a id="HeroT" href="Codex_Personal.html">Personal</a>
+        <a id="HeroT" href="Codex_Allies.html">Allies</a>
+        <a id="HeroT" href="Codex_MemoryRoom.html">Memory Room</a>
+      </div>
+
+<div class="Codex">
+  <div class="Codex_Con" >
+    <img src="Media/UiElements/Codex/Enemys/Acid Spit.png" id="CodexContent_img">
+    <div id="Codex_Title" style="text-align: center;">Name</div>
+    <p id="Codex_content" >Description</p>
+
+  </div>
+
+
+
+  <div class="Codex_Selector">
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Acid Spit.png"
+            data-name="Acid Spitter"
+            data-description="Thick, covered with growths from which mucus drips. It spits acid, its skin is thick and leathery, covered in sores and tumors.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Acid Spit.png"> Acid Spitter</div>
+    </button>
+
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Berserker.png"
+            data-name="Berserker"
+            data-description="The Berserker is even larger and more muscular than a normal Muton, with a massive build, incredibly broad shoulders and powerful limbs. They embody brute strength and unbridled aggression, and their appearance emphasizes their purpose as close-combat fighters. This unit is designed to deal heavy damage and tear enemies apart. | *HP*:45~75">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Berserker.png"> Berserker</div>
+    </button>
+
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Brain.png"
+            data-name="Brain"
+            data-description="Infected with high mental activity, capable of controlling other infected. The brain is not protected by the skull, it has tentacles growing from the back. | Infected with telepathic abilities and long tentacles on his back used for attacks. | *HP*:30~60">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Brain.png"> Brain</div>
+    </button>
+
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Cristolide.png"
+            data-name="Cristolide"
+            data-description="The Crystolid is covered in a dark carapace, and its sharp, serrated claws are designed to tear through armor. The massive, predatory body resembles a giant ant. The poisonous mandibles, shimmering with toxic red. Judging by their action on the battlefield, the Crystolids are not just animal monsters, but intelligent creatures. | *HP*: 15~20 | *Shields* : 1 Reduces damage taken. | *Armor* : 2 Reduces the chance of hitting him. | *Jump*: Can move 5 meters in one jump. | *Claw Strike* : ~5 + (Severely poisons the target). | *Poisonous Bite* : Killing with a bite, the Crystolid turns the target into a zombie.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Cristolide.png"> Cristolide</div>
+    </button>
+
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Electric Wanderer.png"
+            data-name="Electric Wanderer"
+            data-description="Skinny, covered in electrical discharges. With elongated limbs and a thin face. The eyes glow with an ominous blue light. | A very fast electrified infected that recovers from electricity. | *HP*:~15">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Electric Wanderer.png"> Electric Wanderer</div>
+    </button>
+
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Flamethrower.png"
+            data-name="Flamethrower"
+            data-description="Large and gangly, with visible swellings and blisters on the skin. His body constantly heats up, making him unstable. | * Weaknesses* : Slow and predictable in movement. Sensitive to cold and attacks from a long distance. | * HP * : 50~70 |  * Fire Spit * : Fire projectile ~4 (Lightly sets the target on fire). | * Flamethrower* : Cone of fire ~5 (Sets the target on fire heavily.) (Sets the ground on fire). | * Flaming Fist* : ~5 (Sets the target on fire). | * Explosion on death* : Radius of 2 Meters ~6 + (Sets the target on fire heavily).">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Flamethrower.png"> Flamethrower</div>
+    </button>
+
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Flyer.png"
+            data-name="Flyer"
+            data-description="The upper part of a regular Infected but equipped with alien technology. Its main purpose is to quickly penetrate enemy lines, gather intelligence and attack key targets. Thanks to its advanced technology, the Flyer is capable of delivering surprise attacks.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Flyer.png"> Flyer</div>
+    </button>
+
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Infected Birds.png"
+            data-name="Infected Birds 'Guardians of the Sky'"
+            data-description="A flock of small birds with mutated beaks and blood-red eyes. Their feathers have fallen out, replaced by hard scales.There are at least 8 individuals in one flock. | *HP*: ~2 (for each bird).">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Infected Birds.png"> Infected Birds</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Infected Dog.png"
+            data-name="Infected Dog 'Clawed'"
+            data-description="A medium-sized dog with scaly fur and exposed, inflamed skin. It has elongated fangs and claws on its paws due to a painful mutation. | Strengths: Fast running, strong bites, can deal damage with claws. | Weaknesses: Low resistance to fire. | Abilities: Pack (attack in a group with other infected dogs). | *HP*:  7 | Bite: ~3 , Claws: ~2">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Infected Dog.png"> Infected Dog</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Infected Monkey_Trickster.png"
+            data-name="Infected Monkey_Trickster"
+            data-description="Lithe, with tumors on her arms and chest. Her eyes glow a bright green, suggesting an infection.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Infected Monkey_Trickster.png"> Infected Monkey_Trickster</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Infected Shark.png"
+            data-name="Infected Shark"
+            data-description="A massive shark with mutated features, its skin is covered in ulcers and tumors. Its jaws have become even more massive, and its teeth have acquired a sharpened shape. Its eyes glow with an ominous red light. Its fins are enlarged and covered in spikes, and its body exudes the smell of decay and blood.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Infected Shark.png"> Infected Shark</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Infected Soldier.png"
+            data-name="Infected Soldier"
+            data-description="Infected Soldier with rotten flesh are usually in the armor that they wore during life, they are dull but capable of using tools like weapons. | *HP*:7~10">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Infected Soldier.png"> Infected Soldier</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Infected.png"
+            data-name="Infected"
+            data-description="Infected People with rotten flesh are very stupid. | *HP*:1~4">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Infected.png"> Infected</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Infested Rat.png"
+            data-name="Infected Rat 'Cannibal'"
+            data-description="A pack of Rats, covered in sores and scars. Eyes cloudy and filled with blood.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Infested Rat.png"> Infested Rat</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Mentor.png"
+            data-name="Mentor"
+            data-description="A tall, thin alien with long limbs and glowing eyes. His skin shimmers with metal and changes color.According to the data received from the Gamma squad and the Delta squad, this creature is not infected. It has strong telepathic and telekinetic abilities.Sensitive to bright light.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Mentor.png"> Mentor</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Mooton.png"
+            data-name="Mooton"
+            data-description="Mootons are massive, muscular creatures with powerful torsos and massive arms. They are taller than the average human, with broad shoulders and a menacing stance. Their skin is rough-textured and has a reddish or brownish-red hue, which emphasizes their aggressive nature.Using an alien assault rifle and grenades, this unit represents the aliens' main fighting force.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Mooton.png"> Mooton</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Outsider.png"
+            data-name="Outsider"
+            data-description="His figure appears to be created or formed from energy rather than flesh and blood, making him unique among other enemies. After this unit dies, there is practically nothing left but a broken crystal. Apparently, this creature was controlling the alien ship.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Outsider.png"> Outsider</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Ram_BruceBanner.png"
+            data-name="Ram 'Bruce Banner'"
+            data-description="A huge infected with powerful armor, capable of breaking through fortifications. The body is covered with spines and thick skin. | *HP*:~130">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Ram_BruceBanner.png"> Ram Bruce Banner</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Screamer.png"
+            data-name="Screamer"
+            data-description="A strange creature resembling a cross between a human and a bird, with a huge mouth covered with many small teeth. Makes a piercing scream.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Screamer.png"> Screamer</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Seeker.png"
+            data-name="Seeker"
+            data-description="Seeker is a flying alien that looks like a metal octopus with four tentacles. It can become invisible and moves by flying. Its tentacles are equipped with high-tech devices that can be used for attack and defense. | *HP* :12~15">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Seeker.png"> Seeker</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Shadow.png"
+            data-name="Shadow"
+            data-description="A flexible, mutant with gray, hairless skin. It has elongated limbs and glowing eyes. Moves quickly, almost silently. | When first meeting him, he killed 'Delta 2'. | *Strengths* : Stealth and speed. Can approach targets undetected and ambush. | *Weaknesses* : Light armor and sensitivity to bright light. Suffering from increased vulnerability to fire. | *Abilities* : Claw strike (inflicts poison effect), long-range jump. ~4 + ~2 Poison Damage | *HP*:12">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Shadow.png"> Shadow</div>
+    </button>
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Enemys/Full/Tearer.png"
+            data-name="Tearer"
+            data-description="Medium height with mutilated limbs, which the mutation turned into claws. His muscles are constantly tense, which gives him impressive strength.">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Enemys/Tearer.png"> Tearer</div>
+    </button>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const codexButtons = document.querySelectorAll('.codex-btn');
+    const contentImg = document.getElementById('CodexContent_img');
+    const contentTitle = document.getElementById('Codex_Title');
+    const contentDescription = document.getElementById('Codex_content');
+
+    // Function to process and format text (for bold and line breaks)
+    function formatText(text) {
+        // Handle bolding: replace *text* with <strong>text</strong>
+        let formattedText = text.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
+        // Handle line breaks: split by '|' and join with <br>
+        formattedText = formattedText.split('|').join('<br>');
+        return formattedText;
+    }
+
+    // Function to update the content display
+    function updateCodexContent(button) {
+        const imageSrc = button.getAttribute('data-image');
+        const name = button.getAttribute('data-name');
+        const description = button.getAttribute('data-description');
+
+        // Remove active class from all buttons
+        codexButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        button.classList.add('active');
+
+        // Update content
+        contentTitle.textContent = name;
+        // Use innerHTML for description to render HTML tags from formatText
+        contentDescription.innerHTML = formatText(description); 
+        
+
+        // Try to load the image, fallback to placeholder if it fails
+        if (imageSrc) {
+            contentImg.src = imageSrc;
+            contentImg.style.display = 'block';
+            
+            // Handle image load error
+            contentImg.onerror = function() {
+                contentImg.style.display = 'none';
+                // If you had a placeholder div, you'd show it here.
+                // Since there's no placeholder div in your provided HTML,
+                // this might just leave the image space blank or show a broken image icon.
+                // If you want to add a text placeholder, you'd need to add a div in your HTML.
+            };
+        } else {
+            contentImg.style.display = 'none';
+            // Same as above, handle placeholder if needed.
+        }
+    }
+
+    // Add click event listeners to all codex buttons
+    codexButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            updateCodexContent(this);
+        });
+    });
+
+    // Optional: Auto-select first item on page load
+    if (codexButtons.length > 0) {
+        updateCodexContent(codexButtons[0]);
+    }
+});
+</script>
+
+</body>
+
+
+<script src="script.js"></script>
+
+</html>
