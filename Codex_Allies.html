@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <title>Codex</title>
+
+</head>
+
+<body class="Inv_Body">
+
+  <!--Manim_Menue-->
+  <div class="Menu_Main">
+    <a class="MenueButton" href="index.html"></a>
+		<a class = "Invintory" href="invintory.html" >	
+			<button class="MenueButton InvintoryBtn"></button>
+		</a>
+		<a class = "DataBase" href="Codex_Enemy.html" >	
+			<button class="MenueButton SkilsBtn"></button>
+		</a>
+  </div>
+<!--HearoCodex-->
+      <div class="Hero" style="  background-image: url('Media/UiElements/Codex/CodexNav_ally.png');">
+        <a id="HeroT" href="Codex_Enemy.html">Enemies</a>
+        <a id="HeroT" href="Codex_Personal.html">Personal</a>
+        <a id="HeroT" href="Codex_Allies.html">Allies</a>
+        <a id="HeroT" href="Codex_MemoryRoom.html">Memory Room</a>
+      </div>
+
+<div class="Codex" >
+  <div class="Codex_Con" style="border: 3px  solid #3BC2D4;" >
+    <img src="Media/UiElements/Codex/Enemys/Acid Spit.png" id="CodexContent_img" style="border: 3px  solid #3BC2D4;">
+    <div id="Codex_Title" style="text-align: center; border: 3px  solid #3BC2D4;">Name</div>
+    <p id="Codex_content" style="border: 3px  solid #3BC2D4;" >Description</p>
+
+  </div>
+
+
+
+  <div class="Codex_Selector">
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Allies/Full/Marina Novikova.png"
+            data-name="Marina Novikova"
+            data-description="*Appearance: * 165 cm, slim, with short brown hair and green eyes. She often wears glasses for electronics work but uses contact lenses during missions. | * Features: * Marina is known for her ability to infiltrate the most complex locations silently. She has a small scar on her right cheek from a fight with an infected. She is a master with a knife and prefers light gear to maintain her mobility. | * Codename *: 'Shadow' | * Age * : 28 years | * Class * : Scout | * Rank *: Lieutenant (סגן) * Family status * : Single | * Blood type * : A+ | * Missions completed *: 6">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Allies/Marina Novikova.png"> Marina Novikova</div>
+    </button>
+
+    <button class="codex-btn" 
+            data-image="Media/UiElements/Codex/Allies/Full/Alina Petrova.png"
+            data-name="Alina Petrova"
+            data-description=" * Appearance * : 160 cm, slim, with long blonde hair usually braided, and blue eyes. Her face is always friendly, even in the most challenging moments. | * Features *: Alina is known for her kindness and compassion, making her an excellent medic. She always carries a medallion with an angel on it, a gift from her mother. She is extremely attentive to details and capable of providing medical aid in the most extreme conditions.Codename: 'Angel' | * Age * : 27 years | *Class * : Medic | * Rank * : Sergeant (סמל) | * Family status * : Single | * Blood type *: AB- | * Missions completed * : 3">
+      <div class="placeholder-img"><img src="Media/UiElements/Codex/Allies/Alina Petrova.png"> Alina Petrovar</div>
+    </button>
+
+  </div>
+</div>
+
+</body>
+
+
+<script src="script.js"></script>
+
+</html>

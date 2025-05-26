@@ -1,0 +1,706 @@
+body {
+  background-color: rgb(220, 220, 220);
+  background-image: url('Media/Background/MenuAgr1_1.jpg' );
+  background-size: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+
+body.Inv_Body{
+
+background-size: 25%;
+  background-image: url('Media/Background/Inv/Inv_Background2.jpg' );
+
+width: 100%;
+
+}
+
+/* Link styles */
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* H1 */
+h1 {
+  background-color: #2A295C;
+  color: white;
+  line-height: 120px;
+  font-size: 62px;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* H2 */
+h2 {
+  color: #fff;
+   font-family: "Bebas Neue", sans-serif;
+   font-size: 2.5vw;
+   overflow:visible;
+}
+
+
+/* Menu */
+.Menu_Main {
+  position: fixed;
+  transform: translateY(-50%) translateX(-80%);
+  top: 50%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 30%;
+  min-width: 300px;
+  z-index: 9999;
+  }
+
+  .MenueButton {
+    box-sizing: border-box;
+    border: none;
+    background-image: url('Media/UiElements/DeltaMenupng_Base.png');
+    background-color: transparent !important;
+    background-size: cover;
+    object-fit: contain;
+    cursor: pointer;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    transition: transform 0.3s ease;
+    z-index: 10;
+  }
+
+  .InvintoryBtn {
+    position: absolute;
+    top: 100%;
+    left: 15%;
+    width: 80%;
+    aspect-ratio: 16 / 7;
+    background-image: url('Media/UiElements/DeltaMenupng_Inventory.png');
+    background-color: transparent !important;
+    background-size: cover;
+    object-fit: contain;
+    cursor: pointer;
+    visibility: hidden;
+  }
+
+  .SkilsBtn {
+    position: absolute;
+    top: -80%;
+    left: 15%;
+    width: 80%;
+    aspect-ratio: 16 / 7;
+    background-image: url('Media/UiElements/DeltaMenupng_Skills.png');
+    background-color: transparent !important;
+    background-size: cover;
+    object-fit: contain;
+    cursor: pointer;
+    visibility: hidden;
+  }
+
+.Menu_Main:hover {
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+  .Menu_Main:hover .MenueButton {
+    transform: translateX(80%);
+  }
+
+  .Menu_Main:hover .InvintoryBtn,
+  .Menu_Main:hover .SkilsBtn {
+    visibility: visible;
+  }
+
+/*ChaePreviewPic*/
+  /*NPC*/
+  .NPC{
+  position: absolute;
+  height: 60%;
+  bottom: 0;
+  right: 0;
+  }
+
+
+
+.inventory {
+  visibility: hidden;
+}
+
+.TotalPoints {
+
+  border: none;
+  background-color: transparent;
+  width: calc(2.5vw + 10%);
+  overflow:visible;
+  color: #fff;
+  font-size: 2.5vw;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  
+}
+
+
+/* Hero navigation */
+.InvHeader{
+position: absolute;
+top: 0;
+width: 100%;
+height: 100%;
+
+}
+
+.Hero {
+position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background-position: center;
+  background-image: url('Media/UiElements/InvNav.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+/*Hero Text*/
+.Hero #HeroT {
+align-self: center;
+  border: none;
+  padding: 1vw 4vw;
+  text-align: center;
+  font-size: 3vw;
+  top: 50%;
+  bottom: 50%;
+}
+
+
+.PointCount{
+position: relative;
+top: 0;
+margin: 10px;
+border-radius: 1rem;
+border: solid 2px #aaa ;
+padding: 1rem;
+padding-top : 0px;
+padding-bottom : 0px;
+background-image: linear-gradient(#252525, #424141);
+width:30%;
+height: auto;
+min-width: 150px;
+}
+
+
+/*dropdown item_con*/
+
+.dropdown .selector-button {
+  min-height: 70px; /* Essential for the button to have height */
+  display: flex;    /* Helps proper content containment */
+  justify-content: center;
+  align-items: center;
+}
+
+.item_con {
+  height: 100%;     /* Essential for .item_con to scale to .selector-button's height */
+  display: flex;    /* Helps proper content containment */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.dropdown-item img {
+
+    object-fit: contain;
+}
+    /*img item_con*/
+    .img_con {
+      z-index: -1;
+
+    }
+
+  /*points item_con*/
+    .points_con {
+      position: absolute;
+      background-color: #8a8a8a;
+      width: 20%;
+      aspect-ratio: 1 / 1;
+      top: 0px;
+      left: 0;
+      content: unset;
+      font-weight: bold;
+      font-size: 100%;
+      color: black;
+      z-index: 1;
+      align-content: center;
+
+
+  }
+
+
+    /*info item_con*/
+    .info_con {
+      position: absolute;
+      background-color: #c5850f ;
+      width: 20%;
+      aspect-ratio: 1 / 1;
+      top: 0;
+      right: 0;
+      align-content: center;
+      content: unset;
+      font-weight: bold;
+      font-size: 100%;
+      color: black;
+      z-index: 1;
+    }
+
+
+
+
+  /* Dropdown component */
+
+  .selector-button {
+    background: none;
+    border: none;
+    padding: 0;
+    display: block;
+    width: 100%;
+  }
+
+  .selector-button img {
+      background: none;
+      padding: 0;
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      background-color: #343434;
+
+  }
+
+  .selector-button.selected img {
+    border-color: cyan;
+  }
+
+  .dropdown {
+    position: relative;
+    width: 100%;
+  }
+
+
+  .dropdown-list {
+    display: none;
+    list-style: none;
+    top: 100%;
+    padding: 5px;
+    margin: 0;
+    background: #222;
+    position: absolute;
+    z-index: 1000;
+    border: 1px solid #ccc;
+ 
+
+  }
+
+  .dropdown-item img {
+        width: 100%;
+        margin-bottom: 5px;
+        cursor: pointer;
+  }
+
+
+
+
+  /* For selected loadout preview if needed */
+  .selected-items-container {
+
+    padding: 10px;
+    border: 2px solid #aaa;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #000;
+  }
+
+  .selected-item {
+    width: 100%;
+    border: 1px solid #666;
+    border-radius: 5px;
+  }
+
+
+  /*Dropdown Size*/
+  .dropdown 
+  #vest,
+  #equipment1,
+  #equipment2,
+  #equipment3,
+  #granade1,
+  #granade2,
+  #granade3
+
+  {
+  width: 100%; /*change dropdown size*/
+
+  }
+
+  .dropdown 
+  #melee,
+  #weapon1,
+  #weapon2 
+  {
+max-width: 175px;
+}
+
+  .dropdown 
+  .V1,
+  .E1,
+  .E2,
+  .E3,
+  .G1,
+  .G2,
+  .G3,
+  .G4,
+  .G5
+  {
+
+    width: 100%;
+  }
+
+/*Invintory Positions*/
+  /* Equipment slots container */
+  .Equipmants {
+    top: 0;
+    height: 100%;
+    width: 90%;
+    display: flex; 
+    justify-content:start; 
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-bottom: 20px;
+    gap: 2vh;
+  }
+
+
+  .VWC_Group{
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    width: fit-content; 
+    gap: 10px;
+    margin-left: auto;
+
+  }
+    .VW_Group{
+      order: 1;
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      min-width: 150px;
+      gap: 5px;
+    }
+      .VM_Group{
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+      }
+
+      .Weapon1_Grp{
+        width: fit-content;
+        margin-left: auto;
+        
+      }
+
+      .Weapon2_Grp{
+        width: fit-content;
+        margin-left: auto;
+      }
+    /*Char_Group*/
+    .Char_Group{
+      order: 2;
+      display: flex;
+      flex-direction: column; 
+      justify-content:end;
+      align-items: center;
+      width: 35%;
+      background-image: url('Media/Background/CharBackground1.jpg');
+      background-size: 200% 100%;
+      min-width: 200px;
+
+    }
+
+    .CharStats {
+
+visibility: hidden;
+
+
+    }
+    .CharSelector{
+      display: flex;
+      background-color: #666;
+      flex-direction: row;
+      width: 100%; 
+      height: fit-content;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    
+      
+
+      }
+      /*CharName*/
+      .CharName{
+        width: 100%;
+margin: 2px;
+      }
+
+      /*CharImg*/
+      .DeltaChar{
+        position: relative;
+        width: 60%;
+        height: auto;
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+
+      /*button*/
+      #Swipeleft_btn{
+        background-color: #dbdbdb ;
+        height: 100%;
+        aspect-ratio: 1 / 1;
+        min-height: 45px;
+        align-content: center;
+        content: unset;
+        font-weight: bold;
+        font-size: 100%;
+        color: black;
+        z-index: 1;
+
+        }
+
+      #Swiperight_btn{
+            background-color: #dbdbdb ;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            min-height: 45px;
+            align-content: center;
+            content: unset;
+            font-weight: bold;
+            font-size: 100%;
+            color: black;
+            z-index: 1;
+
+
+    }
+
+
+  .Vest_Grp,
+  .Melee_Grp{
+  width: fit-content;
+
+
+  }
+
+  .E-G_Group{
+  gap: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  }
+
+
+  .E_Group {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+  }
+
+  .G_Group {
+    width: fit-content;
+    display: flex;
+      flex-direction: row;
+      gap: 5px;
+
+  }
+
+  /*ItemInfo*/
+  .ItemsInfo_Group {
+    position: relative;
+    width: 90%;
+    height: 100%;
+    margin-bottom: 32px;
+    color: #fff;
+    text-align: left;
+    
+  }
+    .NameInfo{
+      background-color: #252525;
+      border: solid 2px #fff;
+      width: 100%;
+      font-size: 2vw;
+      padding: 1vw;
+    }
+
+    .ContentInfo{
+      background-color: #252525;
+      border: solid 2px #fff;
+      width: 100%;
+      height: fit-content;
+      font-size: 2vw;
+      padding: 1vw;
+
+    }
+
+  .AtachmentInfo{
+  background-color: #252525;
+      border: solid 2px #fff;
+      width: 100%;
+      height: fit-content;
+      font-size: 2vw;
+      padding: 1vw;
+}
+
+    /*Accesories*/
+    .WA_Group{
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      width: fit-content;
+      height: fit-content;
+      gap:10px;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+      .AtachmentsSet{
+        display: flex;
+        flex-direction: column;
+        width: 17.3%;
+        flex-shrink: 0;
+        flex-grow: 2;
+      }
+/*body_Battel Demo*/
+      .Body_Battel{
+		    font-family: Arial, sans-serif; 
+            background-image: url('Media/UiElements/Unsorted/img/background.jpg'); /* Устанавливаем фоновое изображение */
+            /*background-size: cover; /* Фон будет растянут по всему экрану */
+            background-position: center; /* Фон будет по центру */
+            text-align-last: left;
+
+        .container { width: 80%; margin: auto; }
+        .ability { margin: 10px 0; font-size: 28px; } /* Увеличен размер текста для описания способности */
+        .ability img { width: 50px; cursor: pointer; }
+        .tooltip { display: none; position: absolute; background: #eee; padding: 10px; border: 1px solid #333; font-size: 16px; } /* Увеличен размер текста для тултипа */
+        .cooldown { color: red; font-weight: bold; }
+        .ability span {
+            font-size: 30px; /* Увеличен размер текста для названия способности */
+        }
+      }
+
+
+/*DataBase*/
+
+
+.Codex{
+  width: 90%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 2vw;
+  justify-content: center;
+  
+
+}
+
+.Codex_Con{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: 100%;
+  color: #fff;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  border: 3px  solid #ae1818;
+  font-size: 1.2vw;
+}
+
+#Codex_Title{
+border: 3px solid #ae1818;
+text-align: left;
+width: 30vw;
+margin: 0;
+margin-top: -3px;
+background-color: #252525;
+word-wrap:break-word;
+
+}
+
+#Codex_content {
+border: 3px solid #ae1818;
+text-align: left;
+width: 30vw;
+margin: 0;
+margin-top: -3px;
+background-color: #252525;
+word-wrap:break-word;
+
+
+}
+
+#CodexContent_img {
+width: 30vw;
+
+}
+
+.Codex_Selector{ 
+  width: 80%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 20px;
+
+
+}
+
+
+.codex-btn{
+width: fit-content;
+aspect-ratio: 1 / 1;
+background-color: transparent;
+border: none;
+color: #fff;
+font-size: 1.25vw;
+
+}
+
+.placeholder-img{
+width: 10vw;
+aspect-ratio: 1 / 1;
+display: flex;
+flex-direction: column;
+background-color: #343434;
+filter: drop-shadow(6px 2px 1px #000);
+}
+
+.placeholder-img img{
+width: 100%;
+}
