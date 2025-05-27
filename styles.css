@@ -200,18 +200,30 @@ min-width: 150px;
 
 
 /*dropdown item_con*/
-  .item_con {
-  position: relative;
-  width: 100%;
-  height: fit-content;
-  color: whitesmoke;
 
-  }
+.dropdown .selector-button {
 
+  display: flex;    /* Helps proper content containment */
+  justify-content: center;
+  align-items: center;
+}
 
+.item_con {
+  height: 100%;     /* Essential for .item_con to scale to .selector-button's height */
+  display: flex;    /* Helps proper content containment */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.dropdown-item img {
+
+    object-fit: contain;
+}
     /*img item_con*/
     .img_con {
       z-index: -1;
+
     }
 
   /*points item_con*/
@@ -258,7 +270,7 @@ min-width: 150px;
     background: none;
     border: none;
     padding: 0;
-    display: inline-block;
+    display: block;
     width: 100%;
   }
 
@@ -293,14 +305,18 @@ min-width: 150px;
     background: #222;
     position: absolute;
     z-index: 1000;
-    width: fit-content; 
     border: 1px solid #ccc;
-
+    width: 20vw;
+    height: fit-content;
+ 
+  max-height: 30vh; /* Sets max height to 30% of the viewport height */
+  overflow-y: auto; /* Adds a scrollbar if content exceeds max-height */
+  width: 100%; /* Ensures the dropdown list takes full width of its parent */
+  box-sizing: border-box; 
   }
 
   .dropdown-item img {
         width: 100%;
-
         margin-bottom: 5px;
         cursor: pointer;
   }
@@ -333,11 +349,13 @@ min-width: 150px;
   #equipment3,
   #granade1,
   #granade2,
-  #granade3
+  #granade3,
+  #granade4,
+  #granade5
 
   {
   width: 100%; /*change dropdown size*/
-
+height: fit-content;
   }
 
   .dropdown 
@@ -355,10 +373,12 @@ max-width: 175px;
   .E3,
   .G1,
   .G2,
-  .G3
+  .G3,
+  .G4,
+  .G5
   {
-
-    width: 100%;
+    height: auto;
+    width: 20vw;
   }
 
 /*Invintory Positions*/
@@ -366,9 +386,9 @@ max-width: 175px;
   .Equipmants {
     top: 0;
     height: 100%;
-    width: 90%;
+    width: 80%;
     display: flex; 
-    justify-content:start; 
+    justify-content:center; 
     flex-direction: column;
     align-items: center;
     margin-top: 0;
@@ -422,15 +442,14 @@ max-width: 175px;
       width: 35%;
       background-image: url('Media/Background/CharBackground1.jpg');
       background-size: 200% 100%;
-      min-width: 200px;
+      min-width: 150px;
 
     }
 
     .CharStats {
 
 visibility: hidden;
-width: 0;
-height: 0;
+
 
     }
     .CharSelector{
@@ -500,19 +519,21 @@ margin: 2px;
   }
 
   .E-G_Group{
-  gap: 20px;
+  gap: 2vw;
   width: 100%;
   display: flex;
+  height: fit-content;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
+ 
   }
 
 
   .E_Group {
-    width: fit-content;
+    flex-shrink: 1;
     display: flex;
     flex-direction: row;
     gap: 5px;
@@ -520,17 +541,19 @@ margin: 2px;
   }
 
   .G_Group {
-    width: fit-content;
+     flex-shrink: 0;
     display: flex;
-      flex-direction: row;
-      gap: 5px;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    gap: 5px;
 
   }
 
   /*ItemInfo*/
   .ItemsInfo_Group {
     position: relative;
-    width: 90%;
+    width: 100%;
     height: 100%;
     margin-bottom: 32px;
     color: #fff;
@@ -567,22 +590,23 @@ margin: 2px;
     /*Accesories*/
     .WA_Group{
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       flex-direction: row;
-      width: fit-content;
+      flex-wrap: wrap;
+      width: 100%;
       height: fit-content;
-      gap:10px;
-      margin-left: auto;
-      margin-right: auto;
+      gap:1vw;
+
 
     }
 
       .AtachmentsSet{
         display: flex;
         flex-direction: column;
-        width: 17.3%;
+        width: 17%;
         flex-shrink: 0;
         flex-grow: 2;
+        gap: 1vw;
       }
 /*body_Battel Demo*/
       .Body_Battel{
@@ -691,4 +715,12 @@ filter: drop-shadow(6px 2px 1px #000);
 
 .placeholder-img img{
 width: 100%;
+}
+
+.TEST {
+top: 0;
+width: 100px;
+height: 100px;
+
+
 }

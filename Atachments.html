@@ -112,25 +112,17 @@
           </div>
         </div>          
       </div>
-        <div class="Weapon1_Grp">
-            <div class="dropdown W1">
-              <button class="selector-button" onclick="selectSlot('weapon1')">
-                <img src="Media/UiElements/Nothing.jpg" alt="weapon1" id="weapon1" style="max-width: none; flex-shrink: 2; flex-grow: 0;">
-                <div class="selected-item-con"></div>
-              </button>
-
-                <ul class="dropdown-list" id="dropdown_weapon1" >
-                  <div class="Weapon1_Grp">
+        <div class="Weapon1_Grp" style="width: 60%;">
                           <div class="dropdown W1">
                               <button class="selector-button" onclick="selectSlot('weapon1')">
-                                    <img src="Media/UiElements/Nothing.jpg" alt="weapon1" id="weapon1">
-                                    <div class="selected-item-con"></div>
+                                    <img src="Media/UiElements/Nothing.jpg" alt="weapon1" id="weapon1" style="max-width: none; flex-shrink: 2; flex-grow: 0;">
+                                    <div class="selected-item-con" ></div>
                               </button>
 
                         <ul class="dropdown-list" id="dropdown_weapon1" >
                           <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
                           data-info-content="No item selected.">
-                            <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                            <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg" class="img_con" ></div>
                           </li>
                           <li class="dropdown-item" data-image="Media/UiElements/Weapons/MainWeapon/M-16.jpg" data-cost="2" data-info-title="M-16" 
                           data-info-content="Effective Range: 3-75 meters | Damage: 1D10 | Number of Shots: 4 | Accuracy: 1-2 | Special Attack: Headshot increases crit chance by 2 but reduces hit chance by 2 | Points Cost: 2.">
@@ -174,12 +166,45 @@
                           </li>
                         </ul>
                           </div>
-                </div>
-              </ul>
-            </div>
         </div>
       <div class="AtachmentsSet">
-        <div class="Scope_Grp">
+          <div class="Stock_Grp">
+            <div class="dropdown Stock">
+              <button class="selector-button" onclick="selectSlot('stock')">
+                <img src="Media/UiElements/Nothing.jpg" alt="stock" id="stock">
+                <div class="selected-item-con"></div>
+              </button>
+              <ul class="dropdown-list" id="dropdown_stock">      
+                <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
+                  data-info-content="No item selected.">
+                  <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                </li>
+                <li class="dropdown-item" data-image="Media/UiElements/Atachments/Stock/Stock.jpg" data-cost="1" data-info-title="Stock" 
+                  data-info-content="You deal 1 damage to the enemy if you miss.">
+                  <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Atachments/Stock/Stock.jpg" class="img_con">
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="Magazine_Grp">
+            <div class="dropdown Magazine">
+              <button class="selector-button" onclick="selectSlot('magazine')">
+                <img src="Media/UiElements/Nothing.jpg" alt="magazine" id="magazine">
+                <div class="selected-item-con"></div>
+              </button>
+              <ul class="dropdown-list" id="dropdown_magazine">      
+                <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
+                  data-info-content="No item selected.">
+                  <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                </li>
+                <li class="dropdown-item" data-image="Media/UiElements/Atachments/Megazin/Extended Magazine.jpg" data-cost="1" data-info-title="Extended Magazine" 
+                  data-info-content="150% ammunition.">
+                  <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Atachments/Megazin/Extended Magazine.jpg" class="img_con">
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="Scope_Grp">
           <div class="dropdown Scope">
             <button class="selector-button" onclick="selectSlot('scope')">
               <img src="Media/UiElements/Nothing.jpg" alt="scope" id="scope">
@@ -196,39 +221,7 @@
               </li>
             </ul>
           </div>
-          <div class="dropdown Stock">
-            <button class="selector-button" onclick="selectSlot('stock')">
-              <img src="Media/UiElements/Nothing.jpg" alt="stock" id="stock">
-              <div class="selected-item-con"></div>
-            </button>
-            <ul class="dropdown-list" id="dropdown_stock">      
-              <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
-                data-info-content="No item selected.">
-                <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
-              </li>
-              <li class="dropdown-item" data-image="Media/UiElements/Atachments/Stock/Stock.jpg" data-cost="1" data-info-title="Stock" 
-                data-info-content="You deal 1 damage to the enemy if you miss.">
-                <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Atachments/Stock/Stock.jpg" class="img_con">
-              </li>
-            </ul>
-          </div>
-          <div class="dropdown Magazine">
-            <button class="selector-button" onclick="selectSlot('magazine')">
-              <img src="Media/UiElements/Nothing.jpg" alt="magazine" id="magazine">
-              <div class="selected-item-con"></div>
-            </button>
-            <ul class="dropdown-list" id="dropdown_magazine">      
-              <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
-                data-info-content="No item selected.">
-                <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
-              </li>
-              <li class="dropdown-item" data-image="Media/UiElements/Atachments/Megazin/Extended Magazine.jpg" data-cost="1" data-info-title="Extended Magazine" 
-                data-info-content="150% ammunition.">
-                <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Atachments/Megazin/Extended Magazine.jpg" class="img_con">
-              </li>
-            </ul>
-          </div>
-        </div>   
+          </div>   
       </div>
     </div>
     <div class="WA_Group">
@@ -300,7 +293,7 @@
           </div>
         </div>          
       </div>
-      <div class="Weapon2_Grp">
+      <div class="Weapon2_Grp" style="width: 60%;">
         <div class="dropdown W2">
                               <button class="selector-button" onclick="selectSlot('weapon2')">
                                     <img src="Media/UiElements/Nothing.jpg" alt="weapon2" id="weapon2" style="max-width: none; flex-shrink: 2; flex-grow: 0;">
@@ -373,39 +366,44 @@
               </li>
             </ul>
           </div>
-          <div class="dropdown Stock_Sec">
-            <button class="selector-button" onclick="selectSlot('stock_Sec')">
-              <img src="Media/UiElements/Nothing.jpg" alt="stock_Sec" id="stock_Sec">
-              <div class="selected-item-con"></div>
-            </button>
-            <ul class="dropdown-list" id="dropdown_stock_Sec">      
-              <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
-                data-info-content="No item selected.">
-                <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
-              </li>
-              <li class="dropdown-item" data-image="Media/UiElements/Atachments/Stock/Stock.jpg" data-cost="1" data-info-title="Stock" 
-                data-info-content="You deal 1 damage to the enemy if you miss.">
-                <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Atachments/Stock/Stock.jpg" class="img_con">
-              </li>
-            </ul>
-          </div>
-          <div class="dropdown Magazine_Sec">
-            <button class="selector-button" onclick="selectSlot('magazine_Sec')">
-              <img src="Media/UiElements/Nothing.jpg" alt="magazine_Sec" id="magazine_Sec">
-              <div class="selected-item-con"></div>
-            </button>
-            <ul class="dropdown-list" id="dropdown_magazine_Sec">      
-              <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
-                data-info-content="No item selected.">
-                <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
-              </li>
-              <li class="dropdown-item" data-image="Media/UiElements/Atachments/Megazin/Extended Magazine.jpg" data-cost="1" data-info-title="Extended Magazine" 
-                data-info-content="150% ammunition.">
-                <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Atachments/Megazin/Extended Magazine.jpg" class="img_con">
-              </li>
-            </ul>
-          </div>
+          
         </div>   
+        <div class="Stock_Grp">
+          <div class="dropdown Stock_Sec">
+              <button class="selector-button" onclick="selectSlot('stock_Sec')">
+                <img src="Media/UiElements/Nothing.jpg" alt="stock_Sec" id="stock_Sec">
+                <div class="selected-item-con"></div>
+              </button>
+              <ul class="dropdown-list" id="dropdown_stock_Sec">      
+                <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
+                  data-info-content="No item selected.">
+                  <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                </li>
+                <li class="dropdown-item" data-image="Media/UiElements/Atachments/Stock/Stock.jpg" data-cost="1" data-info-title="Stock" 
+                  data-info-content="You deal 1 damage to the enemy if you miss.">
+                  <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Atachments/Stock/Stock.jpg" class="img_con">
+                </li>
+              </ul>
+          </div>
+        </div>
+        <div class="Magazine_Grp">
+          <div class="dropdown Magazine_Sec">
+              <button class="selector-button" onclick="selectSlot('magazine_Sec')">
+                <img src="Media/UiElements/Nothing.jpg" alt="magazine_Sec" id="magazine_Sec">
+                <div class="selected-item-con"></div>
+              </button>
+              <ul class="dropdown-list" id="dropdown_magazine_Sec">      
+                <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
+                  data-info-content="No item selected.">
+                  <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                </li>
+                <li class="dropdown-item" data-image="Media/UiElements/Atachments/Megazin/Extended Magazine.jpg" data-cost="1" data-info-title="Extended Magazine" 
+                  data-info-content="150% ammunition.">
+                  <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Atachments/Megazin/Extended Magazine.jpg" class="img_con">
+                </li>
+              </ul>
+          </div>
+        </div>
       </div>
     </div>
     <div class="ItemsInfo_Group">
@@ -428,6 +426,9 @@
 </body>
 
 
-<script src="script.js"></script>
+<script src="script.js">
+
+
+</script>
 
 </html>

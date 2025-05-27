@@ -59,19 +59,20 @@
                                     <div class="selected-item-con"></div>
                               </button>
 
-                            <ul class="dropdown-list" id="dropdown_vest">      <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
+                            <ul class="dropdown-list" id="dropdown_vest" >      
+                              <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
                                 <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
                               </li>
                               <li class="dropdown-item" data-image="Media/UiElements/Vests/LightArmor.jpg" data-cost="3" data-info-title="Light Vest" 
-                              data-info-content="Allows carrying 4 magazines for assault weapons (or 1 magazine for heavy assault weapons) and 3 magazines for pistols, 2 grenades, and 1 special equipment. Grants a chance to evade attacks (30%).">
+                              data-info-content="Allows carrying 4 magazines for assault weapons (or 1 magazine for heavy assault weapons) | 3 magazines for pistols | 2 grenades | 1 special equipment. | Grants a chance to evade attacks (30%).">
                                 <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Vests/LightArmor.jpg" class="img_con">
                               </li>
                               <li class="dropdown-item" data-image="Media/UiElements/Vests/MediumArmor.jpg" data-cost="2" data-info-title="Medium Vest"
-                              data-info-content="Allows carrying 6 magazines for assault weapons (or 2 magazines for heavy assault weapons) and 4 magazines for pistols, 3 grenades, and 3 special equipment.">
+                              data-info-content="Allows carrying 6 magazines for assault weapons (or 2 magazines for heavy assault weapons) | 4 magazines for pistols | 3 grenades | 3 special equipment.">
                                 <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Vests/MediumArmor.jpg" class="img_con">
                               </li>
                               <li class="dropdown-item" data-image="Media/UiElements/Vests/HeavyArmor.jpg" data-cost="3" data-info-title="Heavy Vest" 
-                              data-info-content="Allows carrying 3 magazines for heavy assault weapons (or 10 magazines for regular assault weapons) and 5 magazines for pistols, 2 grenades, and 2 special equipment. A ceramic plate in the armor reduces incoming damage by 1. The plate may break in an explosion.">
+                              data-info-content="Allows carrying 3 magazines for heavy assault weapons (or 10 magazines for regular assault weapons) | 5 magazines for pistols | 2 grenades | 2 special equipment. A ceramic plate in the armor reduces incoming damage by 1. The plate may break in an explosion.">
                                 <div class="item_con"><div class="points_con">3</div><button class="info_con">i</button><img src="Media/UiElements/Vests/HeavyArmor.jpg" class="img_con">
                               </li>
                             </ul>
@@ -220,7 +221,7 @@
         </div>
             <div class="E-G_Group">
                 <div class="E_Group">
-                      <div class="dropdown E1">
+                      <div class="dropdown E1"  >
                       <button class="selector-button" onclick="selectSlot('equipment1')">
                           <img src="Media/UiElements/Nothing.jpg" alt="equipment1"  id="equipment1">
                       <div class="selected-item-con"></div>
@@ -298,7 +299,7 @@
                         </ul>
                       </div>
 
-                      <div class="dropdown E2">
+                      <div class="dropdown E2"  >
                         <button class="selector-button" onclick="selectSlot('equipment2')">
                           <img src="Media/UiElements/Nothing.jpg" alt="equipment2" id="equipment2">
                         <div class="selected-item-con"></div></button>
@@ -369,7 +370,7 @@
 
                         </ul>
                       </div>
-                        <div class="dropdown E3">
+                        <div class="dropdown E3"  >
                         <button class="selector-button" onclick="selectSlot('equipment3')">
                           <img src="Media/UiElements/Nothing.jpg" alt="Equipment3" id="equipment3">
                         <div class="selected-item-con"></div></button>
@@ -443,7 +444,7 @@
                   </div>
 
                 <div class="G_Group">
-                          <div class="dropdown G1">
+                          <div class="dropdown G1"  >
                         <button class="selector-button" onclick="selectSlot('granade1')">
                           <img src="Media/UiElements/Nothing.jpg" alt="granade1" id="granade1">
                           <div class="selected-item-con"></div>
@@ -504,7 +505,7 @@
                         </ul>
                       </div>
 
-                      <div class="dropdown G2">
+                      <div class="dropdown G2"  >
                         <button class="selector-button" onclick="selectSlot('granade2')">
                           <img src="Media/UiElements/Nothing.jpg" alt="granade2" id="granade2">
                         <div class="selected-item-con"></div></button>
@@ -567,11 +568,131 @@
                     </div>
 
 
-                      <div class="dropdown G3">
+                      <div class="dropdown G3"  >
                       <button class="selector-button" onclick="selectSlot('granade3')">
                           <img src="Media/UiElements/Nothing.jpg" alt="granade3" id="granade3">
                         <div class="selected-item-con"></div></button>
                         <ul class="dropdown-list" id="dropdown_granade3">
+                          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
+                            data-info-content="No item selected.">
+                            <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1" data-info-title="Clamor Mine" 
+                            data-info-content="A wire between two points that will cause an explosion when stepped on, 10 damage, 5-meter radius.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Clamor.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1" data-info-title="Flame Grenade" 
+                            data-info-content="Covers an area with fire causing 3 persistent fire damage for 4 rounds, radius 2 meters.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/FlameGranade.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1" data-info-title="Flashbang" 
+                            data-info-content="Blinds everyone in a 6-meter radius. The target is blinded for 2 rounds. Easier to hit, harder for them to hit someone. Their speed is halved.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/FlashBang.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1" data-info-title="Frag Grenade" 
+                            data-info-content="Deals 7 damage and destroys cover. Reduces the target's armor by 1, if any, radius 3 meters.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Granate.jpg" class="img_con"></div></li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1" data-info-title="Smoke Grenade" 
+                            data-info-content="Creates a smoke cloud for 3 rounds that makes it difficult to hit a target in the smoke and to hit a target through the smoke, radius 6.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/SmokkeGranade.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Magnetic Grenade.png" data-cost="1" data-info-title="Magnetic Grenade" 
+                            data-info-content="Attracts enemies and objects within a 3-meter radius.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Magnetic Grenade.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Decoy Grenade.png" data-cost="2" data-info-title="Decoy Grenade" 
+                            data-info-content="Creates a hologram of a soldier and can provoke an enemy attack. The hologram has 20 HP.">
+                            <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Decoy Grenade.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Door Breacher.png" data-cost="1" data-info-title="Door Breacher" 
+                            data-info-content="Explosive gel that, after being smeared on the wall, explodes and creates a 'new door' to the room.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Door Breacher.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/EMP Grenade.png" data-cost="1" data-info-title="EMP Grenade" 
+                            data-info-content="Blocks abilities and disables drones/automatic machine gun turrets for one round. In a 5-meter radius.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/EMP Grenade.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Panic Gas Grenade.png" data-cost="1" data-info-title="Panic Gas Grenade" 
+                            data-info-content="Enemies in the area of effect perform a WILL check or suffer a panic effect. Radius of 4 meters.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Panic Gas Grenade.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Mine.png" data-cost="1" data-info-title="Proximity Mine" 
+                            data-info-content="	12 damage, 5-meter radius.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Mine.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/SafetyGranade.png" data-cost="1" data-info-title="Safety Grenade" 
+                            data-info-content="These grenades are designed for combat in a space where it is necessary to damage a group of enemies without causing damage to the surroundings. Deals 7 damage, 3-meter radius.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/SafetyGranade.png" class="img_con"></div>
+                          </li>
+
+                        </ul>
+
+                      </div>
+                      <div class="dropdown G4"  >
+                      <button class="selector-button" onclick="selectSlot('granade4')">
+                          <img src="Media/UiElements/Nothing.jpg" alt="granade4" id="granade4">
+                        <div class="selected-item-con"></div></button>
+                        <ul class="dropdown-list" id="dropdown_granade4">
+                          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
+                            data-info-content="No item selected.">
+                            <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Clamor.jpg" data-cost="1" data-info-title="Clamor Mine" 
+                            data-info-content="A wire between two points that will cause an explosion when stepped on, 10 damage, 5-meter radius.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Clamor.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/FlameGranade.jpg" data-cost="1" data-info-title="Flame Grenade" 
+                            data-info-content="Covers an area with fire causing 3 persistent fire damage for 4 rounds, radius 2 meters.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/FlameGranade.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/FlashBang.jpg" data-cost="1" data-info-title="Flashbang" 
+                            data-info-content="Blinds everyone in a 6-meter radius. The target is blinded for 2 rounds. Easier to hit, harder for them to hit someone. Their speed is halved.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/FlashBang.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Granate.jpg" data-cost="1" data-info-title="Frag Grenade" 
+                            data-info-content="Deals 7 damage and destroys cover. Reduces the target's armor by 1, if any, radius 3 meters.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Granate.jpg" class="img_con"></div></li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/SmokkeGranade.jpg" data-cost="1" data-info-title="Smoke Grenade" 
+                            data-info-content="Creates a smoke cloud for 3 rounds that makes it difficult to hit a target in the smoke and to hit a target through the smoke, radius 6.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/SmokkeGranade.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Magnetic Grenade.png" data-cost="1" data-info-title="Magnetic Grenade" 
+                            data-info-content="Attracts enemies and objects within a 3-meter radius.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Magnetic Grenade.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Decoy Grenade.png" data-cost="2" data-info-title="Decoy Grenade" 
+                            data-info-content="Creates a hologram of a soldier and can provoke an enemy attack. The hologram has 20 HP.">
+                            <div class="item_con"><div class="points_con">2</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Decoy Grenade.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Door Breacher.png" data-cost="1" data-info-title="Door Breacher" 
+                            data-info-content="Explosive gel that, after being smeared on the wall, explodes and creates a 'new door' to the room.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Door Breacher.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/EMP Grenade.png" data-cost="1" data-info-title="EMP Grenade" 
+                            data-info-content="Blocks abilities and disables drones/automatic machine gun turrets for one round. In a 5-meter radius.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/EMP Grenade.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Panic Gas Grenade.png" data-cost="1" data-info-title="Panic Gas Grenade" 
+                            data-info-content="Enemies in the area of effect perform a WILL check or suffer a panic effect. Radius of 4 meters.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Panic Gas Grenade.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/Mine.png" data-cost="1" data-info-title="Proximity Mine" 
+                            data-info-content="	12 damage, 5-meter radius.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/Mine.png" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Granades/SafetyGranade.png" data-cost="1" data-info-title="Safety Grenade" 
+                            data-info-content="These grenades are designed for combat in a space where it is necessary to damage a group of enemies without causing damage to the surroundings. Deals 7 damage, 3-meter radius.">
+                            <div class="item_con"><div class="points_con">1</div><button class="info_con">i</button><img src="Media/UiElements/Granades/SafetyGranade.png" class="img_con"></div>
+                          </li>
+
+                        </ul>
+
+                      </div>
+                      <div class="dropdown G5"  >
+                      <button class="selector-button" onclick="selectSlot('granade5')">
+                          <img src="Media/UiElements/Nothing.jpg" alt="granade5" id="granade5">
+                        <div class="selected-item-con"></div></button>
+                        <ul class="dropdown-list" id="dropdown_ granade5">
                           <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" 
                             data-info-content="No item selected.">
                             <div class="item_con"><div class="points_con">0</div><button class="info_con">i</button><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
