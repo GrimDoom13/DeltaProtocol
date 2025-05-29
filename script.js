@@ -610,6 +610,23 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+    //Codex info
+    const codexButtons = document.querySelectorAll('.codex-btn');
+    const codexImage = document.getElementById('CodexContent_img');
+    const codexTitle = document.getElementById('Codex_Title');
+    const codexDescription = document.getElementById('Codex_content');
+
+    codexButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const newImage = this.getAttribute('data-image');
+            const newName = this.getAttribute('data-name');
+            const newDescription = this.getAttribute('data-description');
+
+            codexImage.src = newImage;
+            codexTitle.textContent = newName;
+            codexDescription.textContent = newDescription;
+        });
+    });
     // Initialize dropdown styling
     const dropdownLists = document.querySelectorAll('.dropdown-list');
     dropdownLists.forEach(dropdownList => {

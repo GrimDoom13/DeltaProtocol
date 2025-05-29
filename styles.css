@@ -226,26 +226,25 @@ min-width: 150px;
 
     }
 
-  /*points item_con*/
+
     .points_con {
       position: absolute;
-      background-color: #8a8a8a;
+      background-color: #878787;
       width: 20%;
       aspect-ratio: 1 / 1;
       top: 0px;
       left: 0;
       content: unset;
       font-weight: bold;
-      font-size: 100%;
+      font-size: 2vw;
       color: black;
       z-index: 1;
       align-content: center;
-
-
   }
 
 
-    /*info item_con*/
+    /*info+points item_con*/
+    
     .info_con {
       position: absolute;
       background-color: #c5850f ;
@@ -256,7 +255,7 @@ min-width: 150px;
       align-content: center;
       content: unset;
       font-weight: bold;
-      font-size: 100%;
+      font-size: 2vw;
       color: black;
       z-index: 1;
     }
@@ -593,7 +592,7 @@ margin: 2px;
       justify-content: space-between;
       flex-direction: row;
       flex-wrap: wrap;
-      width: 100%;
+      width: 70%;
       height: fit-content;
       gap:1vw;
 
@@ -652,6 +651,11 @@ margin: 2px;
   margin-right: 1vw;
   border: 3px  solid #ae1818;
   font-size: 1.2vw;
+}
+.Codex_Con img{
+  background-color: #222;
+
+
 }
 
 #Codex_Title{
