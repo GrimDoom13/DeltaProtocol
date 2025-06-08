@@ -18,7 +18,7 @@ let pistolMegazin=0;
 
 //Characteristics
 let MaxHP=0;
-document.getElementById("MaxHP").innerHTML = MaxHP;
+
 // Vest configuration
 const vestConfigurations = {
     'Nothing': { equipmentSlots: 0, grenadeSlots: 0, assultMagazine: 0, heavyAssaultMegazin:0, pistolMegazin:0},
@@ -416,7 +416,7 @@ function updateDeltaCharDisplay() {
 
         //CharStats update
         MaxHP = char.MaxHP;
-        document.getElementById("MaxHP").innerHTML = MaxHP;
+        
         // Update slot visibility based on character's extra slots AND vest type
         updateSlotVisibility();
         
