@@ -416,7 +416,7 @@ function updateDeltaCharDisplay() {
 
         //CharStats update
         MaxHP = char.MaxHP;
-        document.getElementById("MaxHP").innerHTML = MaxHP;
+
         // Update slot visibility based on character's extra slots AND vest type
         updateSlotVisibility();
         
