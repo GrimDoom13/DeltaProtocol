@@ -26,7 +26,7 @@ const vestConfigurations = {
     'Light Vest': { equipmentSlots: 1, grenadeSlots: 2, assultMagazine: 4, heavyAssaultMegazin:1, pistolMegazin:3 },
     'Medium Vest': { equipmentSlots: 3, grenadeSlots: 3, assultMagazine: 6, heavyAssaultMegazin:2, pistolMegazin:4 },
     'Heavy Vest': { equipmentSlots: 2, grenadeSlots: 2, assultMagazine: 10, heavyAssaultMegazin:3, pistolMegazin:5 },
-    // Add more vest types as needed
+    
 };
 
 function updateInfoPanel(title, content) {
@@ -416,7 +416,7 @@ function updateDeltaCharDisplay() {
 
         //CharStats update
         MaxHP = char.MaxHP;
-        
+        document.getElementById("MaxHP").innerHTML = MaxHP;
         // Update slot visibility based on character's extra slots AND vest type
         updateSlotVisibility();
         
