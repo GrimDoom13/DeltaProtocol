@@ -1,4 +1,3 @@
-//Variables
 let activeSlot = null;
 let totalPoints = 0;
 const totalPointsInput = document.querySelector('.TotalPoints');
@@ -9,20 +8,10 @@ let currentSelectedItemTitle = 'Topic-NoN';
 let currentSelectedItemContent = 'Content';
 let currentSelectedItemWeaponId = null;
 let selectedItems = {};
-//invintory 
-let equipmentSlots = 0;
-let grenadeSlots= 0; 
-let assultMagazine= 0; 
-let heavyAssaultMegazin=0; 
-let pistolMegazin=0;
 
-//Characteristics
-let MaxHP=0;
-document.getElementById("MaxHP").innerHTML = MaxHP;
-// Vest configuration
+// Vest configuration - defines base slots for each vest type
 const vestConfigurations = {
     'Nothing': { equipmentSlots: 0, grenadeSlots: 0, assultMagazine: 0, heavyAssaultMegazin:0, pistolMegazin:0},
-    'Suit': { equipmentSlots: 1, grenadeSlots: 2, assultMagazine: 4, heavyAssaultMegazin:1, pistolMegazin:3 },
     'Light Vest': { equipmentSlots: 1, grenadeSlots: 2, assultMagazine: 4, heavyAssaultMegazin:1, pistolMegazin:3 },
     'Medium Vest': { equipmentSlots: 3, grenadeSlots: 3, assultMagazine: 6, heavyAssaultMegazin:2, pistolMegazin:4 },
     'Heavy Vest': { equipmentSlots: 2, grenadeSlots: 2, assultMagazine: 10, heavyAssaultMegazin:3, pistolMegazin:5 },
@@ -157,7 +146,7 @@ function updateWeaponAttachmentsDisplay(weaponSlotId) {
     atachment_con.innerHTML = attachmentsContent;
 }
 
-// Character data
+// Character data - SINGLE CLEAN VERSION
 const deltaCharacters = [
     {
         name: "Nomad",
@@ -184,8 +173,7 @@ const deltaCharacters = [
         extraEquipmentSlots: 0,
         extraAssultMagazine: 0,
         extraHeavyAssaultMegazin:0,
-        extraPistolMegazin:0,
-        MaxHP:30
+        extraPistolMegazin:0
     },
     {
         name: "FatMan",
@@ -212,8 +200,7 @@ const deltaCharacters = [
         extraEquipmentSlots: 0,
         extraAssultMagazine: 0,
         extraHeavyAssaultMegazin:0,
-        extraPistolMegazin:0,
-        MaxHP:33
+        extraPistolMegazin:0
     },
     {
         name: "Artemis",
@@ -240,8 +227,7 @@ const deltaCharacters = [
         extraEquipmentSlots: 0,
         extraAssultMagazine: 0,
         extraHeavyAssaultMegazin:0,
-        extraPistolMegazin:0,
-        MaxHP:30
+        extraPistolMegazin:0
     },
     {
         name: "Tiffany",
@@ -268,8 +254,7 @@ const deltaCharacters = [
         extraEquipmentSlots: 0,
         extraAssultMagazine: 0,
         extraHeavyAssaultMegazin:0,
-        extraPistolMegazin:0,
-        MaxHP:29
+        extraPistolMegazin:0
     }
 ];
 
@@ -413,10 +398,7 @@ function updateDeltaCharDisplay() {
         `;
 
         console.log(`Character switched to: ${char.name} (Index: ${currentCharIndex})`);
-
-        //CharStats update
-        MaxHP = char.MaxHP;
-        document.getElementById("MaxHP").innerHTML = MaxHP;
+        
         // Update slot visibility based on character's extra slots AND vest type
         updateSlotVisibility();
         
