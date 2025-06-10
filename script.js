@@ -314,6 +314,7 @@ function updateSlotVisibility() {
         
         updateEquipmentSlots(totalEquipmentSlots);
         updateGrenadeSlots(totalGrenadeSlots);
+        
 }
 
 function updateEquipmentSlots(totalSlots) {
