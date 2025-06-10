@@ -22,11 +22,19 @@ let MaxHP=0;
 // Vest configuration
 const vestConfigurations = {
     'Nothing': { equipmentSlots: 0, grenadeSlots: 0, assultMagazine: 0, heavyAssaultMegazin:0, pistolMegazin:0},
-    'Suit': { equipmentSlots: 1, grenadeSlots: 2, assultMagazine: 4, heavyAssaultMegazin:1, pistolMegazin:3 },
+
+    'Civilian Clothes': { equipmentSlots: 2, grenadeSlots: 2, assultMagazine: 1, heavyAssaultMegazin:1, pistolMegazin:1, bonusStealth:2 },
+    'Civilian Clothes LVL2': { equipmentSlots: 2, grenadeSlots: 2, assultMagazine: 1, heavyAssaultMegazin:1, pistolMegazin:1, bonusStealth:2 },
     'Light Vest': { equipmentSlots: 1, grenadeSlots: 2, assultMagazine: 4, heavyAssaultMegazin:1, pistolMegazin:3 },
+    'Light Vest LVL2': { equipmentSlots: 1, grenadeSlots: 2, assultMagazine: 4, heavyAssaultMegazin:1, pistolMegazin:3, bonusMaxHP:7},
     'Medium Vest': { equipmentSlots: 3, grenadeSlots: 3, assultMagazine: 6, heavyAssaultMegazin:2, pistolMegazin:4 },
+    'Medium Vest LVL2': { equipmentSlots: 3, grenadeSlots: 3, assultMagazine: 6, heavyAssaultMegazin:2, pistolMegazin:4, bonusMaxHP:9 },
     'Heavy Vest': { equipmentSlots: 2, grenadeSlots: 2, assultMagazine: 10, heavyAssaultMegazin:3, pistolMegazin:5 },
-    // Add more vest types as needed
+    'Heavy Vest LVL2': { equipmentSlots: 2, grenadeSlots: 2, assultMagazine: 10, heavyAssaultMegazin:3, pistolMegazin:5, bonusMaxHP:12 },
+    'Chemical Defense Suit': { equipmentSlots: 2, grenadeSlots: 2, assultMagazine: 4, heavyAssaultMegazin:1, pistolMegazin:3, bonusMaxHP:6 },
+    'Medical Vest': { equipmentSlots: 3, grenadeSlots: 2, assultMagazine: 5, heavyAssaultMegazin:2, pistolMegazin:3, bonusMaxHP:6 },
+    'Spider suit': { equipmentSlots: 1, grenadeSlots: 2, assultMagazine: 4, heavyAssaultMegazin:1, pistolMegazin:3, bonusMaxHP:6 },
+    
 };
 
 function updateInfoPanel(title, content) {
@@ -286,6 +294,7 @@ function updateSlotVisibility() {
     // Get base slot counts from vest type
     const baseSlots = getBaseSlotCounts();
     
+    
     // Calculate total slots (base from vest + character bonuses)
         //E-G
         const totalEquipmentSlots = baseSlots.equipmentSlots + currentChar.extraEquipmentSlots;
@@ -294,6 +303,9 @@ function updateSlotVisibility() {
         const totalAssultMagazine = baseSlots.assultMagazine + currentChar.extraAssultMagazine;
         const totalHeavyAssaultMegazin = baseSlots.heavyAssaultMegazin + currentChar.extraHeavyAssaultMegazin;
         const totalPistolMegazin = baseSlots.pistolMegazin + currentChar.extraPistolMegazin;
+
+        //Hp
+        const totalMaxHP = currentChar.MaxHP + vestConfigurations.bonusMaxHP;
         
         console.log(`Updating slots for ${currentChar.name}:`);
         console.log(`Vest: ${getCurrentVestType()} (Base: ${baseSlots.equipmentSlots} equipment, ${baseSlots.grenadeSlots} grenades)`);
@@ -302,6 +314,7 @@ function updateSlotVisibility() {
         
         updateEquipmentSlots(totalEquipmentSlots);
         updateGrenadeSlots(totalGrenadeSlots);
+        
 }
 
 function updateEquipmentSlots(totalSlots) {
@@ -416,7 +429,7 @@ function updateDeltaCharDisplay() {
 
         //CharStats update
         MaxHP = char.MaxHP;
-        
+
         // Update slot visibility based on character's extra slots AND vest type
         updateSlotVisibility();
         
