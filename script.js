@@ -182,11 +182,16 @@ const deltaCharacters = [
             image: "Media/UiElements/Abilities/NomadAbility.png",
             text: "Ghost Walk - Become invisible for 1 round"
         },
-        costReductions: [],
+        costReductions: [{ itemNames: ["Pistol"], reduction: 1 },
+            { itemNames: ["Dildo_Purple"], reduction: 1 },
+            { itemNames: ["Knife"], reduction: 1 },
+            { itemNames: ["Dildo"], reduction: 1 }
+        ],
         combinedCostReductions: [
             { itemNames: ["Pistol", "Knife"], reduction: 1 },
             { itemNames: ["Pistol", "Dildo_Purple"], reduction: 1 },
-            { itemNames: ["Pistol", "Dildo"], reduction: 1 }
+            { itemNames: ["Pistol", "Dildo"], reduction: 1 },
+            
         ],
         extraGrenadeSlots: 0,
         extraEquipmentSlots: 0,
@@ -210,11 +215,16 @@ const deltaCharacters = [
             image: "Media/UiElements/Abilities/FatManAbility.png",
             text: "Shield Wall - Protect allies behind you for 2 rounds"
         },
-        costReductions: [],
+        costReductions: [{ itemNames: ["Pistol"], reduction: 1 },
+            { itemNames: ["Dildo_Purple"], reduction: 1 },
+            { itemNames: ["Knife"], reduction: 1 },
+            { itemNames: ["Dildo"], reduction: 1 }
+        ],
         combinedCostReductions: [
             { itemNames: ["Pistol", "Knife"], reduction: 1 },
             { itemNames: ["Pistol", "Dildo_Purple"], reduction: 1 },
-            { itemNames: ["Pistol", "Dildo"], reduction: 1 }
+            { itemNames: ["Pistol", "Dildo"], reduction: 1 },
+            
         ],
         extraGrenadeSlots: 2,
         extraEquipmentSlots: 0,
@@ -238,11 +248,16 @@ const deltaCharacters = [
             image: "Media/UiElements/Abilities/AsterisAbility.png",
             text: "System Override - Disable enemy electronics for 1 round"
         },
-        costReductions: [],
+        costReductions: [{ itemNames: ["Pistol"], reduction: 1 },
+            { itemNames: ["Dildo_Purple"], reduction: 1 },
+            { itemNames: ["Knife"], reduction: 1 },
+            { itemNames: ["Dildo"], reduction: 1 }
+        ],
         combinedCostReductions: [
             { itemNames: ["Pistol", "Knife"], reduction: 1 },
             { itemNames: ["Pistol", "Dildo_Purple"], reduction: 1 },
-            { itemNames: ["Pistol", "Dildo"], reduction: 1 }
+            { itemNames: ["Pistol", "Dildo"], reduction: 1 },
+            
         ],
         extraGrenadeSlots: 0,
         extraEquipmentSlots: 0,
@@ -266,11 +281,17 @@ const deltaCharacters = [
             image: "Media/UiElements/Abilities/TiffanyAbility.png",
             text: "Healing Aura - Heals all allies within 3 meters for 1D6 HP for 2 rounds"
         },
-        costReductions: [],
+        costReductions: [{ itemNames: ["Pistol"], reduction: 1 },
+            { itemNames: ["Dildo_Purple"], reduction: 1 },
+            { itemNames: ["Knife"], reduction: 1 },
+            { itemNames: ["Dildo"], reduction: 1 },
+            { itemName: ["Drone"], reduction: 2 } 
+        ],
         combinedCostReductions: [
             { itemNames: ["Pistol", "Knife"], reduction: 1 },
             { itemNames: ["Pistol", "Dildo_Purple"], reduction: 1 },
-            { itemNames: ["Pistol", "Dildo"], reduction: 1 }
+            { itemNames: ["Pistol", "Dildo"], reduction: 1 },
+            
         ],
         extraGrenadeSlots: 0,
         extraEquipmentSlots: 0,
