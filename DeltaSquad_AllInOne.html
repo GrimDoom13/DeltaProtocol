@@ -2683,12 +2683,23 @@ height: 100px;
 
 <section class="app-page" id="page-battle" data-zone="battle">
     <div class="container">
-        <h1>Character selection</h1>
+        <h1>Class Selection</h1>
         <select id="classSelect" onchange="updateAbilities()">
-            <option value="sniper">Nomad</option>
-            <option value="engineer">Artemis</option>
-			<option value="medic">Tiffany</option>
-            <option value="grenaider">Fat Man</option>
+            <optgroup label="Your Squad">
+                <option value="sniper">Nomad (Sharpshooter)</option>
+                <option value="medic">Artemis (Medic)</option>
+                <option value="engineer">Tiffany (Specialist)</option>
+                <option value="grenaider">Fat Man (Grenadier)</option>
+            </optgroup>
+            <!-- X-COM D&D.pdf's Classes & Perks chapter (Improvements/perks-data.js)
+                 documents 7 base classes total -- these 3 aren't any current
+                 squad member's class, but their full perk trees were already
+                 transcribed and just never had anywhere to be selected. -->
+            <optgroup label="Other Classes">
+                <option value="commander">Commander</option>
+                <option value="heavy">Heavy</option>
+                <option value="scout">Scout</option>
+            </optgroup>
         </select>
 
         <h2>Class Abilities</h2>
@@ -2701,34 +2712,103 @@ height: 100px;
     </div>
 
     <script>
+        // Cross-referenced against Improvements/perks-data.js (the full
+        // rank-gated perk trees transcribed from X-COM D&D.pdf pp.2-14) --
+        // each class here maps to one of those trees (sniper=sharpshooter,
+        // grenaider=grenadier, engineer=specialist) and previously only had
+        // its first couple of rank tiers represented, several of them left
+        // commented out entirely. Un-commented those, and added every
+        // remaining tier option/passive that wasn't in this list in any
+        // form yet. No rank/XP gating is modeled here (this tracker never
+        // had any), so every class's full tree is just flattened into one
+        // selectable list, same as the tiers that were already present.
         const abilities = {
             sniper: [
 				{ name: "Sniper", cooldown: 0, description: "סיכוי פגיע +2.אם האויב נמצא במרחק של 10 מטרים מהטווח פגיע האפקטיבי המרבי של הנשק, הנזק גדל ב+2.", img: "Media/UiElements/Unsorted/img//XCOM2_Sharpshooter_icon.png" },
                 { name: "Quick Shot", cooldown: 3, description: "כשה אתה יוראה במטרה עם אקדח. אתה לא מבזבז פעולה כדי לבצע את ההתקפה הזו. (cooldown 3)", img: "Media/UiElements/Unsorted/img//Quickdraw.png" },
                 { name: "Lightning Hands", cooldown: 0, description: "מגדיל את הנזק מאקדח ב-2", img: "Media/UiElements/Unsorted/img//Lightning_Hands.png" },
-                { name: "Faceoff", cooldown: 4, description: "יריאה מאקדח פעם אחת על כל מטרה שאתה רואה.(coldawn 4 תורות)", img: "Media/UiElements/Unsorted/img//Faceoff.png" },/*
-                { name: "Reaper", cooldown: 0, description: "כל הריגה מגדילה את סיכוי הפגיעה הקריטי שלך ב+1. הבונוס עד למקסימום של +4.", img: "Media/UiElements/Unsorted/img//Reaper.png" }*/
+                { name: "Faceoff", cooldown: 4, description: "יריאה מאקדח פעם אחת על כל מטרה שאתה רואה.(coldawn 4 תורות)", img: "Media/UiElements/Unsorted/img//Faceoff.png" },
+                { name: "Reaper", cooldown: 0, description: "כל הריגה מגדילה את סיכוי הפגיעה הקריטי שלך ב+1. הבונוס עד למקסימום של +4.", img: "Media/UiElements/Unsorted/img//Reaper.png" },
+                { name: "Deadeye", cooldown: 0, description: "Every kill scored with a sniper-type weapon refunds the action you spent. (Major-rank passive)", img: "Media/UiElements/Unsorted/img//XEU_Sniper_SnapShot.png" },
+                { name: "Opportunist", cooldown: 0, description: "A kill made with a sniper rifle while flanking a target that isn't in cover doesn't cost an action. (translation uncertain) (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Sniper_DamnGoodGround.png" },
+                { name: "Fan Fire", cooldown: 3, description: "Fire your pistol three times at the same target. (3-round cooldown) (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Sniper_Gunslinger.png" },
             ],
             medic: [
 				{ name: "Medic", cooldown: 0, description: "יכול להישתמש ב תיק עזרה ראשונה 4 פעמים במקום פעם אחת.אתה מטפל ביעילות כפולה.", img: "Media/UiElements/Unsorted/img//XCOM-EU_OTS_-_Rapid_Recovery.png" },
                 { name: "Drone heal", cooldown: 200, description: "הרחפן מסוגל להשתמש מרחוק ביכולות 'ריפוי' ו'ייצוב'לגרמלין יש מטען אחד,עד 30 מטר", img: "Media/UiElements/Unsorted/img//Medical_Protocol.png" },
 				{ name: "Negative effect", cooldown: 0, description: "מרפא השפעות שליליות", img: "Media/UiElements/Unsorted/img//XEU_Psionic_PsiPanic.png" },
-                { name: "Hidden Pocket", cooldown: 0, description: "תא נוסף לציוד מיוחד. +הנזק לנגועים גדל ב-50%.", img: "Media/UiElements/Unsorted/img//XCOM-EU_OTS_-_Don7t_Die_On_Me.png" },/*
-                { name: "Medic drone", cooldown: 200, description: "הרחפן מסוגל להשתמש מרחוק ביכולות "ריפוי" ו"ייצוב". לגרמלין כמות מטענים השווה ל כמות medpack שלחה.(עד 25 מטר)", img: "Media/UiElements/Unsorted/img//Field_Medic.png" }*/
+                { name: "Hidden Pocket", cooldown: 0, description: "תא נוסף לציוד מיוחד. +הנזק לנגועים גדל ב-50%.", img: "Media/UiElements/Unsorted/img//XCOM-EU_OTS_-_Don%2527t_Die_On_Me.png" },
+                { name: "Medic drone", cooldown: 200, description: "הרחפן מסוגל להשתמש מרחוק ביכולות 'ריפוי' ו'ייצוב'. לגרמלין כמות מטענים השווה לכמות medpack שלחה.(עד 25 מטר)", img: "Media/UiElements/Unsorted/img//Field_Medic.png" },
+                { name: "Field Agility", cooldown: 0, description: "You can move 5 additional meters. (Sergeant-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Support_Sprinter.png" },
+                { name: "Squad Recovery Protocol", cooldown: 200, description: "Recovery Protocol: the drone flies out and heals each soldier with the same effectiveness as you. (Sergeant-rank option)", img: "Media/UiElements/Unsorted/img//Restorative_Mist_Icon.png" },
+                { name: "Reinforced Medpack", cooldown: 0, description: "The medpack restores 4 additional HP. (Captain-rank option)", img: "Media/UiElements/Unsorted/img//Revival_Protocol.png" },
+                { name: "Resourceful", cooldown: 0, description: "You may use any item that has a limited number of uses one additional time (does not apply to grenades). (Major-rank passive)", img: "Media/UiElements/Unsorted/img//XComEW_Repair_Servos_icon.png" },
+                { name: "Combat High", cooldown: 0, description: "If you scored a kill during your turn, the first hit against you this round deals no damage. (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//Adaptive_Bone_Marrow_Icon.png" },
+                { name: "Reinforced Plating", cooldown: 0, description: "+1 armor. (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//ABILITY_SHIVCOVER.png" },
             ],
             grenaider: [
 				{ name: "Grenaider", cooldown: 0, description: "יכול לסחוב X2 רימוניםרדיוס פגיה וזריקה של רימונים X2 (זריקה עד 50 מטר)", img: "Media/UiElements/Unsorted/img//XCOM2_Grenaider_icon.png" },
                 { name: "Spicy stuffing", cooldown: 0, description: "רימונים גורמים ל-3 נזקים נוספ.", img: "Media/UiElements/Unsorted/img//XEU_Assault_Aggression.png" },
                 { name: "Hidden pocket", cooldown: 0, description: "ניתן להשתמש ברימון בתא המיועד פעמיים.", img: "Media/UiElements/Unsorted/img//Heavy_Ordnance.png" },
-                { name: "Too much ammunition", cooldown: 0, description: "ירה במטרה פעמיים בדיוק -2. (לא מסיים את התור)", img: "Media/UiElements/Unsorted/img//Chain_Shot.png" },/*
-                { name: "Alertness", cooldown: 0, description: "יכול לירות יריית Overwatch שנייה אם הראשונה פוגעת במטרה.", img: "Media/UiElements/Unsorted/img//XEU_Heavy_RapidReaction.png" }*/
+                { name: "Too much ammunition", cooldown: 0, description: "ירה במטרה פעמיים בדיוק -2. (לא מסיים את התור)", img: "Media/UiElements/Unsorted/img//Chain_Shot.png" },
+                { name: "Alertness", cooldown: 0, description: "יכול לירות יריית Overwatch שנייה אם הראשונה פוגעת במטרה.", img: "Media/UiElements/Unsorted/img//XEU_Heavy_RapidReaction.png" },
+                { name: "Blast Padding", cooldown: 0, description: "Your gear includes additional plating layers that reduce explosive damage by 66%. (Sergeant-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Support_SmokeGrenade.png" },
+                { name: "Overwatch Stance", cooldown: 0, description: "Grants +1 to defense while in a combat-ready (Overwatch) stance. (translation uncertain) (Lieutenant-rank option)", img: "Media/UiElements/Unsorted/img//XComEW_Bring_Em_On_icon.png" },
+                { name: "Resourceful", cooldown: 0, description: "You may use any item that has a limited number of uses one additional time (does not apply to grenades). (Major-rank passive)", img: "Media/UiElements/Unsorted/img//Volatile_Mix.png" },
+                { name: "Rupture", cooldown: 3, description: "Deals critical damage, and the affected target takes +3 damage from all subsequent attacks. (3-round cooldown) (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//Demolition.png" },
+                { name: "Overcharged Payload", cooldown: 0, description: "Grenade radius increases by +1, damage dealt increases by +2, and damage dealt to shields increases by +1. (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//XEU_AlienAbility_DeathBlossom.png" },
             ],
             engineer: [
 				{ name: "Engineer", cooldown: 0, description: "Квалифицированный специалист в области технологий, может взламывать компьютеры, двери и ворота.Тихий дрон и 'מחשיר הלם' стоят по 1 очкоу.", img: "Media/UiElements/Unsorted/img//XCOM2_Specialist_icon.png" },
                 { name: "Мечебный Дрон", cooldown: 200, description: "Дрон способен использовать 'исцеляющие' и 'стабилизирующие' способности на расстоянии. У Гремлина один заряд, до 25 метров.", img: "Media/UiElements/Unsorted/img//Medical_Protocol.png" },
                 { name: "Взломщик", cooldown: 3, description: "Удалёный взлом через дрон", img: "Media/UiElements/Unsorted/img//XComEW_EXALT_Comm_Hack_icon.png" },
-                { name: "Хаекр", cooldown: 0, description: "אתה יכול להשתמש ברחפן נגד רובוטים ומטרות מכניות כדי לפרוץ אותם ולהשתלט עליהם.", img: "Media/UiElements/Unsorted/img//Haywire_Protocol.png" },/*
-                { name: "Бдительность", cooldown: 0, description: "גם אם תבזבז את כל הפעולות שלך,אתה יכול לעבור למצב תצפית 'Overwatch' בסוף התור שלך.", img: "Media/UiElements/Unsorted/img//XComEW_Advanced_Fire_Control_icon.png" }*/
+                { name: "Хаекр", cooldown: 0, description: "אתה יכול להשתמש ברחפן נגד רובוטים ומטרות מכניות כדי לפרוץ אותם ולהשתלט עליהם.", img: "Media/UiElements/Unsorted/img//Haywire_Protocol.png" },
+                { name: "Бдительность", cooldown: 0, description: "גם אם תבזבז את כל הפעולות שלך,אתה יכול לעבור למצב תצפית 'Overwatch' בסוף התור שלך.", img: "Media/UiElements/Unsorted/img//XComEW_Advanced_Fire_Control_icon.png" },
+                { name: "Attack Protocol", cooldown: 0, description: "Attack Protocol: the drone can deliver an electric strike to an enemy for 4 damage (double damage against robots). (Sergeant-rank option)", img: "Media/UiElements/Unsorted/img//Kinetic_Strike_Module_Icon.png" },
+                { name: "Recovery Protocol", cooldown: 200, description: "Recovery Protocol: the drone flies out and heals each soldier for 6 HP. (Lieutenant-rank option)", img: "Media/UiElements/Unsorted/img//Restorative_Mist_Icon.png" },
+                { name: "Guardian Drone", cooldown: 0, description: "The drone shields one soldier, granting them +2 to defense (limited) until the start of their next turn. (Major-rank passive)", img: "Media/UiElements/Unsorted/img//XComEW_Repair_Servos_icon.png" },
+                { name: "Overload Burst", cooldown: 200, description: "The drone discharges a powerful electric burst, dealing damage with a chance to stun everyone nearby. (7m radius, 2D20 damage, one-time use) (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//XEU_AlienAbility_DeathBlossom.png" },
+                { name: "Chain Reaction", cooldown: 0, description: "Every successful shot while in 'Overwatch' grants an additional shot. (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//XComEW_Bring_Em_On_icon.png" },
+            ],
+            // ---- The 3 remaining classes from Improvements/perks-data.js's
+            // full perk trees -- not tied to any current squad member, so
+            // never had a spot in this dropdown before now.
+            commander: [
+                { name: "Squad Commander", cooldown: 0, description: "You have command points (5) used to grant bonuses to other soldiers. Starts with a communicator and an earpiece that don't take up an inventory slot.", img: "Media/UiElements/Unsorted/img//XCOM2_PsiOp_icon.png" },
+                { name: "Always-Ready Grenade", cooldown: 0, description: "You always have one grenade of your choice available (it doesn't take up a slot in your vest). (Sergeant-rank option)", img: "Media/UiElements/Unsorted/img//Heavy_Ordnance.png" },
+                { name: "Support Training", cooldown: 0, description: "Your support skills count as half of a Specialist's. (Sergeant-rank option)", img: "Media/UiElements/Unsorted/img//XComEW_Inspired_icon.png" },
+                { name: "Extra Loadout Slot", cooldown: 0, description: "One extra equipment slot of your choice. +1 equipment points. (Lieutenant-rank option)", img: "Media/UiElements/Unsorted/img//ABILITY_SHIVCOVER.png" },
+                { name: "Command Reserves", cooldown: 0, description: "+1 command-point choice. +3 command points. (Lieutenant-rank option)", img: "Media/UiElements/Unsorted/img//XComEW_Bring_Em_On_icon.png" },
+                { name: "Piercing Round", cooldown: 3, description: "A shot that breaks 1 point of an enemy's armor and adds +3 damage. (3-round cooldown) (Captain-rank option)", img: "Media/UiElements/Unsorted/img//Chain_Shot.png" },
+                { name: "Command Presence", cooldown: 0, description: "+3 damage. (translation uncertain — likely applies to your Order abilities) (Captain-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Assault_Aggression.png" },
+                { name: "Order: Stand Down", cooldown: 0, description: "An ally of your choice can act without spending an action this round. (Does not affect that ally's own cooldowns.) (Major-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Support_Savior.png" },
+                { name: "Leadership Aura", cooldown: 0, description: "+1 WILL and +1 armor for every soldier on the mission. (Major-rank option)", img: "Media/UiElements/Unsorted/img//Adaptive_Bone_Marrow_Icon.png" },
+                { name: "Order: Execution", cooldown: 0, description: "Command everyone to fire at an enemy of your choice; you don't spend an action for this. (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//XEU_AlienAbility_DeathBlossom.png" },
+                { name: "Order: Suppress", cooldown: 0, description: "An enemy of your choice loses their action this round. +3 command points. (translation uncertain) (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Sniper_DisablingShot.png" },
+            ],
+            heavy: [
+                { name: "Heavy Weapons Specialist", cooldown: 0, description: "The Negev costs 2 points instead of 3. +1 free weapon attachment.", img: "Media/UiElements/Unsorted/img//XEU_Heavy_RapidReaction.png" },
+                { name: "Lead Rain", cooldown: 2, description: "Can fire two shots for the cost of one action. (2-round cooldown) (Sergeant-rank option)", img: "Media/UiElements/Unsorted/img//Chain_Shot.png" },
+                { name: "Suppressive Fire", cooldown: 0, description: "(Costs 2 shots) You fire continuously at one target until their next turn, reducing their accuracy by 3, and you can still hit them if they act. (translation uncertain on the final clause) (Sergeant-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Support_RifleSuppression.png" },
+                { name: "Armor Breaker", cooldown: 0, description: "Your shots can now destroy the enemy's armor (-1 per hit). (Lieutenant-rank option)", img: "Media/UiElements/Unsorted/img//Kinetic_Strike_Module_Icon.png" },
+                { name: "Holographic Marker", cooldown: 0, description: "When you fire, allies attacking the same target gain +1 accuracy. (Lieutenant-rank option)", img: "Media/UiElements/Unsorted/img//XComEW_Advanced_Fire_Control_icon.png" },
+                { name: "Overwatch Reflex", cooldown: 0, description: "Can fire a second Overwatch shot if the first one hits its target. (Captain-rank option)", img: "Media/UiElements/Unsorted/img//XComEW_Bring_Em_On_icon.png" },
+                { name: "Thermal Ammunition", cooldown: 0, description: "Increases damage dealt to robots by 50%. (Captain-rank option)", img: "Media/UiElements/Unsorted/img//Volatile_Mix.png" },
+                { name: "Battle-Hardened", cooldown: 0, description: "If you are in cover and not being flanked, damage taken is reduced by 2. (Major-rank passive)", img: "Media/UiElements/Unsorted/img//ABILITY_SHIVCOVER.png" },
+                { name: "Reinforced Armor", cooldown: 0, description: "+2 armor. (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//Adaptive_Bone_Marrow_Icon.png" },
+                { name: "Overwhelming Firepower", cooldown: 0, description: "+5 damage for all heavy weapons. (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//XEU_AlienAbility_DeathBlossom.png" },
+            ],
+            scout: [
+                { name: "Scout", cooldown: 0, description: "+2 to movement in terrain (regardless of terrain type). When the squad is spotted, you remain hidden.", img: "Media/UiElements/Unsorted/img//XCOM2_Ranger_icon.png" },
+                { name: "Ghost Step", cooldown: 200, description: "The ability to pass by enemies without risking detection (once per mission). (Sergeant-rank option)", img: "Media/UiElements/Unsorted/img//Grapple.png" },
+                { name: "Stealth Training", cooldown: 0, description: "+2 to stealth rolls. (Sergeant-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Support_SmokeAndMirrors.png" },
+                { name: "Keen Eye", cooldown: 0, description: "+2 to detecting enemies and traps. (Lieutenant-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Sniper_BattleScanner.png" },
+                { name: "Extra Gadget Slot", cooldown: 0, description: "+1 slot for special gadgets/equipment. (Lieutenant-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Support_SmokeGrenade.png" },
+                { name: "Swift Movement", cooldown: 0, description: "+4 to movement in terrain (regardless of terrain type). (Captain-rank option)", img: "Media/UiElements/Unsorted/img//Airborn.png" },
+                { name: "Shadow Strike", cooldown: 0, description: "Firing from stealth deals an additional 1D6 damage. (Captain-rank option)", img: "Media/UiElements/Unsorted/img//Death_From_Above.png" },
+                { name: "Silent Takedown", cooldown: 0, description: "Firing from stealth has a chance not to reveal you (100% if it was the last enemy in the group, 50% if one enemy remains, 25% if more than one enemy remains in the group). (Major-rank passive)", img: "Media/UiElements/Unsorted/img//XEU_Sniper_DisablingShot.png" },
+                { name: "Marked for Death", cooldown: 3, description: "Mark an enemy, increasing damage against them by +3 for all squad members for 3 rounds. (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//Reaper.png" },
+                { name: "Adrenaline Rush", cooldown: 0, description: "When revealed, gain a +10 meter movement-speed bonus for one round and +2 to defense. (Lt. Colonel-rank option)", img: "Media/UiElements/Unsorted/img//XEU_Assault_RunAndGun.png" },
             ]
         };
 
@@ -2746,21 +2826,55 @@ height: 100px;
 
         function updateAbilities() {
             const selectedClass = document.getElementById("classSelect").value;
-            renderAbilities("classAbilities", abilities[selectedClass]);
+            renderAbilities("classAbilities", abilities[selectedClass], selectedClass);
         }
 
-        function renderAbilities(containerId, abilityList) {
+        // `namespace` (the selected class, or "base" for baseAbilities) keeps
+        // each class's cooldowns independent -- several classes have an
+        // ability of the same name ("Hidden Pocket" in both medic and
+        // grenaider, "Resourceful" in both grenaider and medic here), so
+        // keying purely by ability name meant using one could show as
+        // on-cooldown for a same-named ability in a totally different class.
+        // Builds real DOM nodes with addEventListener/textContent instead of
+        // interpolating ability text into inline onclick/onmouseover HTML
+        // attribute strings -- the old approach broke outright the moment a
+        // description contained a single quote (several of the newly-added
+        // ones do, e.g. "...while in 'Overwatch'...", and it's exactly the
+        // pattern already flagged as fragile in SUGGESTIONS.md §16).
+        function renderAbilities(containerId, abilityList, namespace) {
             const container = document.getElementById(containerId);
             container.innerHTML = "";
-            abilityList.forEach((ability, index) => {
-                cooldowns[ability.name] = 0; // Инициализация кулдауна
-                container.innerHTML += `
-                    <div class="ability">
-                        <img src="${ability.img}" onmouseover="showTooltip(event, '${ability.description}')" onmouseout="hideTooltip()" onclick="useAbility('${ability.name}', ${ability.cooldown})">
-                        <span>${ability.name}</span>
-                        <span id="${ability.name}-cooldown" class="cooldown"></span>
-                    </div>
-                `;
+            abilityList.forEach((ability) => {
+                const key = `${namespace}::${ability.name}`;
+                // Only initialize if this ability has never been seen before --
+                // re-rendering (e.g. switching classes and back) must not wipe
+                // out a cooldown that's still ticking down.
+                if (!(key in cooldowns)) cooldowns[key] = 0;
+
+                const div = document.createElement("div");
+                div.className = "ability";
+
+                const img = document.createElement("img");
+                img.src = ability.img;
+                img.addEventListener("mouseover", (e) => showTooltip(e, ability.description));
+                img.addEventListener("mouseout", hideTooltip);
+                img.addEventListener("click", () => useAbility(key, ability.cooldown, ability.name));
+                div.appendChild(img);
+
+                const nameSpan = document.createElement("span");
+                nameSpan.textContent = ability.name;
+                div.appendChild(nameSpan);
+
+                const cooldownSpan = document.createElement("span");
+                cooldownSpan.id = `${key}-cooldown`;
+                cooldownSpan.className = "cooldown";
+                // Reflect whatever's already ticking, rather than always
+                // starting blank -- previously a re-render always showed an
+                // empty cooldown span even while cooldowns[key] was > 0.
+                cooldownSpan.textContent = cooldowns[key] > 0 ? `Cooldown: ${cooldowns[key]}` : "";
+                div.appendChild(cooldownSpan);
+
+                container.appendChild(div);
             });
         }
 
@@ -2772,7 +2886,7 @@ height: 100px;
                 tooltip.className = "tooltip";
                 document.body.appendChild(tooltip);
             }
-            tooltip.innerHTML = text;
+            tooltip.textContent = text;
             tooltip.style.left = event.pageX + "px";
             tooltip.style.top = event.pageY + "px";
             tooltip.style.display = "block";
@@ -2785,23 +2899,27 @@ height: 100px;
             }
         }
 
-        function useAbility(name, cooldown) {
-            if (cooldowns[name] > 0) {
-                alert(`Ability ${name} in cooldown! Wait ${cooldowns[name]} rounds.`);
+        function useAbility(key, cooldown, displayName) {
+            if (cooldowns[key] > 0) {
+                alert(`Ability ${displayName || key} in cooldown! Wait ${cooldowns[key]} rounds.`);
                 return;
             }
-            cooldowns[name] = cooldown;
-            document.getElementById(`${name}-cooldown`).innerText = `Cooldown: ${cooldown}`;
+            cooldowns[key] = cooldown;
+            document.getElementById(`${key}-cooldown`).innerText = `Cooldown: ${cooldown}`;
         }
 
         function endTurn() {
             Object.keys(cooldowns).forEach((key) => {
                 if (cooldowns[key] > 0) {
                     cooldowns[key] -= 1;
-                    if (cooldowns[key] === 0) {
-                        document.getElementById(`${key}-cooldown`).innerText = "";
-                    } else {
-                        document.getElementById(`${key}-cooldown`).innerText = `Cooldown: ${cooldowns[key]}`;
+                    // The ability currently ticking down might belong to a
+                    // class that isn't the one on screen right now (its
+                    // cooldown span was replaced when the class list was
+                    // re-rendered) -- update the stored value regardless,
+                    // but only touch the DOM if that span still exists.
+                    const el = document.getElementById(`${key}-cooldown`);
+                    if (el) {
+                        el.innerText = cooldowns[key] === 0 ? "" : `Cooldown: ${cooldowns[key]}`;
                     }
                 }
             });
@@ -2811,7 +2929,7 @@ height: 100px;
         // addEventListener so it doesn't clash with anything else in the merged file)
         document.addEventListener('DOMContentLoaded', () => {
             updateAbilities();
-            renderAbilities("baseAbilities", baseAbilities);
+            renderAbilities("baseAbilities", baseAbilities, "base");
         });
 
     </script>
@@ -3121,16 +3239,16 @@ const deltaCharacters = [
         name: "Artemis",
         image: "Media/UiElements/The Squad/Artemis.png",
         implants: {
-            image: "Media/UiElements/Implants/AsterisImplant.png",
-            text: "Neural interface, +2 to hacking and tech skills"
+            image: "Media/UiElements/Implants/TiffanyImplant.png",
+            text: "Biometric scanner, +3 to medical and support actions"
         },
         characteristics: {
             image: "Media/UiElements/Characteristics/AsterisStats.png",
             text: "HP: 8 | Speed: 5m | Armor: Light"
         },
         abilities: {
-            image: "Media/UiElements/Abilities/AsterisAbility.png",
-            text: "System Override - Disable enemy electronics for 1 round"
+            image: "Media/UiElements/Abilities/TiffanyAbility.png",
+            text: "Healing Aura - Heals all allies within 3 meters for 1D6 HP for 2 rounds"
         },
         costReductions: [{ itemNames: ["Pistol"], reduction: 1 },
             { itemNames: ["Dildo_Purple"], reduction: 1 },
@@ -3154,16 +3272,16 @@ const deltaCharacters = [
         name: "Tiffany",
         image: "Media/UiElements/The Squad/Tiffany.png",
         implants: {
-            image: "Media/UiElements/Implants/TiffanyImplant.png",
-            text: "Biometric scanner, +3 to medical and support actions"
+            image: "Media/UiElements/Implants/AsterisImplant.png",
+            text: "Neural interface, +2 to hacking and tech skills"
         },
         characteristics: {
             image: "Media/UiElements/Characteristics/TiffanyStats.png",
             text: "HP: 10 | Speed: 5m | Armor: Medium"
         },
         abilities: {
-            image: "Media/UiElements/Abilities/TiffanyAbility.png",
-            text: "Healing Aura - Heals all allies within 3 meters for 1D6 HP for 2 rounds"
+            image: "Media/UiElements/Abilities/AsterisAbility.png",
+            text: "System Override - Disable enemy electronics for 1 round"
         },
         costReductions: [{ itemNames: ["Pistol"], reduction: 1 },
             { itemNames: ["Dildo_Purple"], reduction: 1 },
