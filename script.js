@@ -1,4 +1,12 @@
 //Variables
+// Single source of truth for the starting equipment point cap (X-COM D&D.pdf
+// p.48: 14 base, 16 once the Base's bonuses are unlocked). Change this one
+// value to change the cap everywhere — every page's displayed "/N" updates
+// itself from this constant on load instead of each page hardcoding its own
+// (which is how invintory.html/Atachments.html ended up at "/15" and
+// Implants.html at "/14").
+const MAX_STARTING_POINTS = 16;
+
 let activeSlot = null;
 let totalPoints = 0;
 const totalPointsInput = document.querySelector('.TotalPoints');
@@ -91,6 +99,35 @@ function getBaseSlotCounts() {
     };
 }
 
+// Sizes a dropdown-list to show ~5 items tall, based on its first item's
+// actual rendered height. Called both once at page load (best-effort, for a
+// snappier first open) and every time the dropdown is actually opened via
+// selectSlot() — the on-open call is what matters for correctness: if the
+// item's image hasn't finished loading yet, its box is too short to
+// measure, so we leave the CSS default (max-height:30vh, already set in
+// styles.css) in place instead of locking in a too-small pixel value, and
+// re-measure once the image does load. Measuring only once at page load
+// (the original approach) meant a dropdown could get stuck permanently
+// undersized if its image was still loading at that exact moment — rare on
+// a single standalone page, much more likely on DeltaSquad_AllInOne.html
+// where every page's images are all loading at once.
+function sizeDropdownList(dropdownList) {
+    if (!dropdownList) return;
+    const firstItem = dropdownList.querySelector('.dropdown-item');
+    if (!firstItem) return;
+    const img = firstItem.querySelector('img');
+    if (img && !img.complete) {
+        dropdownList.style.maxHeight = '';
+        img.addEventListener('load', () => sizeDropdownList(dropdownList), { once: true });
+        return;
+    }
+    const itemHeight = firstItem.scrollHeight;
+    if (itemHeight > 0) {
+        dropdownList.style.maxHeight = `${itemHeight * 5}px`;
+        dropdownList.style.overflowY = 'auto';
+    }
+}
+
 function selectSlot(slotId) {
     document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
     document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
@@ -98,7 +135,8 @@ function selectSlot(slotId) {
     activeSlot = slotId;
     const dropdown = document.getElementById(`dropdown_${slotId}`);
     if (dropdown) {
-        dropdown.style.display = 'block'; 
+        dropdown.style.display = 'block';
+        sizeDropdownList(dropdown);
     }
     const currentButton = event.currentTarget;
     currentButton.classList.add('selected');
@@ -285,7 +323,7 @@ const deltaCharacters = [
             { itemNames: ["Dildo_Purple"], reduction: 1 },
             { itemNames: ["Knife"], reduction: 1 },
             { itemNames: ["Dildo"], reduction: 1 },
-            { itemName: ["Drone"], reduction: 2 } 
+            { itemNames: ["Drone"], reduction: 2 }
         ],
         combinedCostReductions: [
             { itemNames: ["Pistol", "Knife"], reduction: 1 },
@@ -497,62 +535,72 @@ function initializeCharacterSwitching() {
 }
 
 function recalculateTotalPointsBasedOnSelections() {
-    totalPoints = 0; 
-    const currentChar = deltaCharacters[currentCharIndex]; 
+    totalPoints = 0;
+    const currentChar = deltaCharacters[currentCharIndex];
 
-    const combinedReductionItems = {};
-    if (currentChar && currentChar.combinedCostReductions) {
-        currentChar.combinedCostReductions.forEach(rule => {
-            rule.itemNames.forEach(itemName => {
-                combinedReductionItems[itemName] = { rule: rule, count: 0, totalOriginalCost: 0 };
-            });
-        });
-    }
-
+    // Tally selected items by name first (an item name could occupy more
+    // than one slot at once, e.g. the same pistol in both weapon slots).
+    const selectedByName = {};
     for (const slotId in selectedItems) {
         const item = selectedItems[slotId];
-        if (item && item.cost !== undefined) { 
-            const itemCost = item.cost;
-            const itemName = item.title;
-
-            if (itemName && combinedReductionItems[itemName]) {
-                combinedReductionItems[itemName].count++;
-                combinedReductionItems[itemName].totalOriginalCost += itemCost;
-            } else {
-                let effectiveCost = itemCost;
-                if (currentChar && currentChar.costReductions) {
-                    const reductionRule = currentChar.costReductions.find(rule => rule.itemName === itemName);
-                    if (reductionRule) {
-                        effectiveCost = Math.max(0, itemCost - reductionRule.reduction);
-                    }
-                }
-                totalPoints += effectiveCost;
+        if (item && item.cost !== undefined && item.title) {
+            if (!selectedByName[item.title]) {
+                selectedByName[item.title] = { count: 0, totalCost: 0 };
             }
+            selectedByName[item.title].count++;
+            selectedByName[item.title].totalCost += item.cost;
         }
     }
 
+    // A combinedCostReductions rule (e.g. "Pistol + Knife") only applies when
+    // EVERY item it names is actually selected — not just whichever one
+    // happens to share a name with the rule. Without this check, a
+    // character whose combo rules list "Pistol" alongside several different
+    // melee options (Knife/Dildo/Dildo_Purple) would have their Pistol's
+    // cost re-summed once per rule that mentions it, multiplying its
+    // effective cost instead of discounting it.
+    const namesCoveredByCombo = new Set();
     if (currentChar && currentChar.combinedCostReductions) {
         currentChar.combinedCostReductions.forEach(rule => {
-            let groupOriginalCost = 0;
-            
-            rule.itemNames.forEach(itemNameInGroup => {
-                if (combinedReductionItems[itemNameInGroup] && combinedReductionItems[itemNameInGroup].count > 0) {
-                    groupOriginalCost += combinedReductionItems[itemNameInGroup].totalOriginalCost;
-                }
-            });
-
-            let effectiveGroupCost = Math.max(0, groupOriginalCost - rule.reduction);
-            totalPoints += effectiveGroupCost;
+            const allPresent = rule.itemNames.every(name => selectedByName[name]);
+            if (allPresent) {
+                let groupCost = 0;
+                rule.itemNames.forEach(name => {
+                    groupCost += selectedByName[name].totalCost;
+                    namesCoveredByCombo.add(name);
+                });
+                totalPoints += Math.max(0, groupCost - rule.reduction);
+            }
         });
     }
 
-    totalPointsInput.value = totalPoints;
-    if (totalPoints > 15) {
-        totalPointsInput.style.color = 'red';
-    } else {
-        totalPointsInput.style.color = 'white'; 
+    // Everything not already counted via a combo gets its normal cost, minus
+    // any per-item discount (applied once per copy, so two of the same item
+    // in two slots both get discounted).
+    for (const name in selectedByName) {
+        if (namesCoveredByCombo.has(name)) continue;
+        let cost = selectedByName[name].totalCost;
+        if (currentChar && currentChar.costReductions) {
+            const reductionRule = currentChar.costReductions.find(rule => rule.itemNames.includes(name));
+            if (reductionRule) {
+                cost = Math.max(0, cost - reductionRule.reduction * selectedByName[name].count);
+            }
+        }
+        totalPoints += cost;
     }
-    
+
+    // Codex_*.html pages have no .TotalPoints element (totalPointsInput is
+    // null there) but this function still runs on every page load to keep
+    // localStorage's saved total in sync — only touch the DOM if it exists.
+    if (totalPointsInput) {
+        totalPointsInput.value = totalPoints;
+        if (totalPoints > MAX_STARTING_POINTS) {
+            totalPointsInput.style.color = 'red';
+        } else {
+            totalPointsInput.style.color = 'white';
+        }
+    }
+
     localStorage.setItem('totalPoints', totalPoints);
 }
 
@@ -656,12 +704,23 @@ document.addEventListener('click', (e) => {
         document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
         document.querySelectorAll('.selector-button').forEach(btn => btn.classList.remove('selected'));
         activeSlot = null;
-        atachment_con.style.display = 'none';
-        currentSelectedItemWeaponId = null; 
+        // This listener fires on every click anywhere on every page — on
+        // Codex_*.html (no #Atachment_Con at all) that included clicking a
+        // .codex-btn, throwing an uncaught error on every codex entry click.
+        if (atachment_con) {
+            atachment_con.style.display = 'none';
+        }
+        currentSelectedItemWeaponId = null;
     }
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Sync the displayed point cap ("/15", "/14", ...) to MAX_STARTING_POINTS
+    // so every page shows the same, single-source-of-truth number.
+    document.querySelectorAll('.MaxPointsDisplay').forEach(el => {
+        el.textContent = MAX_STARTING_POINTS;
+    });
+
     //Codex info
     const codexButtons = document.querySelectorAll('.codex-btn');
     const codexImage = document.getElementById('CodexContent_img');
@@ -679,20 +738,13 @@ document.addEventListener('DOMContentLoaded', function() {
             codexDescription.textContent = newDescription;
         });
     });
-    // Initialize dropdown styling
-    const dropdownLists = document.querySelectorAll('.dropdown-list');
-    dropdownLists.forEach(dropdownList => {
+    // Best-effort pre-sizing so the first open of each dropdown doesn't have
+    // to wait — see sizeDropdownList()'s comment for why this alone isn't
+    // relied on for correctness (selectSlot() re-measures on every open).
+    document.querySelectorAll('.dropdown-list').forEach(dropdownList => {
         dropdownList.style.display = 'block';
         dropdownList.style.visibility = 'hidden';
-
-        const firstItem = dropdownList.querySelector('.dropdown-item');
-        if (firstItem) {
-            const itemHeight = firstItem.scrollHeight;
-            const listMaxHeight = itemHeight * 5;
-            dropdownList.style.maxHeight = `${listMaxHeight}px`;
-            dropdownList.style.overflowY = 'auto';
-        }
-
+        sizeDropdownList(dropdownList);
         dropdownList.style.display = 'none';
         dropdownList.style.visibility = 'visible';
     });
@@ -714,7 +766,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const savedTotalPoints = localStorage.getItem('totalPoints');
     if (savedTotalPoints !== null) {
         totalPoints = parseInt(savedTotalPoints, 10);
-        totalPointsInput.value = totalPoints;
+        // Codex_*.html pages have no .TotalPoints element at all, so this is
+        // null there — once a player has used the inventory even once,
+        // localStorage has a saved total, and every later Codex page visit
+        // was throwing an uncaught error here (which silently skipped the
+        // rest of this init function, including character-index restore).
+        if (totalPointsInput) {
+            totalPointsInput.value = totalPoints;
+        }
     }
 
     // Load saved character index and update slots
@@ -780,8 +839,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Final initialization - IMPORTANT: Update slot visibility after loading saved items
     updateDeltaCharDisplay(); // This will call updateSlotVisibility() with correct vest info
     recalculateTotalPointsBasedOnSelections();
-    atachment_con.style.display = 'none';
-    
+    // Runs on every page load unconditionally — Codex_*.html has no
+    // #Atachment_Con at all, so this threw on page load before reaching
+    // anything below it (including the initial info-panel default further
+    // down this same function).
+    if (atachment_con) {
+        atachment_con.style.display = 'none';
+    }
+
     if (!infoPanelUpdatedBySavedItem) {
         const initialItem = document.querySelector('.Vest_Grp .dropdown-item[data-cost="0"]');
         if (initialItem) {

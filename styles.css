@@ -226,6 +226,22 @@ min-width: 150px;
 
     }
 
+    /* Always-visible item name under the thumbnail, so you can tell items
+       apart in the list without having to hover/tap the "i" info button
+       first — every .dropdown-item already carries its name in
+       data-info-title, this just surfaces it. */
+    .dropdown-item::after {
+      content: attr(data-info-title);
+      display: block;
+      text-align: center;
+      color: #fff;
+      font-size: 0.8rem;
+      line-height: 1.2;
+      padding: 3px 4px;
+      background: rgba(0, 0, 0, 0.65);
+      word-wrap: break-word;
+    }
+
 
     .points_con {
       position: absolute;
@@ -365,8 +381,11 @@ height: fit-content;
 max-width: 175px;
 }
 
-  .dropdown 
+  .dropdown
   .V1,
+  .Melee,
+  .W1,
+  .W2,
   .E1,
   .E2,
   .E3,
@@ -374,10 +393,33 @@ max-width: 175px;
   .G2,
   .G3,
   .G4,
-  .G5
+  .G5,
+  /* Atachments.html's slot columns (.AtachmentsSet) are deliberately
+     narrow — they're meant to hold a slim stack of small icon buttons —
+     but the dropdown LIST that pops out of them was inheriting that same
+     narrow width (measured as low as 51px on mobile, 141px even on
+     desktop). A dropdown list opening from a narrow trigger shouldn't be
+     forced to the trigger's width; same fix as the vest/equipment/grenade
+     dropdowns, applied to every attachment slot (primary + _Sec secondary). */
+  .Silens,
+  .Silens_Sec,
+  .Mount1,
+  .Mount1_Sec,
+  .Mount2,
+  .Mount2_Sec,
+  .Stock,
+  .Stock_Sec,
+  .Magazine,
+  .Magazine_Sec,
+  .Scope,
+  .Scope_Sec
   {
     height: auto;
-    width: 20vw;
+    /* Was a flat 20vw, which is fine on desktop (~280px at 1400px wide) but
+       shrinks to an unusable ~78px sliver on a phone (390px wide) — you'd
+       see almost nothing of each item. clamp() keeps it readable at any
+       width: never narrower than 220px, never wider than 320px. */
+    width: clamp(220px, 55vw, 320px);
   }
 
 /*Invintory Positions*/
@@ -612,21 +654,29 @@ margin: 2px;
       }
 /*body_Battel Demo*/
       .Body_Battel{
-		    font-family: Arial, sans-serif; 
+		    font-family: Arial, sans-serif;
             background-image: url('Media/UiElements/Unsorted/img/background.jpg'); /* Устанавливаем фоновое изображение */
             /*background-size: cover; /* Фон будет растянут по всему экрану */
             background-position: center; /* Фон будет по центру */
             text-align-last: left;
+      }
 
-        .container { width: 80%; margin: auto; }
-        .ability { margin: 10px 0; font-size: 28px; } /* Увеличен размер текста для описания способности */
-        .ability img { width: 50px; cursor: pointer; }
-        .tooltip { display: none; position: absolute; background: #eee; padding: 10px; border: 1px solid #333; font-size: 16px; } /* Увеличен размер текста для тултипа */
-        .cooldown { color: red; font-weight: bold; }
-        .ability span {
+      /* These were written nested inside .Body_Battel{} above without the
+         "&" that real CSS nesting requires — plain descendant-style nesting
+         like this only works in browsers with recent native CSS-nesting
+         support (current Chrome does parse it, but older Safari/Firefox and
+         many phones' browsers won't, and would silently drop these rules
+         entirely). Written as normal scoped selectors instead so the
+         ability tracker's layout/icon sizing/tooltip is reliable everywhere,
+         not just in browsers new enough to have caught up. */
+        .Body_Battel .container { width: 80%; margin: auto; }
+        .Body_Battel .ability { margin: 10px 0; font-size: 28px; } /* Увеличен размер текста для описания способности */
+        .Body_Battel .ability img { width: 50px; cursor: pointer; }
+        .Body_Battel .tooltip { display: none; position: absolute; background: #eee; padding: 10px; border: 1px solid #333; font-size: 16px; } /* Увеличен размер текста для тултипа */
+        .Body_Battel .cooldown { color: red; font-weight: bold; }
+        .Body_Battel .ability span {
             font-size: 30px; /* Увеличен размер текста для названия способности */
         }
-      }
 
 
 /*DataBase*/
@@ -639,7 +689,12 @@ margin: 2px;
   flex-direction: row-reverse;
   margin: 2vw;
   justify-content: center;
-  
+  /* Flex's default align-items:stretch was forcing the button grid to match
+     the detail viewer's height — and the detail viewer can get tall from a
+     portrait creature image, so the grid stretched well past its own
+     buttons and left a large blank gap below the last row. flex-start lets
+     each side size to its own content instead. */
+  align-items: flex-start;
 
 }
 
@@ -653,7 +708,8 @@ margin: 2px;
   margin-left: 1vw;
   margin-right: 1vw;
   border: 3px  solid #ae1818;
-  font-size: 1.2vw;
+  /* Was a flat 1.2vw — 6px at a 500px-wide screen, unreadably small. */
+  font-size: clamp(12px, 1.2vw, 18px);
 }
 .Codex_Con img{
   background-color: #222;
@@ -664,7 +720,10 @@ margin: 2px;
 #Codex_Title{
 border: 3px solid #ae1818;
 text-align: left;
-width: 30vw;
+/* Was a flat 30vw — cramped (150px) on mobile, and the name/description
+   panel is the whole point of this page, so it shouldn't be the part that
+   gets squeezed. clamp() keeps it readable narrow and caps it wide. */
+width: clamp(220px, 30vw, 420px);
 margin: 0;
 margin-top: -3px;
 background-color: #252525;
@@ -675,7 +734,7 @@ word-wrap:break-word;
 #Codex_content {
 border: 3px solid #ae1818;
 text-align: left;
-width: 30vw;
+width: clamp(220px, 30vw, 420px);
 margin: 0;
 margin-top: -3px;
 background-color: #252525;
@@ -685,15 +744,19 @@ word-wrap:break-word;
 }
 
 #CodexContent_img {
-width: 30vw;
+width: clamp(220px, 30vw, 420px);
 
 }
 
-.Codex_Selector{ 
+.Codex_Selector{
   width: 80%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* Was a fixed 4 columns regardless of screen width, so on a narrow phone
+     each of the ~20+ enemy entries got squeezed into a tiny card. auto-fill
+     lets the column count adapt: fewer, bigger cards on narrow screens,
+     more columns as space allows, never smaller than 90px per card. */
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   gap: 10px;
   padding: 20px;
 
@@ -702,17 +765,24 @@ width: 30vw;
 
 
 .codex-btn{
-width: fit-content;
+/* Was fit-content sized against a fixed-vw child (below), which didn't
+   track the grid's own (now responsive) column width — longer names like
+   "Electric Wanderer" ended up wider than their card and got cut off by
+   the neighboring card. Filling the grid cell directly, with the grid's
+   minmax() as the one source of truth for card width, fixes that. */
+width: 100%;
 aspect-ratio: 1 / 1;
 background-color: transparent;
 border: none;
 color: #fff;
-font-size: 1.25vw;
+overflow-wrap: break-word;
+/* Was a flat 1.25vw — about 6px at a 500px-wide screen, unreadable. */
+font-size: clamp(11px, 1.25vw, 16px);
 
 }
 
 .placeholder-img{
-width: 10vw;
+width: 100%;
 aspect-ratio: 1 / 1;
 display: flex;
 flex-direction: column;

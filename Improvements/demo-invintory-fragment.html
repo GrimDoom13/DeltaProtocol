@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data-driven inventory — demo</title>
+  <!-- base href makes every relative path below resolve against the project
+       root (one level up), same as the real invintory.html would see it -->
+  <base href="../">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+</head>
+<!--
+  Open this file directly in a browser (double-click it, or a Live Server
+  extension) to see the data-driven approach working with the project's
+  REAL styles.css and REAL script.js — nothing here is a mockup.
+
+  Compare the markup below to the equivalent block in invintory.html:
+  this file defines the vest slot, melee slot, one weapon slot, two grenade
+  slots, and one equipment slot in ~10 lines of HTML instead of ~250, plus a
+  codex grid in 1 line instead of 20+ buttons. Every <ul> below only differs
+  from the production markup by one added attribute: data-source.
+-->
+<body class="Inv_Body">
+
+  <div class="InvHeader">
+    <div class="PointCount">
+      <h2 class="h2">Total points
+        <input type="number" class="TotalPoints" value="0" readonly> /15
+      </h2>
+    </div>
+    <br>
+
+    <div class="Equipmants">
+      <div class="VWC_Group">
+        <div class="VW_Group">
+          <div class="VM_Group">
+            <div class="Vest_Grp">
+              <div class="dropdown V1">
+                <button class="selector-button" onclick="selectSlot('vest')">
+                  <img src="Media/UiElements/Nothing.jpg" alt="vest" id="vest">
+                  <div class="selected-item-con"></div>
+                </button>
+                <ul class="dropdown-list" id="dropdown_vest" data-source="vests"></ul>
+              </div>
+            </div>
+            <div class="Melee_Grp">
+              <div class="dropdown Melee">
+                <button class="selector-button" onclick="selectSlot('melee')">
+                  <img src="Media/UiElements/Nothing.jpg" alt="melee" id="melee">
+                  <div class="selected-item-con"></div>
+                </button>
+                <ul class="dropdown-list" id="dropdown_melee" data-source="melee"></ul>
+              </div>
+            </div>
+          </div>
+          <div class="Weapon1_Grp">
+            <div class="dropdown W1">
+              <button class="selector-button" onclick="selectSlot('weapon1')">
+                <img src="Media/UiElements/Nothing.jpg" alt="weapon1" id="weapon1">
+                <div class="selected-item-con"></div>
+              </button>
+              <ul class="dropdown-list" id="dropdown_weapon1" data-source="mainWeapons"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="E-G_Group">
+        <div class="E_Group">
+          <div class="dropdown E1">
+            <button class="selector-button" onclick="selectSlot('equipment1')">
+              <img src="Media/UiElements/Nothing.jpg" alt="equipment1" id="equipment1">
+              <div class="selected-item-con"></div>
+            </button>
+            <ul class="dropdown-list" id="dropdown_equipment1" data-source="equipment"></ul>
+          </div>
+        </div>
+        <div class="G_Group">
+          <div class="dropdown G1">
+            <button class="selector-button" onclick="selectSlot('granade1')">
+              <img src="Media/UiElements/Nothing.jpg" alt="granade1" id="granade1">
+              <div class="selected-item-con"></div>
+            </button>
+            <ul class="dropdown-list" id="dropdown_granade1" data-source="grenades"></ul>
+          </div>
+          <div class="dropdown G2">
+            <button class="selector-button" onclick="selectSlot('granade2')">
+              <img src="Media/UiElements/Nothing.jpg" alt="granade2" id="granade2">
+              <div class="selected-item-con"></div>
+            </button>
+            <ul class="dropdown-list" id="dropdown_granade2" data-source="grenades"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="ItemsInfo_Group">
+        <div class="NameInfo"><div id="item-info-title">Topic-NoN</div></div>
+        <div class="ContentInfo"><div id="item-info-content">Content</div></div>
+        <div class="AtachmentInfo"><div id="Atachment_Con">No Attachments</div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="margin: 3vw 0; border-color: #444;">
+
+  <!-- Codex grid demo: same trick, one line instead of 20+ buttons -->
+  <div class="Codex">
+    <div class="Codex_Con">
+      <img src="Media/UiElements/Codex/Enemys/Acid Spit.png" id="CodexContent_img">
+      <div id="Codex_Title" style="text-align: center;">Name</div>
+      <p id="Codex_content">Description</p>
+    </div>
+    <div class="Codex_Selector" data-codex-source="codex.enemies"></div>
+  </div>
+
+  <script src="Improvements/game-data.js"></script>
+  <script src="Improvements/render-engine.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
