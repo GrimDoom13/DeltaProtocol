@@ -405,6 +405,7 @@ max-width: 175px;
   .G3,
   .G4,
   .G5,
+  .MECArmor,
   .MEC,
   .Ammo
   {
@@ -2029,6 +2030,27 @@ height: 100px;
                   </div>
 
                 <div class="MA_Group">
+                      <div class="dropdown MECArmor"  >
+                      <button class="selector-button" onclick="selectSlot('mecArmor')">
+                          <img src="Media/UiElements/Nothing.jpg" alt="mecArmor"  id="mecArmor">
+                      <div class="selected-item-con"></div>
+                      </button>
+
+                        <ul class="dropdown-list" id="dropdown_mecArmor" >
+                          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No item selected.">
+                            <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="5" data-info-title="MEC Suit"
+                            data-info-content="Allows carrying 3 magazines for heavy assault weapons, 2 grenades, and 2 special equipment. | +8 HP | +2 armor | +5 STRENGTH | The MEC can become 'Living Cover' to shield an ally; requires an action to activate and to maintain. | Flight: for 3 rounds (can be used non-consecutively). | Built-in punch attack: 1D10+STR.">
+                            <div class="item_con"><div class="points_con">5</div> <div class="info_con">i</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                          </li>
+                          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="6" data-info-title="MEC Suit LVL2"
+                            data-info-content="Allows carrying 4 magazines for heavy assault weapons, 3 grenades, and 3 special equipment. | +16 HP | +4 armor | +6 STRENGTH | The MEC can become 'Living Cover' to shield an ally; requires an action to activate and to maintain. | Flight: for 6 rounds (can be used non-consecutively). | Built-in punch attack: 1D12+STR.">
+                            <div class="item_con"><div class="points_con">6</div> <div class="info_con">i</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+                          </li>
+                        </ul>
+                      </div>
+
                       <div class="dropdown MEC"  >
                       <button class="selector-button" onclick="selectSlot('mecWeapon')">
                           <img src="Media/UiElements/Nothing.jpg" alt="mecWeapon"  id="mecWeapon">
@@ -3357,6 +3379,45 @@ function handleVestSelection(slotId, newItemName) {
     }
 }
 
+// MEC weapons (X-COM D&D.pdf p.34-36) are explicitly gated behind wearing a
+// MEC suit — "Drawbacks: Can only be used with a MEC suit" is baked into
+// each of their own descriptions already. The mecArmor slot is that suit;
+// the MEC Weapon slot should only be selectable while one is equipped.
+function getCurrentMecArmorType() {
+    const armorItem = selectedItems['mecArmor'];
+    if (armorItem && armorItem.title) {
+        return armorItem.title;
+    }
+    return 'Nothing';
+}
+
+function updateMecWeaponSlotVisibility() {
+    const hasMecArmor = getCurrentMecArmorType() !== 'Nothing';
+    const slotElement = document.getElementById('mecWeapon');
+    const slotContainer = slotElement ? slotElement.closest('.selector-button') : null;
+    if (!slotContainer) return;
+
+    if (hasMecArmor) {
+        slotContainer.style.visibility = 'visible';
+        slotContainer.style.pointerEvents = 'auto';
+        slotContainer.style.opacity = '1';
+    } else {
+        slotContainer.style.visibility = 'hidden';
+        slotContainer.style.pointerEvents = 'none';
+        slotContainer.style.opacity = '0.3';
+        // Unequipping the suit mid-loadout shouldn't leave a MEC weapon
+        // selected (and its cost counted) with nothing to justify it.
+        clearSlotSelection('mecWeapon');
+    }
+}
+
+function handleMecArmorSelection(slotId, newItemName) {
+    if (slotId === 'mecArmor') {
+        console.log(`MEC armor changed to: ${newItemName}`);
+        updateMecWeaponSlotVisibility();
+    }
+}
+
 // Event listeners for dropdown functionality
 document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
     const dropdownList = dropdownContainer.querySelector('.dropdown-list');
@@ -3408,6 +3469,7 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
 
                     // Handle vest-specific logic
                     handleVestSelection(activeSlot, newItemName);
+                    handleMecArmorSelection(activeSlot, newItemName);
 
                     recalculateTotalPointsBasedOnSelections();
 
@@ -3542,7 +3604,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'equipment3', 'granade1', 'granade2', 'granade3','granade4', 'granade5',
         'silens', 'mount1', 'mount2', 'magazine', 'scope', 'stock',
         'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec',
-        'mecWeapon', 'ammo'
+        'mecWeapon', 'ammo', 'mecArmor'
     ];
 
     slotIds.forEach(slotId => {
@@ -3593,6 +3655,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Final initialization - IMPORTANT: Update slot visibility after loading saved items
     updateDeltaCharDisplay(); // This will call updateSlotVisibility() with correct vest info
+    updateMecWeaponSlotVisibility(); // Same idea, but for the MEC suit -> MEC weapon gate
     recalculateTotalPointsBasedOnSelections();
     atachment_con.style.display = 'none';
 });
