@@ -407,7 +407,8 @@ max-width: 175px;
   .G5,
   .MECArmor,
   .MEC,
-  .Ammo
+  .Ammo,
+  .ImplantSlot
   {
     height: auto;
     /* Was a flat 20vw, which is fine on desktop (~280px at 1400px wide) but
@@ -629,6 +630,16 @@ margin: 2px;
     width: 100%;
     gap: 5px;
 
+  }
+
+  .Implants_Group {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 5px;
+    margin-top: 16px;
   }
 
   /*ItemInfo*/
@@ -2594,8 +2605,78 @@ height: 100px;
                   <ul class="dropdown-list"  >
                     </ul>
                 </div>
+    </div>
 
+    <!-- Shen's 4 cybernetic enhancements (X-COM D&D.pdf p.54-56,
+         Improvements/base-data.js's cyberneticEnhancements) -- one slot per
+         body part, since each enhancement is specific to a slot (skin/heart/
+         arm/lungs) and there's currently only one option per slot. These are
+         Base-research unlocks, not starting-loadout purchases, so every entry
+         is cost 0 -- selecting one doesn't touch the Total Points bar. -->
+    <div class="Implants_Group">
+      <div class="dropdown ImplantSlot">
+        <button class="selector-button" onclick="selectSlot('implantSkin')">
+          <img src="Media/UiElements/Nothing.jpg" alt="implantSkin" id="implantSkin">
+          <div class="selected-item-con"></div>
+        </button>
+        <ul class="dropdown-list" id="dropdown_implantSkin">
+          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No implant installed.">
+            <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+          </li>
+          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Adaptive Skin Implant"
+            data-info-content="Slot: Skin | Effect: Reduces damage from environmental effects (acid, fire, etc.) by 1. | How it works: Nano-bots create a layer of bio-organic protective skin that adapts to the environment and attacking factors, increasing the soldier's survival odds. | Incompatible with: biological skin enhancements (gene mods).">
+            <div class="item_con"><div class="points_con">0</div> <div class="info_con">i</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+          </li>
+        </ul>
+      </div>
 
+      <div class="dropdown ImplantSlot">
+        <button class="selector-button" onclick="selectSlot('implantHeart')">
+          <img src="Media/UiElements/Nothing.jpg" alt="implantHeart" id="implantHeart">
+          <div class="selected-item-con"></div>
+        </button>
+        <ul class="dropdown-list" id="dropdown_implantHeart">
+          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No implant installed.">
+            <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+          </li>
+          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Mechanical Heart with Nano-Robot Integration"
+            data-info-content="Slot: Heart | Effect: Increases a physical characteristic by +1, up to 6 times per mission (once every 60 seconds). | How it works: A mechanical heart releases nano-bots to deliver an adrenaline burst on demand. | Incompatible with: biological heart enhancements (gene mods).">
+            <div class="item_con"><div class="points_con">0</div> <div class="info_con">i</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dropdown ImplantSlot">
+        <button class="selector-button" onclick="selectSlot('implantArm')">
+          <img src="Media/UiElements/Nothing.jpg" alt="implantArm" id="implantArm">
+          <div class="selected-item-con"></div>
+        </button>
+        <ul class="dropdown-list" id="dropdown_implantArm">
+          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No implant installed.">
+            <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+          </li>
+          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Hybrid Bionic Prosthesis"
+            data-info-content="Slot: Arm | Effect: Grants the ability to use a concealed bladed weapon called 'Mantis'. | Mantis stats: Range 0-2 meters | Damage 2D10 | Special Attack: Melts 2 units of the target's armor, if any. | How it works: Built on 'Meld,' combining bionic and organic components into a hybrid weapon with improved body function. | Incompatible with: biological arm enhancements (gene mods).">
+            <div class="item_con"><div class="points_con">0</div> <div class="info_con">i</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dropdown ImplantSlot">
+        <button class="selector-button" onclick="selectSlot('implantLungs')">
+          <img src="Media/UiElements/Nothing.jpg" alt="implantLungs" id="implantLungs">
+          <div class="selected-item-con"></div>
+        </button>
+        <ul class="dropdown-list" id="dropdown_implantLungs">
+          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Nothing" data-info-content="No implant installed.">
+            <div class="item_con"><div class="points_con">0</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+          </li>
+          <li class="dropdown-item" data-image="Media/UiElements/Nothing.jpg" data-cost="0" data-info-title="Bionic Lungs"
+            data-info-content="Slot: Lungs | Effect: Grants the ability to breathe in any condition (underwater, in a toxic cloud) unless actively being choked/strangled. | How it works: A full lung replacement engineered to filter incoming air and prevent the wearer from becoming infected. | Incompatible with: biological lungs enhancements (gene mods).">
+            <div class="item_con"><div class="points_con">0</div> <div class="info_con">i</div><img src="Media/UiElements/Nothing.jpg" class="img_con"></div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -3523,6 +3604,44 @@ document.querySelectorAll('.dropdown').forEach(dropdownContainer => {
     }
 });
 
+// Hover-and-hold tooltip for the CURRENTLY EQUIPPED item in each slot (the
+// persistent image on the closed .selector-button), not just the items
+// inside an opened dropdown list — same 1s-hold behavior, same shared
+// tooltip element. Looked up from `selectedItems` rather than the button's
+// own markup since the button's img only carries data-cost/data-title
+// (needed for cost math), not the full description text.
+document.querySelectorAll('.selector-button').forEach(button => {
+    const img = button.querySelector('img');
+    if (!img) return;
+    // weapon1-atc/weapon2-atc mirror weapon1/weapon2's own selection under
+    // a different DOM id (see data-mirror-of, set where they're rendered).
+    const slotId = img.dataset.mirrorOf || img.id;
+    if (!slotId) return;
+
+    let hoverTimer = null;
+    button.addEventListener('mouseenter', (e) => {
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => {
+            const item = selectedItems[slotId];
+            if (!item || !item.title || item.title === 'Nothing') return;
+            showHoverTooltip(item.title, item.content, e.clientX, e.clientY);
+        }, 1000);
+    });
+    button.addEventListener('mousemove', (e) => {
+        positionHoverTooltip(e.clientX, e.clientY);
+    });
+    button.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimer);
+        hideHoverTooltip();
+    });
+    // Clicking opens this slot's dropdown (selectSlot(), wired via the
+    // button's own onclick) without the cursor ever leaving the button, so
+    // mouseleave never fires to cancel a pending timer — without this, a
+    // click just under the 1s mark could pop the tooltip up moments later,
+    // on top of the now-open dropdown.
+    button.addEventListener('click', () => clearTimeout(hoverTimer));
+});
+
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.dropdown') && !e.target.closest('.selector-button')) {
         document.querySelectorAll('.dropdown-list').forEach(dl => dl.style.display = 'none');
@@ -3604,7 +3723,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'equipment3', 'granade1', 'granade2', 'granade3','granade4', 'granade5',
         'silens', 'mount1', 'mount2', 'magazine', 'scope', 'stock',
         'silens_Sec', 'mount1_Sec', 'mount2_Sec', 'scope_Sec', 'stock_Sec', 'magazine_Sec',
-        'mecWeapon', 'ammo', 'mecArmor'
+        'mecWeapon', 'ammo', 'mecArmor',
+        'implantSkin', 'implantHeart', 'implantArm', 'implantLungs'
     ];
 
     slotIds.forEach(slotId => {
